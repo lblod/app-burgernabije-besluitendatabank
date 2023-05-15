@@ -20,9 +20,16 @@
 ;; commented out domain.lisp.
 
 ;; (add-prefix "dcat" "http://www.w3.org/ns/dcat#")
-;; (add-prefix "dct" "http://purl.org/dc/terms/")
-;; (add-prefix "skos" "http://www.w3.org/2004/02/skos/core#")
-
+(add-prefix "dct" "http://purl.org/dc/terms/")
+(add-prefix "skos" "http://www.w3.org/2004/02/skos/core#")
+(add-prefix "foaf" "http://xmlns.com/foaf/0.1/")
+(add-prefix "eli" "http://data.europa.eu/eli/ontology#")
+(add-prefix "owl" "http://www.w3.org/2002/07/owl#")
+(add-prefix "prov" "http://www.w3.org/ns/prov#")
+(add-prefix "person" "http://www.w3.org/ns/person#")
+(add-prefix "besluit" "http://data.vlaanderen.be/ns/besluit#")
+(add-prefix "mandaat" "http://data.vlaanderen.be/ns/mandaat#")
+(add-prefix "persoon" "https://data.vlaanderen.be/ns/persoon#")
 
 ;;;;;
 ;; You can use the ext: prefix when you're still searching for

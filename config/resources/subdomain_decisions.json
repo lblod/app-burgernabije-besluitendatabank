@@ -1,11 +1,5 @@
 {
   "version": "0.1",
-  "prefixes": {
-    "besluit": "http://data.vlaanderen.be/ns/besluit#",
-    "purl": "http://purl.org/dc/terms/",
-    "owl": "http://www.w3.org/2002/07/owl#",
-    "eu" : "http://data.europa.eu/eli/ontology#"
-  },
   "resources": {
     "decisions": {
       "name": "decision",
@@ -13,11 +7,11 @@
       "attributes": {
         "title": {
           "type": "string",
-          "predicate": "eu:title"
+          "predicate": "eli:title"
         },
         "description": {
           "type": "string",
-          "predicate": "eu:description"
+          "predicate": "eli:description"
         },
         "alternate-link" : {
           "type": "string",

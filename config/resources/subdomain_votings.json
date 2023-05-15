@@ -1,8 +1,5 @@
 {
   "version": "0.1",
-  "prefixes": {
-    "besluit": "http://data.vlaanderen.be/ns/besluit#"
-  },
   "resources": {
     "votings": {
       "name": "voting",
@@ -26,7 +23,7 @@
         },
         "alternate-link" : {
           "type": "string",
-          "predicate": "http://www.w3.org/2002/07/owl#sameAs"
+          "predicate": "owl:sameAs"
         }
       },
       "relationships": {      

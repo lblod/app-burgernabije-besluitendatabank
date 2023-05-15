@@ -1,9 +1,5 @@
 {
     "version": "0.1",
-    "prefixes": {
-      "besluit": "http://data.vlaanderen.be/ns/besluit#",
-      "mandaat": "http://data.vlaanderen.be/ns/mandaat#"
-    },
     "resources": {
       "agents": {
         "name": "agent",
@@ -11,7 +7,7 @@
         "attributes": {
           "start": {
             "type": "string",
-            "predicate": "http://data.vlaanderen.be/ns/mandaat#start"
+            "predicate": "mandaat:start"
           }
         },
         "relationships": {      
@@ -25,15 +21,15 @@
       },
       "alias": {
         "name": "alias",
-        "class": "http://www.w3.org/ns/person#Person",
+        "class": "person:Person",
         "attributes": {
           "firstName": {
             "type": "string",
-            "predicate": "http://data.vlaanderen.be/ns/persoon#gebruikteVoornaam"
+            "predicate": "persoon:gebruikteVoornaam"
           },
           "familyName": {
             "type": "string",
-            "predicate": "http://xmlns.com/foaf/0.1/familyName"
+            "predicate": "foaf:familyName"
           }
         },
         "new-resource-base": "http://dev.bnb.lblod.info/alias"

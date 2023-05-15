@@ -1,10 +1,5 @@
 {
   "version": "0.1",
-  "prefixes": {
-    "besluit": "http://data.vlaanderen.be/ns/besluit#",
-    "purl": "http://purl.org/dc/terms/",
-    "owl": "http://www.w3.org/2002/07/owl#"
-  },
   "resources": {
     "handled-agenda-items": {
       "name": "handledAgendaItem",

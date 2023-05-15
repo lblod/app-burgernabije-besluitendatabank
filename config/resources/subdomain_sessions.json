@@ -1,8 +1,5 @@
 {
   "version": "0.1",
-  "prefixes": {
-    "besluit": "http://data.vlaanderen.be/ns/besluit#"
-  },
   "resources": {
     "sessions": {
       "name": "session",
@@ -10,11 +7,11 @@
       "attributes": {
         "started-at": {
           "type": "string",
-          "predicate": "http://www.w3.org/ns/prov#startedAtTime"
+          "predicate": "prov:startedAtTime"
         },
         "ended-at": {
           "type": "string",
-          "predicate": "http://www.w3.org/ns/prov#endedAtTime"
+          "predicate": "prov:endedAtTime"
         }
       },
       "relationships": {

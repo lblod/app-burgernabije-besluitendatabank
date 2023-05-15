@@ -1,10 +1,5 @@
 {
   "version": "0.1",
-  "prefixes": {
-    "besluit": "http://data.vlaanderen.be/ns/besluit#",
-    "purl": "http://purl.org/dc/terms/",
-    "owl": "http://www.w3.org/2002/07/owl#"
-  },
   "resources": {
     "agenda-items": {
       "name": "agendaItem",
@@ -12,11 +7,11 @@
       "attributes": {
         "title": {
           "type": "string",
-          "predicate": "purl:title"
+          "predicate": "dct:title"
         },
         "description": {
           "type": "string",
-          "predicate": "purl:description"
+          "predicate": "dct:description"
         },
         "planned-for-public": {
           "type": "boolean",
@@ -33,7 +28,7 @@
       },
       "relationships": {
         "generated": {
-          "predicate": "http://www.w3.org/ns/prov#generated",
+          "predicate": "prov#generated",
           "target": "decision",
           "cardinality": "one"
         },
@@ -44,7 +39,7 @@
           "inverse": true
         },
         "handled": {
-          "predicate": "purl:subject",
+          "predicate": "dct:subject",
           "target": "handledAgendaItem",
           "cardinality": "one",
           "inverse": true

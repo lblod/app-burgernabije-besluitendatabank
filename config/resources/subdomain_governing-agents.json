@@ -1,8 +1,5 @@
 {
     "version": "0.1",
-    "prefixes": {
-      "besluit": "http://data.vlaanderen.be/ns/besluit#"
-    },
     "resources": {
       "governing-agents": {
         "name": "governing-agent",
@@ -10,7 +7,7 @@
         "attributes": {
           "label": {
             "type": "string",
-            "predicate": "http://www.w3.org/2004/02/skos/core#prefLabel"
+            "predicate": "skos:prefLabel"
           }
         },
         "new-resource-base": "http://dev.bnb.lblod.info/governing-agents/"
