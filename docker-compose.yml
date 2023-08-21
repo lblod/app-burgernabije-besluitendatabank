@@ -1,11 +1,9 @@
 version: '3.7'
-
 x-logging: &default-logging
   driver: "json-file"
   options:
     max-size: "10m"
     max-file: "3"
-
 services:
   identifier:
     image: semtech/mu-identifier:1.9.1
@@ -95,7 +93,7 @@ services:
   mandatendatabank-consumer:
     image: lblod/delta-consumer:0.0.19
     environment:
-      DCR_SYNC_BASE_URL: "https://loket.lokaalbestuur.vlaanderen.be/"
+      DCR_SYNC_BASE_URL: "https://dev.loket.lblod.info/"
       DCR_SERVICE_NAME: "mandatendatabank-consumer"
       DCR_SYNC_FILES_PATH: "/sync/mandatarissen/files"
       DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/MandatarissenCacheGraphDump"
@@ -118,7 +116,7 @@ services:
   op-public-consumer:
     image: lblod/delta-consumer:0.0.19
     environment:
-      DCR_SYNC_BASE_URL: "https://organisaties.abb.vlaanderen.be/"
+      DCR_SYNC_BASE_URL: "https://dev.organisaties.abb.lblod.info/"
       DCR_SERVICE_NAME: "op-public-consumer"
       DCR_SYNC_FILES_PATH: "/sync/public/files"
       DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/PublicCacheGraphDump"
@@ -140,7 +138,7 @@ services:
   besluiten-consumer:
     image: lblod/delta-consumer:0.0.19
     environment:
-      DCR_SYNC_BASE_URL: "https://qa.harvesting-self-service.lblod.info/"
+      DCR_SYNC_BASE_URL: "https://dev.harvesting-self-service.lblod.info/"
       DCR_SERVICE_NAME: "besluiten-consumer"
       DCR_SYNC_FILES_PATH: "/sync/besluiten/files"
       DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
