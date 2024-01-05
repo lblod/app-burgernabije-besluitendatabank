@@ -1,7 +1,7 @@
 import { generateReportFromData, batchedQuery } from "../helpers.js";
 
 export default {
-  cronPattern: "0 00 23 * * *",
+  cronPattern: "0 00 23 * * Sunday",
   name: "governing-body-report",
   execute: async () => {
     const reportData = {
@@ -13,9 +13,6 @@ export default {
     // Get all governing bodies and their location
     const queryGoverningBodyListResponse = await batchedQuery(
       queryGoverningBodyList
-    );
-    console.log(
-      `Found ${queryGoverningBodyListResponse.results.bindings.length} governing bodies`
     );
 
     const data = [];
@@ -29,7 +26,6 @@ export default {
       const queryResponse = await batchedQuery(
         queryGoverningBodyStats(governingBodyAbstract.value)
       );
-      console.log(JSON.stringify(queryResponse.results));
 
       const {
         firstSessionPlannedStart,
@@ -112,7 +108,6 @@ export default {
         ),
       });
     }
-    console.log(`Found ${data.length} data rows`);
 
     // Generate the report
     await generateReportFromData(

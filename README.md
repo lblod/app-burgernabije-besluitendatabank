@@ -213,6 +213,14 @@ Ensure the flag `BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES` is set to `false` for **E
 - QA data: https://organisaties.abb.lblod.info/
 - DEV data: https://dev.organisaties.abb.lblod.info/
 
+### Bestuursorganen Report
+
+The report is generated every day at 23:00. The report is available at `/download-exports/exports/Bestuursorganen`. 
+
+#### Trigger report generation manually
+```bash
+curl --header "Content-Type: application/json" --request POST --data '{"data":{"attributes":{"reportName":"governing-body-report"}}}' $BASE_URL/generate-reports/reports
+```
 
 ## Reference
 
