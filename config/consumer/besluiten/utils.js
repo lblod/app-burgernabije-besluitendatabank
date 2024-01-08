@@ -20,7 +20,7 @@ async function parallelisedBatchedUpdate (
   const parallelBatches = chunk(nTriples,
                                 Math.ceil(triplesLength / threads));
 
-  console.log(`We have ${parallelBatches.length} batches`);
+  console.log(`We have ${parallelBatches.length} parallel batches`);
 
   await Promise.all(
     parallelBatches.map(async parallelBatch => {
