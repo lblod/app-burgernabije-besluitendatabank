@@ -1,3 +1,67 @@
+async function parallelisedBatchedUpdate (
+  lib,
+  nTriples,
+  targetGraph,
+  sleep,
+  batch,
+  extraHeaders,
+  endpoint,
+  operation,
+  bypassMuAuth = false,
+  threads = 1
+) {
+
+  const { chunk } = lib;
+
+  const triplesLength = nTriples.length;
+  console.log(`Received ${triplesLength} triples.;
+    ${threads}-parallel batches will be created`);
+
+  const parallelBatches = chunk(nTriples,
+                                Math.ceil(triplesLength / threads));
+
+  console.log(`We have ${parallelBatches.length} batches`);
+
+  await Promise.all(
+    parallelBatches.map(async parallelBatch => {
+        try {
+          await batchedUpdate(
+            lib,
+            parallelBatch,
+            targetGraph,
+            sleep,
+            batch,
+            extraHeaders,
+            endpoint,
+            operation,
+          );
+        }
+        catch(e) {
+          console.warn(`Error ${e} ingesting parallel batch.`);
+          // This means we haven't tried directly through virtuoso yet
+          if(!bypassMuAuth) {
+            console.warn(`Ingesting through mu-auth failed.
+              Attempt with a direct call to ${operation} this time...`);
+            await batchedUpdate(
+              lib,
+              parallelBatch,
+              targetGraph,
+              sleep,
+              batch,
+              extraHeaders,
+              endpoint,
+              operation,
+            );
+          }
+          else {
+            console.log(`No options left for updating db; throwing error...`);
+            throw e;
+          }
+        }
+    })
+  );
+}
+
 async function batchedUpdate(
   lib,
   nTriples,
@@ -8,10 +72,13 @@ async function batchedUpdate(
   endpoint,
   operation,
 ) {
+
   const { muAuthSudo, chunk, sparqlEscapeUri } = lib;
-  console.log("size of store: ", nTriples?.length);
+  console.log(`Batch size: ${nTriples.length}`);
+
   const chunkedArray = chunk(nTriples, batch);
-  let chunkCounter = 0;
+  let chunkCounter = 1;
+
   for (const chunkedTriple of chunkedArray) {
     console.log(
       `Processing chunk number ${chunkCounter} of ${chunkedArray.length} chunks.`,
@@ -68,4 +135,5 @@ async function batchedUpdate(
 
 module.exports = {
   batchedUpdate,
+  parallelisedBatchedUpdate,
 };
