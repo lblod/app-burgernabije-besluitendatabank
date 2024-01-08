@@ -1,5 +1,5 @@
 const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || 1);
-const PARALLEL_CALLS = parseInt(process.env.PARALLEL_CALLS || 6);
+const PARALLEL_CALLS = parseInt(process.env.PARALLEL_CALLS || 1);
 const MU_CALL_SCOPE_ID_INITIAL_SYNC =
   process.env.MU_CALL_SCOPE_ID_INITIAL_SYNC ||
   "http://redpencil.data.gift/id/concept/muScope/deltas/consumer/initialSync";
