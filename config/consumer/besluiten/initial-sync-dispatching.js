@@ -1,4 +1,4 @@
-const { batchedUpdate } = require("./utils");
+const { parallelisedBatchedUpdate } = require("./utils");
 const {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
@@ -6,6 +6,7 @@ const {
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
+  PARALLEL_CALLS,
 } = require("./config");
 
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
@@ -37,7 +38,7 @@ async function dispatch(lib, data) {
   }
   console.log(`Using ${endpoint} to insert triples`);
 
-  await batchedUpdate(
+  await parallelisedBatchedUpdate (
     lib,
     triples,
     INGEST_GRAPH,
@@ -46,6 +47,8 @@ async function dispatch(lib, data) {
     { "mu-call-scope-id": MU_CALL_SCOPE_ID_INITIAL_SYNC },
     endpoint,
     "INSERT",
+    BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
+    PARALLEL_CALLS
   );
 }
 
