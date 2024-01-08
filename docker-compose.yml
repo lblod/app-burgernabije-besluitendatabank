@@ -205,7 +205,8 @@ services:
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "false"
       DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
       BATCH_SIZE: 250
-      PARALLEL_CALLS: 8
+      # You play with following variable in the docker-compose.override.yml.
+      PARALLEL_CALLS: 1
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files/besluiten:/consumer-files/
