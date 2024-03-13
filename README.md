@@ -203,7 +203,7 @@ Ensure the flag `BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES` is set to `false` for **E
 
 #### besluiten harvester SPARQL endpoints
 
-- QA data:
+- Production data:
   - https://lokaalbeslist-harvester-0.s.redhost.be/sparql
   - https://lokaalbeslist-harvester-1.s.redhost.be/sparql
   - https://lokaalbeslist-harvester-2.s.redhost.be/sparql
