@@ -201,6 +201,14 @@ Ensure the flag `BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES` is set to `false` for **E
 - QA data: https://harvesting-self-service.lblod.info/
 - DEV data: https://dev.harvesting-self-service.lblod.info/
 
+#### besluiten harvester SPARQL endpoints
+
+- Production data:
+  - https://lokaalbeslist-harvester-0.s.redhost.be/sparql
+  - https://lokaalbeslist-harvester-1.s.redhost.be/sparql
+  - https://lokaalbeslist-harvester-2.s.redhost.be/sparql
+  - https://lokaalbeslist-harvester-3.s.redhost.be/sparql
+
 ##### mandatendatabank-consumer
 
 - Production data: https://loket.lokaalbestuur.vlaanderen.be/
