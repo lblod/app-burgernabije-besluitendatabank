@@ -10,7 +10,7 @@ services:
   # HTTP Proxy for identifying sessions
   # https://github.com/mu-semtech/mu-identifier
   identifier:
-    image: semtech/mu-identifier:1.9.1
+    image: semtech/mu-identifier:1.10.3
     environment:
       SESSION_COOKIE_SECURE: "on"
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: '[{"variables":[],"name":"public"}]'
@@ -60,7 +60,7 @@ services:
   # Allows accessing linked data as a JSON:API endpoint. Used by frontend
   # https://github.com/mu-semtech/mu-cl-resources
   resources:
-    image: semtech/mu-cl-resources:feature-optionally-accept-strange-resource-types
+    image: semtech/mu-cl-resources:1.25.0
     environment:
       CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     links:
@@ -75,7 +75,7 @@ services:
   # Allows running .sparql & .ttl files to the triplestore
   # https://github.com/mu-semtech/mu-migrations-service
   migrations:
-    image: semtech/mu-migrations-service:0.8.0
+    image: semtech/mu-migrations-service:0.9.0
     links:
       - triplestore:database
     environment:
@@ -88,14 +88,12 @@ services:
       - "logging=true"
 
   # SPARQL Endpoint authorization service. Adds an authentication layer to the triplestore
-  # https://github.com/mu-semtech/mu-authorization
+  # https://github.com/mu-semtech/sparql-parser
   database:
-    image: semtech/mu-authorization:0.6.0-beta.8
-    environment:
-      MU_SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
-      ERROR_ON_UNWRITTEN_DATA: "on"
+    image: semtech/sparql-parser:0.0.13
     volumes:
       - ./config/authorization:/config
+      - ./data/authorization:/data
     restart: always
     logging: *default-logging
     labels:
@@ -104,7 +102,7 @@ services:
   # A linked-data database. All consumed data ends up here
   # https://github.com/redpencilio/docker-virtuoso
   triplestore:
-    image: redpencil/virtuoso:1.2.0-rc.1
+    image: redpencil/virtuoso:1.2.0
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/graphs/public"
@@ -118,8 +116,8 @@ services:
 
   # Sends notifications to the uuid-generation & resources when new data is found on specific data.vlaanderen.be urls
   # https://github.com/mu-semtech/delta-notifier
-  deltanotifier:
-    image: semtech/mu-delta-notifier
+  delta-notifier:
+    image: semtech/mu-delta-notifier:0.4.0
     volumes:
       - ./config/delta:/config
     restart: always
@@ -130,7 +128,7 @@ services:
   # Service that generates uuid's for imported data to allow linked-data usage
   # https://github.com/redpencilio/uuid-generation-service
   uuid-generation:
-    image: redpencil/uuid-generation:0.2.1
+    image: redpencil/uuid-generation:0.3.0
     volumes:
       - ./config/uuid-generation/:/config
     links:
@@ -143,7 +141,7 @@ services:
   # Imports endpoint data into the triplestore
   # https://github.com/lblod/delta-consumer
   mandatendatabank-consumer:
-    image: lblod/delta-consumer:0.0.24
+    image: lblod/delta-consumer:0.0.26
     environment:
       DCR_SYNC_BASE_URL: "https://loket.lokaalbestuur.vlaanderen.be/"
       DCR_SERVICE_NAME: "mandatendatabank-consumer"
@@ -166,7 +164,7 @@ services:
     labels:
       - "logging=true"
   op-public-consumer:
-    image: lblod/delta-consumer:0.0.24
+    image: lblod/delta-consumer:0.0.26
     environment:
       DCR_SYNC_BASE_URL: "https://organisaties.abb.vlaanderen.be/"
       DCR_SERVICE_NAME: "op-public-consumer"
@@ -189,7 +187,7 @@ services:
     labels:
       - "logging=true"
   besluiten-consumer:
-    image: lblod/delta-consumer:0.0.24
+    image: lblod/delta-consumer:0.0.26
     environment:
       DCR_SYNC_BASE_URL: "https://harvesting-self-service.lblod.info/"
       DCR_SERVICE_NAME: "besluiten-consumer"
@@ -214,16 +212,20 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  # Search facility for mu-semtech, powered by ElasticSearch
+  # https://github.com/mu-semtech/mu-search
   search:
-    image: semtech/mu-search:0.10.0-beta.3
+    image: semtech/mu-search:0.10.0
     volumes:
       - ./config/search:/config
     restart: always
     logging: *default-logging
     labels:
       - "logging=true"
+  # Elasticsearch backend to be used with mu-search
+  # https://github.com/mu-semtech/mu-search-elastic-backend/
   elasticsearch:
-    image: semtech/mu-search-elastic-backend:1.0.1
+    image: semtech/mu-search-elastic-backend:1.1.0
     volumes:
       - ./data/elasticsearch/:/usr/share/elasticsearch/data
     environment:
@@ -232,8 +234,10 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  # Generic service to generate reports about data
+  # https://github.com/lblod/loket-report-generation-service
   report-generation:
-    image: lblod/loket-report-generation-service:0.8.0
+    image: lblod/loket-report-generation-service:0.8.2
     environment:
       LOG_SPARQL_ALL: "false"
       DEBUG_AUTH_HEADERS: "false"
@@ -246,6 +250,8 @@ services:
       - "logging=true"
     restart: always
     logging: *default-logging
+  # Provides endpoints to download the most recent version of data exports 
+  # https://github.com/lblod/download-exports-service
   download-exports:
     image: lblod/download-exports-service:0.1.0
     links:
