@@ -231,7 +231,9 @@
             "copy_to": "search_content"
           },
           "search_content": {
-            "type": "text"
+            "type": "text",
+            "analyzer": "dutchanalyzer",
+            "search_analyzer": "dutchanalyzer"
           },
           "search_governing_body_classification_id": {
             "type": "keyword"
@@ -443,7 +445,9 @@
             "copy_to": "search_content"
           },
           "search_content": {
-            "type": "text"
+            "type": "text",
+            "analyzer": "dutchanalyzer",
+            "search_analyzer": "dutchanalyzer"
           },
           "search_governing_body_classification_id": {
             "type": "keyword"
