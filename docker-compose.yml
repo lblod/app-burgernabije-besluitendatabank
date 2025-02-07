@@ -278,3 +278,12 @@ services:
       - "logging=true"
     restart: always
     logging: *default-logging
+  metrics:
+    image: lblod/metrics-service
+    volumes:
+      - ./data/metrics:/external-metrics
+      - ./config/metrics:/config
+    environment:
+      LOG_SPARQL_ALL: true
+    restart: always
+    logging: *default-logging
