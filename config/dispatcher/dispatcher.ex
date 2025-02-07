@@ -94,6 +94,14 @@ defmodule Dispatcher do
     Proxy.forward conn, [], "http://uuid-generation/run"
   end
 
+  #################
+  # prometheus reporting
+  #################
+  get "/metrics", @any do
+    Proxy.forward conn, [], "http://metrics/metrics"
+  end
+
+
   ###############################################################
   # SEARCH
   ###############################################################
