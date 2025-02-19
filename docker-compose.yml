@@ -90,7 +90,7 @@ services:
   # SPARQL Endpoint authorization service. Adds an authentication layer to the triplestore
   # https://github.com/mu-semtech/sparql-parser
   database:
-    image: semtech/sparql-parser:0.0.13
+    image: semtech/sparql-parser:0.0.14
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
@@ -98,7 +98,8 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-
+    environment:
+      LISP_DYNAMIC_SPACE_SIZE: "2048"
   # A linked-data database. All consumed data ends up here
   # https://github.com/redpencilio/docker-virtuoso
   triplestore:

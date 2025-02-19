@@ -2,13 +2,13 @@
 ;;; delta messenger
 (in-package :delta-messenger)
 
-(add-delta-logger)
+;;(add-delta-logger)
 (add-delta-messenger "http://delta-notifier/")
 
 ;;;;;;;;;;;;;;;;;
 ;;; configuration
 (in-package :client)
-(setf *log-sparql-query-roundtrip* t)
+(setf *log-sparql-query-roundtrip* nil)
 (setf *backend* "http://triplestore:8890/sparql")
 
 
