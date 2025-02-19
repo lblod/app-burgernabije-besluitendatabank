@@ -1,3 +1,5 @@
+const TIMEOUT = 300000; // 5-minute timeout
+
 async function parallelisedBatchedUpdate (
   lib,
   nTriples,
@@ -24,17 +26,11 @@ async function parallelisedBatchedUpdate (
 
   await Promise.all(
     parallelBatches.map(async parallelBatch => {
-        try {
-          await batchedUpdate(
-            lib,
-            parallelBatch,
-            targetGraph,
-            sleep,
-            batch,
-            extraHeaders,
-            endpoint,
-            operation,
-          );
+      try {
+        await Promise.race([
+          batchedUpdate(lib, parallelBatch, targetGraph, sleep, batch, extraHeaders, endpoint, operation),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Batched update did not complete in 5 minutes")), TIMEOUT))
+        ]);
         }
         catch(e) {
           console.warn(`Error ${e} ingesting parallel batch.`);
@@ -42,16 +38,10 @@ async function parallelisedBatchedUpdate (
           if(directDatabaseEndpoint) {
             console.warn(`Ingesting through mu-auth failed.
               Attempt with a direct call to ${directDatabaseEndpoint} this time...`);
-            await batchedUpdate(
-              lib,
-              parallelBatch,
-              targetGraph,
-              sleep,
-              batch,
-              extraHeaders,
-              directDatabaseEndpoint,
-              operation,
-            );
+            await Promise.race([
+              batchedUpdate(lib, parallelBatch, targetGraph, sleep, batch, extraHeaders, endpoint, operation),
+              new Promise((_, reject) => setTimeout(() => reject(new Error("Batched update did not complete in 5 minutes")), TIMEOUT))
+            ]);
           }
           else {
             console.log(`No options left for updating db; throwing error...`);
