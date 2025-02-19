@@ -36,3 +36,6 @@
 (grant (read)
   :to-graph (public)
   :for-allowed-group "public")
+
+;; increase the default read timeout. this allows waiting heavier queries (like the one for delta files)
+(setf dexador.util:*default-read-timeout* 60)
