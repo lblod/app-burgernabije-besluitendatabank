@@ -38,7 +38,7 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    image: lblod/frontend-burgernabije-besluitendatabank:0.8.3
+    image: lblod/frontend-burgernabije-besluitendatabank:0.8.4
     links:
       - identifier
     restart: always
@@ -251,7 +251,7 @@ services:
       - "logging=true"
     restart: always
     logging: *default-logging
-  # Provides endpoints to download the most recent version of data exports 
+  # Provides endpoints to download the most recent version of data exports
   # https://github.com/lblod/download-exports-service
   download-exports:
     image: lblod/download-exports-service:0.1.0
