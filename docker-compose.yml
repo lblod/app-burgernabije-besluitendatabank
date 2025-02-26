@@ -204,6 +204,7 @@ services:
       BATCH_SIZE: 250
       # You play with following variable in the docker-compose.override.yml.
       PARALLEL_CALLS: 1
+      NODE_ENV: "development"
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files/besluiten:/consumer-files/
@@ -211,6 +212,8 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+    ports:
+      - 9229:9229
   # Search facility for mu-semtech, powered by ElasticSearch
   # https://github.com/mu-semtech/mu-search
   search:
@@ -286,3 +289,8 @@ services:
       LOG_SPARQL_ALL: true
     restart: always
     logging: *default-logging
+  project-scripts:
+    image: semtech/simple-script-store:1.0.0
+    volumes:
+      - ./scripts/:/app/scripts/
+    restart: "no"
