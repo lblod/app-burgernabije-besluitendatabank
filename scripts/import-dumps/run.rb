@@ -158,7 +158,7 @@ request.on_complete do
       progressbar = TTY::ProgressBar.new("Loading file [:bar] :elapsed")
       connection.do("ld_dir('toLoad', '#{filename}', '#{ingest_graph}' )")
       connection.do("rdf_loader_run()")
-      connection.do("checkpoint()")
+      connection.do("exec('checkpoint')")
       progressbar.finish
       prompt.say("File successfully loaded into #{ingest_graph}.")
     rescue => e
@@ -190,7 +190,7 @@ request.on_complete do
   PREFIX adms: <http://www.w3.org/ns/adms#>
   PREFIX nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
  INSERT DATA {
-     GRAPH <JOBS_GRAPH> {
+     GRAPH <#{JOBS_GRAPH}> {
        <#{job_uri}> a cogs:Job;
                     mu:uuid "#{job_id}";
                     dct:creator <#{job_creator_uri}>;
@@ -217,14 +217,13 @@ request.on_complete do
       <#{container_uri}> a nfo:DataContainer;
                           dct:subject <http://redpencil.data.gift/id/concept/DeltaSync/DeltafileInfo>;
                           mu:uuid "#{container_id}";
-                          ext:hasDeltafileTimestamp "#{distribution_metadata["created"]}"^^xsd:dateTime.
-                          ext:hasDeltafileId "#{distribution["id"]}".
+                          ext:hasDeltafileTimestamp "#{distribution_metadata["release-date"]}"^^xsd:dateTime;
+                          ext:hasDeltafileId "#{distribution["id"]}";
                           ext:hasDeltafileName "#{filename}".
       <#{task_1_uri}> task:resultsContainer <#{container_uri}>.
       <#{task_1_uri}> task:inputContainer  <#{container_uri}>.
      }
     }
-                    }
 QUERY
     connection = get_db_connection
     prompt.say("Executing query: \n #{metadata_query}")
