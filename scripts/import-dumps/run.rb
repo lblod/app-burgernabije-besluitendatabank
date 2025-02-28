@@ -110,86 +110,127 @@ def get_latest_dump_file(sync_base_url, subject)
   end
 end
 
+def fetch_and_store_file(prompt, sync_base_url, sync_dataset_subject)
+  distribution, distribution_metadata = get_latest_dump_file(sync_base_url, sync_dataset_subject)
+  prompt.say "Dateset has release-date #{distribution_metadata["release-date"]}"
+  distribution_url = "#{sync_base_url}files/#{distribution["id"]}/download"
+  progressbar = nil
+  tmp_file_path = "/project/tmp-#{distribution["id"]}.ttl"
+  prompt.say "Downloading file from #{distribution_url} to #{tmp_file_path}"
+  progressbar = TTY::ProgressBar.new("Downloading: :byte_rate/s :current_byte :elapsed")
+  file = File.open(tmp_file_path, 'wb')
+  request = Typhoeus::Request.new(distribution_url, followlocation: true, accept_encoding: 'deflate,gzip')
+  request.on_headers do |response|
+    if response.code != 200
+      raise "Failed to download file, response code #{response.code}"
+    end
+    puts response.headers["Content-Encoding"]
+  end
+  request.on_body do |chunk|
+    file.write(chunk)
+    progressbar.advance(chunk.bytesize) if progressbar
+  end
+  request.on_complete do
+    file.close
+    progressbar.finish
+  end
+  request.run
+  return [tmp_file_path, distribution_metadata["release-date"]]
+end
 
 prompt = TTY::Prompt.new
 prompt.say ""
-sync_base_url = prompt.ask('Enter the SYNC_BASE_URL:', default: "https://lokaalbeslist-harvester-0.s.redhost.be/")
-default_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
-sync_dataset_subject = prompt.ask("Enter the dataset URI:", default: default_subject)
-ingest_graph = prompt.ask("Enter the INGEST_GRAPH", default: "http://mu.semte.ch/graphs/public")
-job_creator_uri = prompt.ask("Enter the JOB_CREATOR_URI", default: "http://data.lblod.info/services/id/besluiten-consumer")
+choices = [
+  {name: "https://lokaalbeslist-harvester-0.s.redhost.be/", value: 1 },
+  {name: "https://lokaalbeslist-harvester-1.s.redhost.be/", value: 2 },
+  {name: "https://lokaalbeslist-harvester-2.s.redhost.be/", value: 3 },
+  {name: "https://lokaalbeslist-harvester-3.s.redhost.be/", value: 4 },
+  {name: "https://dev.harvesting-self-service.lblod.info/", value: "dev" },
+  {name: "custom", value: "custom"}
+]
 
-distribution, distribution_metadata = get_latest_dump_file(sync_base_url, sync_dataset_subject)
+harvester = prompt.select("From which harvester are you importing?", choices)
+if harvester == "custom"
+  sync_base_url = prompt.ask('Enter the SYNC_BASE_URL:', default: "https://lokaalbeslist-harvester-0.s.redhost.be/")
+  ingest_graph = prompt.ask("Enter the INGEST_GRAPH", default: "http://mu.semte.ch/graphs/public")
+  job_creator_uri = prompt.ask("Enter the JOB_CREATOR_URI", default: "http://data.lblod.info/services/id/besluiten-consumer")
+  default_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+  sync_dataset_subject = prompt.ask("Enter the dataset URI:", default: default_subject)
+  job_operation = prompt.ask("Enter the job operation for the initalsync metadata", default: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten")
+elsif harvester == "dev"
+  sync_base_url = "https://dev.harvesting-self-service.lblod.info/"
+  ingest_graph = "http://mu.semte.ch/graphs/public"
+  job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer"
+  sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+  job_operation =  "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten"
+else
+  # a prod harvester
+  sync_base_url = "https://lokaalbeslist-harvester-#{harvester-1}.s.redhost.be/"
+  ingest_graph = "http://mu.semte.ch/graphs/harvester/#{harvester-1}"
+  job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer"
+  sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+  job_operation =  "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten"
+  if harvester > 1
+    job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer-#{harvester-1}"
+    job_operation = "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten-#{harvester-1}"
+  end
+end
 
-distribution_url = "#{sync_base_url}files/#{distribution["id"]}/download"
+fetch_from = prompt.select("Fetch file from endpoint or filesystem?", ["endpoint", "filesystem"])
 start=DateTime.now
-progressbar = nil
+if fetch_from == "endpoint"
+  tmp_file_path, distribution_id, release_date = fetch_and_store_file(prompt, sync_base_url,sync_dataset_subject)
+else
+  tmp_file_path = prompt.ask("Where is the file located (project folder mounted under /project)", default: "/project/dump.ttl")
+  release_date = prompt.ask("What was the generation time for this file (used by delta-consumer as since)", default: DateTime.now.xmlschema)
+  distribution_id = prompt.ask("Enter the distribution id", default: SecureRandom.uuid)
+end
+prompt.say "Validating file #{tmp_file_path}"
+system("/usr/local/bin/riot --validate #{tmp_file_path}")
+unless $?.success?
+  raise "Downloaded turtle file is not a valid turtle file"
+end
 filename="dataset-#{SecureRandom.uuid}.ttl"
-tmp_file_path = "/project/tmp-#{filename}"
-prompt.say "Downloading file from #{distribution_url} to #{tmp_file_path}"
-progressbar = TTY::ProgressBar.new("Downloading: :byte_rate/s :current_byte :elapsed")
-
-file = File.open(tmp_file_path, 'wb')
-request = Typhoeus::Request.new(distribution_url, followlocation: true, accept_encoding: 'deflate,gzip')
-request.on_headers do |response|
-  if response.code != 200
-    raise "Failed to download file, response code #{response.code}"
-  end
-  puts response.headers["Content-Encoding"]
-end
-request.on_body do |chunk|
-  file.write(chunk)
-  progressbar.advance(chunk.bytesize) if progressbar
-end
-request.on_complete do
-  file.close
-  progressbar.finish
-  prompt.say "Validating file #{tmp_file_path}"
-  system("/usr/local/bin/riot --validate #{tmp_file_path}")
-  unless $?.success?
-    raise "Downloaded turtle file is not a valid turtle file"
-  end
-  File.rename(tmp_file_path,"/project/data/db/toLoad/#{filename}")
-  prompt.say("Moved validated ttl to data/db/toLoad/#{filename}")
-  load_file = prompt.yes?("Load file via virtuoso odbc")
-  if load_file
-    begin
-      connection = get_db_connection
-      progressbar = TTY::ProgressBar.new("Loading file [:bar] :elapsed")
-      connection.do("ld_dir('toLoad', '#{filename}', '#{ingest_graph}' )")
-      connection.do("rdf_loader_run()")
-      connection.do("exec('checkpoint')")
-      progressbar.finish
-      prompt.say("File successfully loaded into #{ingest_graph}.")
-    rescue => e
-      puts e.trace
-      exit(1)
-    end
-  end
-  end_time = DateTime.now
-  prompt.say("Adding initial starting point for delta sync")
+File.rename(tmp_file_path,"/project/data/db/toLoad/#{filename}")
+prompt.say("Moved validated ttl to data/db/toLoad/#{filename}")
+load_file = prompt.yes?("Load file via virtuoso odbc")
+if load_file
   begin
-    job_operation = prompt.ask("What is the job operation you want to use in the metadata", default: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten")
-    container_id = SecureRandom.uuid
-    container_uri = "http://data.lblod.info/id/dataContainers/#{container_id}";
-    job_id = SecureRandom.uuid
-    job_uri = "http://redpencil.data.gift/id/job/#{job_id}"
-    task_id = SecureRandom.uuid
-    task_uri = "http://redpencil.data.gift/id/task/#{task_id}"
-    task_1_id = SecureRandom.uuid
-    task_1_uri = "http://redpencil.data.gift/id/task/#{task_1_id}"
-    metadata_query = <<~QUERY
-                    SPARQL
-  PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-  PREFIX task: <http://redpencil.data.gift/vocabularies/tasks/>
-  PREFIX dct: <http://purl.org/dc/terms/>
-  PREFIX prov: <http://www.w3.org/ns/prov#>
-  PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
-  PREFIX oslc: <http://open-services.net/ns/core#>
-  PREFIX cogs: <http://vocab.deri.ie/cogs#>
-  PREFIX adms: <http://www.w3.org/ns/adms#>
-  PREFIX nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
- INSERT DATA {
+    connection = get_db_connection
+    progressbar = TTY::ProgressBar.new("Loading file [:bar] :elapsed")
+    connection.do("ld_dir('toLoad', '#{filename}', '#{ingest_graph}' )")
+    connection.do("rdf_loader_run()")
+    connection.do("exec('checkpoint')")
+    progressbar.finish
+    prompt.say("File successfully loaded into #{ingest_graph}.")
+  rescue => e
+    puts e.backtrace
+    exit(1)
+  end
+end
+end_time = DateTime.now
+prompt.say("Adding initial starting point for delta sync")
+begin
+  container_id = SecureRandom.uuid
+  container_uri = "http://data.lblod.info/id/dataContainers/#{container_id}";
+  job_id = SecureRandom.uuid
+  job_uri = "http://redpencil.data.gift/id/job/#{job_id}"
+  task_id = SecureRandom.uuid
+  task_uri = "http://redpencil.data.gift/id/task/#{task_id}"
+  task_1_id = SecureRandom.uuid
+  task_1_uri = "http://redpencil.data.gift/id/task/#{task_1_id}"
+  metadata_query = <<~QUERY
+SPARQL
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX task: <http://redpencil.data.gift/vocabularies/tasks/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX oslc: <http://open-services.net/ns/core#>
+PREFIX cogs: <http://vocab.deri.ie/cogs#>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+INSERT DATA {
      GRAPH <#{JOBS_GRAPH}> {
        <#{job_uri}> a cogs:Job;
                     mu:uuid "#{job_id}";
@@ -217,18 +258,15 @@ request.on_complete do
       <#{container_uri}> a nfo:DataContainer;
                           dct:subject <http://redpencil.data.gift/id/concept/DeltaSync/DeltafileInfo>;
                           mu:uuid "#{container_id}";
-                          ext:hasDeltafileTimestamp "#{distribution_metadata["release-date"]}"^^xsd:dateTime;
-                          ext:hasDeltafileId "#{distribution["id"]}";
+                          ext:hasDeltafileTimestamp "#{release_date}"^^xsd:dateTime;
+                          ext:hasDeltafileId "#{distribution_id}";
                           ext:hasDeltafileName "#{filename}".
       <#{task_1_uri}> task:resultsContainer <#{container_uri}>.
       <#{task_1_uri}> task:inputContainer  <#{container_uri}>.
      }
     }
 QUERY
-    connection = get_db_connection
-    prompt.say("Executing query: \n #{metadata_query}")
-    connection.do(metadata_query)
-  end
+  connection = get_db_connection
+  prompt.say("Executing query: \n #{metadata_query}")
+  connection.do(metadata_query)
 end
-
-request.run
