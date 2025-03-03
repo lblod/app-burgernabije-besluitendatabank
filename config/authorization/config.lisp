@@ -28,11 +28,48 @@
 (defparameter *rights* nil
   "All known GRANT instances connecting ACCESS-SPECIFICATION to GRAPH.")
 
-(define-graph public ("http://mu.semte.ch/graphs/public")
+(define-graph harvester0 ("http://mu.semte.ch/graphs/harvester-0")
   (_ -> _))
+
+(define-graph harvester1 ("http://mu.semte.ch/graphs/harvester-1")
+  (_ -> _))
+
+(define-graph harvester2 ("http://mu.semte.ch/graphs/harvester-2")
+  (_ -> _))
+
+(define-graph harvester3 ("http://mu.semte.ch/graphs/harvester-3")
+  (_ -> _))
+
+(define-graph mandaten ("http://mu.semte.ch/graphs/mandaten")
+  (_ -> _))
+
+(define-graph organisations ("http://mu.semte.ch/graphs/organisations")
+  (_ -> _))
+
+
 
 (supply-allowed-group "public")
 
 (grant (read)
-  :to-graph (public)
+  :to-graph (harvester0)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (harvester1)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (harvester2)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (harvester3)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (mandaten)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (organisations)
   :for-allowed-group "public")

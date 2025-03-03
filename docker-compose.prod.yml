@@ -1,0 +1,191 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  virtuoso:
+    volumes:
+      - ./config/virtuoso/virtuoso-production.ini:/data/virtuoso.ini
+  #################################################################################
+  # START CONSUMER HARVESTER 0
+  #################################################################################
+  besluiten-consumer:
+    environment:
+      # #### START: "intialSync operation mode" in optimal performance for direct virtuoso (needs full-reindex though)
+      # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
+      # BATCH_SIZE: 500
+      # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
+      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
+      # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
+
+      # #### START: "normal operation mode" in optimal performance for mu-auth
+      BATCH_SIZE: "1"
+      SLEEP_BETWEEN_BATCHES: "1"
+      PARALLEL_CALLS: "8"
+      # #### END: "normal operation mode" in optimal performance for mu-auth
+
+      DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-0.s.redhost.be/"
+      DCR_DISABLE_DELTA_INGEST: "false" # set to false to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "false" # set to false to enable initial sync
+      SUDO_QUERY_RETRY: "true"
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
+  #################################################################################
+  # END CONSUMER HARVESTER 0
+  #################################################################################
+
+  #################################################################################
+  # START CONSUMER HARVESTER 1
+  # Note: not in docker-compose.yml
+  #################################################################################
+  besluiten-consumer-1:
+    ################################# START "default" config
+    image: lblod/delta-consumer:0.1.4
+    volumes:
+      - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
+      - ./data/files/consumer-files-1/besluiten:/consumer-files/
+    restart: always
+    environment:
+      DCR_SERVICE_NAME: "besluiten-consumer-1"
+      DCR_SYNC_FILES_PATH: "/sync/besluiten/files"
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten-1"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/besluitenSyncing-1"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/besluiten-consumer-1"
+      DCR_WAIT_FOR_INITIAL_SYNC: "false"
+      DCR_KEEP_DELTA_FILES: "false"
+      DCR_DELTA_FILE_FOLDER: "/consumer-files-1"
+      DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/harvester-1"
+    ################################# END "default" config
+
+    ################################# START "override" config    
+      # #### START: "intialSync operation mode" in optimal performance for direct virtuoso (needs full-reindex though)
+      #  SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
+      # BATCH_SIZE: 500
+      # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
+      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
+      # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
+
+      # #### START: "normal operation mode" in optimal performance for mu-auth
+      BATCH_SIZE: "1"
+      SLEEP_BETWEEN_BATCHES: "1"
+      PARALLEL_CALLS: "8"
+      # #### END: "normal operation mode" in optimal performance for mu-auth
+      DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-1.s.redhost.be/"
+      DCR_DISABLE_DELTA_INGEST: "false" # set to false to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "true" # set to false to enable initial sync
+      SUDO_QUERY_RETRY: "true"
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
+    ################################# START "override" config
+    logging: *default-logging
+
+  #################################################################################
+  # END CONSUMER HARVESTER 1
+  #################################################################################
+
+  #################################################################################
+  # START CONSUMER HARVESTER 2
+  # Note: not in docker-compose.yml
+  #################################################################################
+  besluiten-consumer-2:
+    ################################# START "default" config
+    image: lblod/delta-consumer:0.0.26
+    volumes:
+      - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
+      - ./data/files/consumer-files-2/besluiten:/consumer-files/
+    restart: always
+    environment:
+      DCR_SERVICE_NAME: "besluiten-consumer-2"
+      DCR_SYNC_FILES_PATH: "/sync/besluiten/files"
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten-2"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/besluitenSyncing-2"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/besluiten-consumer-2"
+      DCR_KEEP_DELTA_FILES: "false"
+      DCR_DELTA_FILE_FOLDER: "/consumer-files-2"
+      DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/harvester-2"
+
+    ################################# END "default" config
+
+    ################################# START "override" config    
+      # #### START: "intialSync operation mode" in optimal performance for direct virtuoso (needs full-reindex though)
+      # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
+      # BATCH_SIZE: 500
+      # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
+      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
+      # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
+
+      # #### START: "normal operation mode" in optimal performance for mu-auth
+      BATCH_SIZE: "1"
+      SLEEP_BETWEEN_BATCHES: "1"
+      PARALLEL_CALLS: "8"
+      # #### END: "normal operation mode" in optimal performance for mu-auth
+
+      DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-2.s.redhost.be/"
+      DCR_DISABLE_DELTA_INGEST: "false" # set to false to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "false" # set to false to enable initial sync
+      SUDO_QUERY_RETRY: "true"
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
+    logging: *default-logging
+
+    ################################# START "override" config
+
+  #################################################################################
+  # END CONSUMER HARVESTER 2
+  #################################################################################
+
+
+  #################################################################################
+  # START CONSUMER HARVESTER 3
+  # Note: not in docker-compose.yml
+  #################################################################################
+  besluiten-consumer-3:
+    ################################# START "default" config
+    image: lblod/delta-consumer:0.0.26
+    volumes:
+      - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
+      - ./data/files/consumer-files-3/besluiten:/consumer-files/
+    restart: always
+    environment:
+      DCR_SERVICE_NAME: "besluiten-consumer-3"
+      DCR_SYNC_FILES_PATH: "/sync/besluiten/files"
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten-3"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/besluitenSyncing-3"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/besluiten-consumer-3"
+      DCR_KEEP_DELTA_FILES: "false"
+      DCR_DELTA_FILE_FOLDER: "/consumer-files-3"
+      DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/harvester-3"
+    ################################# END "default" config
+
+    ################################# START "override" config    
+      # #### START: "intialSync operation mode" in optimal performance for direct virtuoso (needs full-reindex though)
+      # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
+      # BATCH_SIZE: 500
+      # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
+      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
+      # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
+
+      # #### START: "normal operation mode" in optimal performance for mu-auth
+      BATCH_SIZE: "1"
+      SLEEP_BETWEEN_BATCHES: "1"
+      PARALLEL_CALLS: "8"
+      # #### END: "normal operation mode" in optimal performance for mu-auth
+
+      DCR_START_FROM_DELTA_TIMESTAMP: "2025-02-01T00:00:00Z" 
+      DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-3.s.redhost.be/"
+      DCR_DISABLE_DELTA_INGEST: "false" # set to false to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "false" # set to false to enable initial sync
+      SUDO_QUERY_RETRY: "true"
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
+    logging: *default-logging
+
+    ################################# START "override" config
+
+  #################################################################################
+  # END CONSUMER HARVESTER 3
+  #################################################################################
