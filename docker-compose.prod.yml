@@ -5,7 +5,7 @@ x-logging: &default-logging
     max-file: "3"
 
 services:
-  virtuoso:
+  triplestore:
     volumes:
       - ./config/virtuoso/virtuoso-production.ini:/data/virtuoso.ini
   #################################################################################
