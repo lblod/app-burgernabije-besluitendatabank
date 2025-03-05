@@ -207,7 +207,6 @@ services:
       BATCH_SIZE: 250
       # You play with following variable in the docker-compose.override.yml.
       PARALLEL_CALLS: 1
-      NODE_ENV: "development"
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files/besluiten:/consumer-files/
