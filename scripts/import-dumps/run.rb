@@ -166,7 +166,7 @@ elsif harvester == "dev"
 else
   # a prod harvester
   sync_base_url = "https://lokaalbeslist-harvester-#{harvester-1}.s.redhost.be/"
-  ingest_graph = "http://mu.semte.ch/graphs/harvester/#{harvester-1}"
+  ingest_graph = "http://mu.semte.ch/graphs/harvester-#{harvester-1}"
   job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer"
   sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
   job_operation =  "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten"
