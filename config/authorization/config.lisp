@@ -74,6 +74,9 @@
   :to-graph (organisations)
   :for-allowed-group "public")
 
+;; increase the default read timeout. this allows waiting heavier queries
+(setf dexador.util:*default-read-timeout* 60)
+
 (in-package :support)
 ;; virtuoso supports strings up to 2GB in size, assuming this a character count and a char uses max 4 bytes gives us 536_870_912
 (defparameter *string-max-size* 536_870_912
