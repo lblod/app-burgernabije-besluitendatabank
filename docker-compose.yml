@@ -140,7 +140,7 @@ services:
   # Imports endpoint data into the triplestore
   # https://github.com/lblod/delta-consumer
   mandatendatabank-consumer:
-    image: lblod/delta-consumer:0.0.26
+    image: lblod/delta-consumer:0.1.4
     environment:
       DCR_SYNC_BASE_URL: "https://loket.lokaalbestuur.vlaanderen.be/"
       DCR_SERVICE_NAME: "mandatendatabank-consumer"
@@ -155,6 +155,7 @@ services:
       DCR_DISABLE_INITIAL_SYNC: "true" # toggle this in override, leave 'true' in default docker-compose.yml
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "false"
       DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/mandaten"
       BATCH_SIZE: 250
     volumes:
       - ./data/files/consumer-files/mandaten:/consumer-files/
@@ -163,7 +164,7 @@ services:
     labels:
       - "logging=true"
   op-public-consumer:
-    image: lblod/delta-consumer:0.0.26
+    image: lblod/delta-consumer:0.1.4
     environment:
       DCR_SYNC_BASE_URL: "https://organisaties.abb.vlaanderen.be/"
       DCR_SERVICE_NAME: "op-public-consumer"
@@ -178,6 +179,7 @@ services:
       DCR_DISABLE_INITIAL_SYNC: "true" # toggle this in override, leave 'true' in default docker-compose.yml
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "false"
       DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/organisations"
       BATCH_SIZE: 250
     volumes:
       - ./data/files/consumer-files/op-public:/consumer-files/
@@ -186,7 +188,7 @@ services:
     labels:
       - "logging=true"
   besluiten-consumer:
-    image: lblod/delta-consumer:0.0.26
+    image: lblod/delta-consumer:0.1.4
     environment:
       DCR_SYNC_BASE_URL: "https://harvesting-self-service.lblod.info/"
       DCR_SERVICE_NAME: "besluiten-consumer"
@@ -201,6 +203,7 @@ services:
       DCR_DISABLE_INITIAL_SYNC: "true" # toggle this in override, leave 'true' in default docker-compose.yml
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "false"
       DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/harvester-0"
       BATCH_SIZE: 250
       # You play with following variable in the docker-compose.override.yml.
       PARALLEL_CALLS: 1
@@ -286,3 +289,8 @@ services:
       LOG_SPARQL_ALL: true
     restart: always
     logging: *default-logging
+  project-scripts:
+    image: semtech/simple-script-store:1.0.0
+    volumes:
+      - ./scripts/:/app/scripts/
+    restart: "no"

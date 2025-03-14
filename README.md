@@ -71,43 +71,42 @@ The synchronization of external data sources is a structured process divided int
 
 ##### 1. Initial sync
 ##### From scratch
-Setting up the sync should happen work with the following steps:
+It's recommend you use the mu-cli scripts provided in this repository to set up the initial sync, this will load data straight into virtuoso and will be the quickest way to get started.
+
+First start the triplestore and migrations service
+```sh
+drc up -d triplestore migrations
+```
+
+Once migrations have finished. Run the import-dump script to start an interactive wizard to load the necessary data.
+```sh
+mu script project-scripts import-dump
+```
+
+*Note:* in some cases (for dumps > 6GB), fetching the dump might fail. in that case note down the logged metadata (release-date, uuid used in the filename), copy the dump through scp and run the script again but load from filesystem instead of endpoint.
+
+Once all imports have finished (you need at least a besluiten, mandatendb and organisation portal dump). Start database, elasticsearch and search to create the search indexes.
+
+
+After that set up regular sync  with the following steps:
 
 - ensure docker-compose.override.yml has AT LEAST the following information
 
 ```yml
-version: '3.7'
-
 services:
 #(...) there might be other services
 
   besluiten-consumer:
     environment:
       DCR_SYNC_BASE_URL: "https://harvesting-self-service.lblod.info/" # you choose endpoint here
-      DCR_DISABLE_DELTA_INGEST: "true"
-      DCR_DISABLE_INITIAL_SYNC: "true"
+      DCR_DISABLE_DELTA_INGEST: "false"
+      DCR_DISABLE_INITIAL_SYNC: "false" # the import script creates the necessary metadata, from a service point of view the ingest has happened
 # (...) there might be other information
 ```
+Ensure the flag `BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES` is set to `false` for **EVERY CONSUMER**
 
-- start the stack. `drc up -d`. Ensure the migrations have run and finished `drc logs -f --tail=100 migrations`
-- Now the sync can be started. Ensure you update the `docker-compose.override.yml` to
+- start the stack. `drc up -d`. 
 
-```yml
-version: '3.7'
-
-services:
-#(...) there might be other services
-
-  besluiten-consumer:
-    environment:
-      DCR_SYNC_BASE_URL: "https://harvesting-self-service.lblod.info/" # you choose endpoint here
-      DCR_DISABLE_DELTA_INGEST: "false" # <------ THIS CHANGED
-      DCR_DISABLE_INITIAL_SYNC: "false" # <------ THIS CHANGED
-      BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
-# (...) there might be other information
-```
-
-- start the sync `drc up -d besluiten-consumer`.
   Data should be ingesting.
   Check the logs `drc logs -f --tail=200 besluiten-consumer`
 
@@ -119,8 +118,6 @@ In some cases, you may need to reset the data due to unforeseen issues. The simp
 - step 1: ensure the app is running and all migrations ran.
 - step 2: ensure the besluiten-consumer stopped syncing, `docker-compose.override.yml` should AT LEAST contain the following information
 ```yml
-version: '3.7'
-
 services:
 #(...) there might be other services
 
@@ -144,24 +141,7 @@ docker-compose exec besluiten-consumer curl -X POST http://localhost/flush
 docker-compose logs -f --tail=200 besluiten-consumer 2>&1 | grep -i "flush"
 ```
   - This should end with `Flush successful`.
-- step 6: Proceed to consuming data from scratch again, ensure `docker-compose.override.yml` should AT LEAST contain the following information
-```yml
-version: '3.7'
-
-services:
-#(...) there might be other services
-
-  besluiten-consumer:
-    environment:
-      DCR_DISABLE_DELTA_INGEST: "false"
-      DCR_DISABLE_INITIAL_SYNC: "false"
-      BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
-     # (...) there might be other information e.g. about the endpoint
-
-# (...) there might be other information
-```
-- step 8: Run `docker-compose up -d`
-- step 9: This might take a while if `docker-compose logs besluiten-consumer |grep success Returns: Initial sync http://redpencil.data.gift/id/job/URI has been successfully run`; you should be good. (Your computer will also stop making noise)
+- step 6: Proceed to consuming data from scratch again, make sure the consumers are off and run the import script to import a new dump.
 
 ###### op-public-consumer & mandatendatabank-consumer
 As of the time of writing, there is some overlap between the two data producers due to practical reasons. This issue will be resolved eventually. For the time being, if re-synchronization is required, it's advisable to re-sync both consumers.
@@ -174,26 +154,6 @@ For all delta-streams, you'll have to run `docker-compose restart resources cach
 In order to trigger a full mu-search reindex, you can execute `sudo bash ./scripts/reset-elastic.sh` (the stack must be up).
 It takes a while to reindex, please consider using a small dataset to speed it up.
 
-#### 3. switch to 'normal operation' mode
-Essentially, we want to force the data to go through mu-auth again, which is responsible for maintaining the cached data in sync. So ensure in `docker-compose.override.yml` the following.
-```yml
-version: '3.7'
-
-services:
-#(...) there might be other services
-
-  besluiten-consumer:
-    environment:
-      DCR_DISABLE_DELTA_INGEST: "false"
-      DCR_DISABLE_INITIAL_SYNC: "false"
-      BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: 'false' # <------ THIS CHANGED
-     # (...) there might be other information e.g. about the endpoint
-
-# (...) there might be other information
-```
-Again, a the time of writing, the same configuration is valid for the other consumers.
-After updating `docker-compose.override.yml`, don't forget `docker-compose up -d`
-Ensure the flag `BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES` is set to `false` for **EVERY CONSUMER**
 #### What endpoints can be used?
 ##### besluiten-consumer
 
@@ -202,6 +162,7 @@ Ensure the flag `BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES` is set to `false` for **E
 - DEV data: https://dev.harvesting-self-service.lblod.info/
 
 #### besluiten harvester SPARQL endpoints
+*Note*: See docker-compose.prod.yml for an example setup of the consumers.
 
 - Production data:
   - https://lokaalbeslist-harvester-0.s.redhost.be/sparql
