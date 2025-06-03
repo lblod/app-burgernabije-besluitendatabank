@@ -85,6 +85,34 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resources/votes/"
   end
 
+  get "/concept-schemes/*path", @any do
+    Proxy.forward conn, path, "http://resource/concept-schemes/"
+  end
+
+  get "/concepts/*path", @any do
+    Proxy.forward conn, path, "http://resource/concepts/"
+  end
+
+  get "/addresses/*path", @any do
+    Proxy.forward conn, path, "http://resource/addresses/"
+  end
+
+  get "/geometries/*path", @any do
+    Proxy.forward conn, path, "http://resource/geometries/"
+  end
+
+  match "/sparql/*path" do
+    Proxy.forward conn, path, "http://triplestore:8890/sparql/"
+  end #remove this in production
+
+  match "/adresses-register/*path" do
+    forward conn, path, "http://adressenregister"
+  end
+
+  # match "/duplicate-uri/*path" do
+  #   forward conn, path, "http://adressenregister"
+  # end
+
   ###############
   # SERVICES
   ###############

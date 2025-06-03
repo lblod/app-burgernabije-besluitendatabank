@@ -101,11 +101,13 @@ services:
   # A linked-data database. All consumed data ends up here
   # https://github.com/redpencilio/docker-virtuoso
   triplestore:
-    image: redpencil/virtuoso:1.2.0
+    # image: redpencil/virtuoso:1.2.0
+    image: nbittich/virtuoso
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/graphs/public"
     volumes:
+      - ./data/import:/import
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
     restart: always

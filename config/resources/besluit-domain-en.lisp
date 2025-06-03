@@ -30,6 +30,10 @@
                 (:type :uri-set ,(s-prefix "besluit:Agendapunt.type"))
                 (:alternate-link :string-set ,(s-prefix "prov:wasDerivedFrom"))
                 )
+  :has-many `((concept :via ,(s-prefix "sro:heeftThema")
+                      :as "has-themes"))
+  :has-many `((location :via ,(s-prefix "sro:heeftLocatie")
+                      :as "has-location"))
   :has-many `((session :via ,(s-prefix "besluit:behandelt")
                       :inverse t
                       :as "sessions"))
@@ -129,7 +133,7 @@
   :class (s-prefix "besluit:Besluit")
   :properties `((:description :string ,(s-prefix "eli:description"))
                 (:motivation :string ,(s-prefix "besluit:motivering"))
-                (:publication-date :date ,(s-prefix "eli:date_publication")) 
+                (:publication-date :date ,(s-prefix "eli:date_publication"))
                 (:value :string ,(s-prefix "prov:value"))
                 (:language :url ,(s-prefix "eli:language"))
                 (:title :string ,(s-prefix "eli:title")))
@@ -173,7 +177,7 @@
   :resource-base (s-url "http://data.lblod.info/id/zittingen/")
   :features '(include-uri)
   :on-path "sessions")
-  
+
 (define-resource vote ()
   :class (s-prefix "besluit:Stemming")
   :properties `((:number-of-abstentions :number ,(s-prefix "besluit:aantalOnthouders"))
