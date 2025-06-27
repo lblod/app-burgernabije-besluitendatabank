@@ -103,15 +103,42 @@ defmodule Dispatcher do
 
   match "/sparql/*path" do
     Proxy.forward conn, path, "http://triplestore:8890/sparql/"
-  end #remove this in production
+  end  #remove this in production
+
+  match "/frontend-sparql/*path" do
+    Proxy.forward conn, path, "http://database:8890/sparql/"
+  end
 
   match "/adresses-register/*path" do
     forward conn, path, "http://adressenregister"
   end
 
-  # match "/duplicate-uri/*path" do
-  #   forward conn, path, "http://adressenregister"
-  # end
+  ###############
+  # CITERRA
+  ###############
+  get "/zones/*path", @any do
+    Proxy.forward conn, path, "http://resources/zones/"
+  end
+
+  get "/geo-points/*path", @any do
+    Proxy.forward conn, path, "http://resources/geo-points/"
+  end
+
+  get "/uittreksels/*path", @any do
+    Proxy.forward conn, path, "http://resources/uittreksels/"
+  end
+
+  get "/public-services/*path", @any do
+    Proxy.forward conn, path, "http://resources/public-services/"
+  end
+
+  get "/requirements/*path", @any do
+    Proxy.forward conn, path, "http://resources/requirements/"
+  end
+
+  get "/voorwaardecollecties/*path", @any do
+    Proxy.forward conn, path, "http://resources/voorwaardecollecties/"
+  end
 
   ###############
   # SERVICES
@@ -154,15 +181,15 @@ defmodule Dispatcher do
   # FRONTEND
   ###############
   match "/assets/*path", @any do
-    Proxy.forward conn, path, "http://frontend/assets/"
+    Proxy.forward conn, path, "http://citerra-frontend/assets/"
   end
 
   match "/@appuniversum/*path", @any do
-    Proxy.forward conn, path, "http://frontend/@appuniversum/"
+    Proxy.forward conn, path, "http://citerra-frontend/@appuniversum/"
   end
 
   match "/*_path", @html do
-    Proxy.forward conn, [], "http://frontend/index.html"
+    Proxy.forward conn, [], "http://citerra-frontend/index.html"
   end
 
   #################

@@ -5,6 +5,17 @@ export default [
         "http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt",
         "http://data.vlaanderen.be/ns/besluit#Zitting",
         "http://data.vlaanderen.be/ns/besluit#Stemming",
+        "http://data.europa.eu/m8g/Requirement",
+        "http://data.europa.eu/m8g/EvidenceType",
+        "http://data.europa.eu/m8g/EvidenceTypeList",
+        "https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#Voorwaardecollectie",
+        "http://purl.org/vocab/cpsv#PublicService",
+        "https://data.vlaanderen.be/ns/mobiliteit#Zone",
+        "http://www.w3.org/ns/locn#Geometry",
+        "http://www.w3.org/ns/locn#Location",
+        "http://www.w3.org/ns/locn#Adres",
+        "https://data.vlaanderen.be/ns/generiek/#GeografischePositie",
+        "http://xmlns.com/foaf/0.1/Document"
     ].map((type) => ({
         match: {
             predicate: {

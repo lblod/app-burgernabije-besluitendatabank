@@ -1,0 +1,20 @@
+PREFIX sro: <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+  <https://data.aalter.be/id/agendapunten/25.0211.2414.3305>
+    rdf:type <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;
+    sro:heeftLocatie <http://data.lblod.info/id/adressen/01973f6d-fd7a-7246-a8b8-86a1edcfed75> .
+
+  <http://data.lblod.info/id/adressen/01973f6d-fd7a-7246-a8b8-86a1edcfed75>
+    rdf:type locn:Address ;
+    locn:geometry <http://data.lblod.info/id/geometries/01973f6e-1bc4-726b-b9c4-c6da89dc50cb> .
+
+  <http://data.lblod.info/id/geometries/01973f6e-1bc4-726b-b9c4-c6da89dc50cb>
+    rdf:type locn:Geometry ;
+    geosparql:asWKT "<http://www.opengis.net/def/crs/EPSG/0/31370> POINT(155000.331 168667.218)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+  }
+}

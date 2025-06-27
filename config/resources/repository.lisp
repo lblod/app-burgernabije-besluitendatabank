@@ -67,3 +67,7 @@
 (add-prefix "cogs" "http://vocab.deri.ie/cogs#")
 (add-prefix "task" "http://redpencil.data.gift/vocabularies/tasks/")
 (add-prefix "sro" "https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#")
+(add-prefix "mobiliteit" "http://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#")
+(add-prefix "belgifPublicService" "http://vocab.belgif.be/ns/publicservice#")
+(add-prefix "say" "http://mu.semte.ch/vocabularies/say/")
+(add-prefix "qb" "http://purl.org/linked-data/cube#")

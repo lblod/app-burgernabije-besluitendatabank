@@ -1,0 +1,21 @@
+<https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-LogischeOperatie>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "5e020412-f695-48d8-b3dc-393214e2236c" ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Logische operatie"@nl ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Codelijst van logische operaties binnen het kader van intelligente toegang."@nl .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-LogischeOperatie/b872e78b-6d5f-41ee-aa0a-8ee8c141c7cc>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "b872e78b-6d5f-41ee-aa0a-8ee8c141c7cc" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "AND"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-LogischeOperatie> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "AND"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-LogischeOperatie> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-LogischeOperatie/be81ccdc-71d3-4730-8301-be3386ca0b5e>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "be81ccdc-71d3-4730-8301-be3386ca0b5e" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "OR"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-LogischeOperatie> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "OR"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-LogischeOperatie> .

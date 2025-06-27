@@ -10,5 +10,6 @@
 (read-domain-file "mandaat-domain-en.lisp")
 (read-domain-file "concept-scheme.lisp")
 (read-domain-file "address-scheme.lisp")
+(read-domain-file "citerra.lisp")
 
 (setf *fetch-all-types-in-construct-queries* t)

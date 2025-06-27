@@ -5,7 +5,8 @@ PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
 
 INSERT DATA {
   GRAPH <http://mu.semte.ch/graphs/public> {
-  <https://data.gent.be/id/agendapunten/24.1210.2218.2928>
+  <https://data.aalter.be/id/agendapunten/25.0211.0053.0388>
+    rdf:type <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;
     sro:heeftLocatie <http://data.lblod.info/id/adressen/1234> .
 
   <http://data.lblod.info/id/adressen/1234>

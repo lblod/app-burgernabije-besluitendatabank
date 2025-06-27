@@ -1,0 +1,29 @@
+<https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "e4671c49-ab7b-4e4f-aa4c-83f6a1683e52" ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Type Aanvrager"@nl ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Codelijst van type aanvragers binnen het kader van intelligente toegang."@nl .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeAanvrager/a22561fc-70f4-4d84-a91e-a82bcc539218>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "a22561fc-70f4-4d84-a91e-a82bcc539218" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Burger"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Burger"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeAanvrager/1738bdf1-f067-4084-9220-7748a6ae499f>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "1738bdf1-f067-4084-9220-7748a6ae499f" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Onderneming"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Onderneming"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeAanvrager/5f3560fa-84d1-4aa1-b24a-623dbdd44e88>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "5f3560fa-84d1-4aa1-b24a-623dbdd44e88" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Vereniging"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Vereniging"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeAanvrager> .

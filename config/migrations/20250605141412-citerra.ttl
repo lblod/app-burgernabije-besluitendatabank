@@ -1,0 +1,240 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ns0: <http://lblod.data.gift/vocabularies/besluit/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ns1: <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#> .
+@prefix ns2: <http://vocab.belgif.be/ns/publicservice#> .
+@prefix ns3: <http://mu.semte.ch/vocabularies/core/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix ns4: <http://mu.semte.ch/vocabularies/ext/> .
+@prefix ns5: <http://data.europa.eu/m8g/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns6: <http://www.w3.org/ns/locn#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ns7: <dct:> .
+@prefix ns8: <http://www.opengis.net/ont/geosparql#> .
+@prefix ns9: <http://data.europa.eu/eli/ontology#> .
+@prefix ns10: <http://data.vlaanderen.be/ns/besluit#> .
+@prefix ns11: <https://say.data.gift/ns/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.vlaanderen.be/id/dienstverleningen/2b69df8a-23a0-4bd7-bd32-5b6bc8e1243d>
+  a <http://purl.org/vocab/cpsv#PublicService> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  prov:value "Reglement toegang autoluwe zonesZonedefinitiesVoor zones:Testzone aTestzone bgeldt:Toegang met vergunningHouders van een vergunning mogen de zone betreden met hun voertuig.Een vergunning kan worden verstrekt voor voertuigen uit een van de volgende categorieën:Ondernemingen, gevestigd in de zone, met een garage of standplaats in de zoneDe onderneming voldoet aan de volgende voorwaarden:De onderneming is gevestigd in de zone.De onderneming bezit een garage of standplaats binnen de zone, en kan dit aantonen aan de hand van onderstaande bewijsstukken:Eigendomsbewijs van een garage of standplaats binnen de zone.Ondernemingen die voorzien in het vervoer van leerlingenDe onderneming voldoet aan de volgende voorwaarden:De onderneming voorziet in het vervoer van leerlingen.Dit wordt bepaald op basis van informatie uit het MAGDA profiel."@nl-be ;
+  ns0:extractedDecisionContent <http://data.lblod.info/id/files/7e38e3a1-4d08-11f0-a391-7330c191222a> ;
+  skos:prefLabel "Vergunning"@nl-be ;
+  ns1:heeftOutputtype <http://data.vlaanderen.be/id/concept/PubliekeDienstverleningOutputCode/5ab0e9b8a3b2ca7c5e00001b> ;
+  ns2:hasRequirement <http://data.vlaanderen.be/id/voorwaardecollecties/43fbdcbb-22bd-44e1-a462-047e3da5475e> ;
+  ns3:uuid "fe94c986-0f05-5526-be56-040f5928421d" .
+
+<https://data.vlaanderen.be/id/voorwaardes/aa0a402c-5a1c-443e-bdc1-6a0bd12971c5>
+  a <http://data.europa.eu/m8g/Requirement> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/doelgroep> ;
+  ns4:expectedValue "ondernemer"@nl-be ;
+  ns3:uuid "e96022f0-7fbc-59f6-92ee-5412bd79c811" .
+
+<http://data.vlaanderen.be/id/voorwaardecollecties/43fbdcbb-22bd-44e1-a462-047e3da5475e>
+  a ns1:Voorwaardecollectie ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns1:operatie <https://data.vlaanderen.be/id/concept/operaties/or> ;
+  ns5:isRequirementOf <http://data.vlaanderen.be/id/voorwaardecollecties/fc500253-fd38-4232-837f-fc355f229d07> ;
+  ns3:uuid "05803da8-9ca4-500f-8c9f-beb01fc78e5e" .
+
+<https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/43a4f960-d9e9-4d48-a8f2-b480bc5007d9>
+  a <http://www.w3.org/ns/locn#Location> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  rdfs:label "Testzone b"@nl-be ;
+  ns6:geometry <https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/97269284-5f2f-4dae-81aa-4a60a762a8e2> ;
+  ns3:uuid "7a319952-697f-5c7e-a0a5-15bc040cfa75" .
+
+<http://data.lblod.info/id/lblod/uittreksels/9b75cfe0-475f-11f0-80dd-8f157e2a3603>
+  a foaf:Document, <https://data.vlaanderen.be/id/concept/BesluitDocumentType/9d5bfaca-bbf2-49dd-a830-769f91a6377b> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns7:type <http://data.lblod.info/id/document-types/uittreksel> ;
+  prov:value """
+
+                                                    Openbare behandeling van agendapunt                    1.          Kopie van Test citerra 2                            Test citerra besluit 2besluit citerrageef bestuursorgaan op,BevoegdheidRechtsgrond die bepaalt dat dit orgaan bevoegd is.Juridische contextVoeg juridische context inFeitelijke context en argumentatieVoeg context en argumentatie inBeslissingEnig artikel 1De raad keurt het volgende reglement goedReglementaire bijlage: test publicatie citerraReglement toegang autoluwe zonesZonedefinitiesVoor zones:Testzone aTestzone bgeldt:Toegang met vergunningHouders van een vergunning mogen de zone betreden met hun voertuig.Een vergunning kan worden verstrekt voor voertuigen uit een van de volgende categorieën:Ondernemingen, gevestigd in de zone, met een garage of standplaats in de zoneDe onderneming voldoet aan de volgende voorwaarden:De onderneming is gevestigd in de zone.De onderneming bezit een garage of standplaats binnen de zone, en kan dit aantonen aan de hand van onderstaande bewijsstukken:Eigendomsbewijs van een garage of standplaats binnen de zone.Ondernemingen die voorzien in het vervoer van leerlingenDe onderneming voldoet aan de volgende voorwaarden:De onderneming voorziet in het vervoer van leerlingen.Dit wordt bepaald op basis van informatie uit het MAGDA profiel.
+
+"""@nl ;
+  ns3:uuid "93ad8b5c-3229-5378-81d6-cf44d25ebb1c" .
+
+<https://data.vlaanderen.be/id/voorwaardes/68b3eacb-2c26-4c14-987e-33dd06809daf>
+  a ns5:Requirement ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/doelgroep> ;
+  ns4:expectedValue "ondernemer"@nl-be ;
+  ns3:uuid "899643e0-00f0-5f30-9cac-72b2ab98080f" .
+
+<https://data.vlaanderen.be/id/d00e5748-379f-48c2-91a2-b352ecc8f79a>
+  a ns5:EvidenceType ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns5:evidenceTypeClassification <https://data.vlaanderen.be/id/concept/bewijstype/magda> ;
+  ns3:uuid "eb7936ed-1311-5812-b16c-5fbc801f5f34" .
+
+<http://data.lblod.info/id/voorwaarden/--ref--uuid4-req-zone-2>
+  a ns5:Requirement ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/zone> ;
+  ns4:expectedValue <http://data.vlaanderen.be/id/zones/fc500253-fd38-4232-837f-fc355f229d07> ;
+  ns3:uuid "7784a214-9e7c-5931-a3c6-1467a3158af4" .
+
+<https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/e781ec4f-0b34-4648-8dfe-6407bb44fa95>
+  a ns6:Geometry ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns8:asWKT "<http://www.opengis.net/def/crs/EPSG/0/31370> POLYGON((126017.6053446904 181950.14857816882, 125563.66965726668 181585.27814633213, 125212.3592664602 181256.03304617386, 126048.60294034891 180818.92807437293, 126256.6804384836 180156.06510043703, 126520.66995209953 179841.93955329806, 127251.96100154081 180163.6775382543, 127573.2909928594 180547.41258338094, 127280.55744140813 181192.4896631511, 126709.34954201637 181574.0334826121, 126017.6053446904 181950.14857816882))"^^ns8:wktLiteral ;
+  ns3:uuid "cfc21575-2d49-5977-8a7f-b41e826fb9e7" .
+
+<http://data.vlaanderen.be/id/voorwaardecollecties/fc500253-fd38-4232-837f-fc355f229d07>
+  a ns1:Voorwaardecollectie ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns1:operatie <http://data.vlaanderen.be/id/concept/operaties/and> ;
+  ns5:isRequirementOf <http://data.vlaanderen.be/id/voorwaardecollecties/2209b3d6-874f-446d-9f1b-6ed5bea9e2d2>, <https://data.vlaanderen.be/id/voorwaardecollecties/a4a2f2ff-0efe-4cad-9e95-6421783a8a0f> ;
+  ns3:uuid "b2bc5151-35c9-53a5-8cc0-f66412383dac" .
+
+<http://data.lblod.info/id/voorwaarden/--ref--uuid4-req-zone-1>
+  a ns5:Requirement ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/zone> ;
+  ns4:expectedValue <http://data.vlaanderen.be/id/zones/b67eea9b-2484-4ea9-b6f4-eccf863ce8c2> ;
+  ns3:uuid "291d1c79-1261-515f-9043-3cc3c15c7ed9" .
+
+<https://data.vlaanderen.be/id/voorwaardecollecties/a4a2f2ff-0efe-4cad-9e95-6421783a8a0f>
+  a ns1:Voorwaardecollectie ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns1:operatie <https://data.vlaanderen.be/id/concept/operaties/or> ;
+  ns5:isRequirementOf <https://data.vlaanderen.be/id/voorwaardecollecties/ed0f87a7-6b7c-464d-b81c-d4431b4b1504>, <https://data.vlaanderen.be/id/voorwaardecollecties/3b54d9ba-9894-48fa-9803-e74fefc5d9fd> ;
+  ns3:uuid "770d0ebe-abcd-57f7-b352-87b02d7af736" .
+
+<http://example.org>
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  prov:generated <http://data.lblod.info/id/besluiten/8eba8b40-42b1-11f0-9bd2-418e90b4fc70> .
+
+<https://data.vlaanderen.be/id/voorwaardecollecties/ed0f87a7-6b7c-464d-b81c-d4431b4b1504>
+  a ns1:Voorwaardecollectie ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns1:operatie <http://data.vlaanderen.be/id/concept/operaties/and> ;
+  ns5:isRequirementOf <https://data.vlaanderen.be/id/voorwaardes/aa0a402c-5a1c-443e-bdc1-6a0bd12971c5>, <https://data.vlaanderen.be/id/voorwaardes/4c9c7a1d-3560-4813-9074-e099588b6443>, <https://data.vlaanderen.be/id/voorwaardes/3e750a52-9da6-4f13-bb40-e8ebf764b60c> ;
+  ns3:uuid "0bb9167f-4ddf-56f8-b856-310ca0e7c658" .
+
+<https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/43889f7b-5c7a-4416-acf0-50148b4f3c01>
+  a ns6:Location ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  rdfs:label "Testzone a"@nl-be ;
+  ns6:geometry <https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/e781ec4f-0b34-4648-8dfe-6407bb44fa95> ;
+  ns3:uuid "a7aa89ed-aa3a-592e-ab1d-ba36657455ff" .
+
+<http://data.vlaanderen.be/id/zones/b67eea9b-2484-4ea9-b6f4-eccf863ce8c2>
+  a ns5:Requirement, <https://data.vlaanderen.be/ns/mobiliteit#Zone> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  prov:value <https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/43889f7b-5c7a-4416-acf0-50148b4f3c01> ;
+  skos:prefLabel "Zone"@nl-be ;
+  ns3:uuid "c41f8ef6-7d3b-5a2d-8b12-d7d06ff5864b" .
+
+<http://data.vlaanderen.be/id/voorwaardecollecties/2209b3d6-874f-446d-9f1b-6ed5bea9e2d2>
+  a ns1:Voorwaardecollectie ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns2:hasRequirement <http://data.lblod.info/id/voorwaarden/--ref--uuid4-req-zone-2>, <http://data.lblod.info/id/voorwaarden/--ref--uuid4-req-zone-1> ;
+  ns1:operatie <https://data.vlaanderen.be/id/concept/operaties/or> ;
+  ns3:uuid "58e831b6-43ae-52a3-8d32-247d94da3cfa" .
+
+<https://data.vlaanderen.be/id/bewijstypelijsten/05990454-f809-4d15-85f0-f1505db726e9>
+  a ns5:EvidenceTypeList ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns5:specifiesEvidenceType <https://data.vlaanderen.be/id/ca356c1e-b865-451f-b2e9-3b63b0572d77> ;
+  ns3:uuid "aaa42369-b63f-56e9-b409-52b7fc9e12f9" .
+
+<https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/97269284-5f2f-4dae-81aa-4a60a762a8e2>
+  a ns6:Geometry ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns8:asWKT "<http://www.opengis.net/def/crs/EPSG/0/31370> POLYGON((126171.72861053051 182015.61648637615, 126736.89929770213 181652.12022145, 127265.91400871032 181276.7847705409, 127552.58402341143 180625.72596875392, 127987.58589514183 180804.39098173007, 128486.13191294132 181776.9830958387, 127828.05657319335 183006.83238820825, 126538.03590528006 183024.49144586548, 126171.72861053051 182015.61648637615))"^^ns8:wktLiteral ;
+  ns3:uuid "65196b8a-54b1-5b51-84bc-2707556203a7" .
+
+<https://data.vlaanderen.be/id/bewijstypelijsten/00d01375-5638-42c1-90a7-54d37cf0aa88>
+  a ns5:EvidenceTypeList ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns5:specifiesEvidenceType <https://data.vlaanderen.be/id/d00e5748-379f-48c2-91a2-b352ecc8f79a> ;
+  ns3:uuid "1d26cf91-0375-5cee-ac49-a8a444eb0921" .
+
+<https://data.vlaanderen.be/id/voorwaardes/fc555388-c0f9-4ac1-b4f6-63af8c383b2e>
+  a ns5:Requirement ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/Reden> ;
+  ns4:expectedValue "Voorziet in het vervoer van leerlingen"@nl-be ;
+  ns5:hasEvidenceTypeList <https://data.vlaanderen.be/id/bewijstypelijsten/00d01375-5638-42c1-90a7-54d37cf0aa88> ;
+  ns3:uuid "0bf9e709-e126-5cb1-bcc9-398a93ed5c38" .
+
+<http://data.vlaanderen.be/id/zones/fc500253-fd38-4232-837f-fc355f229d07>
+  a ns5:Requirement, <https://data.vlaanderen.be/ns/mobiliteit#Zone> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  prov:value <https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/43a4f960-d9e9-4d48-a8f2-b480bc5007d9> ;
+  skos:prefLabel "Zone"@nl-be ;
+  ns3:uuid "8d2d96ce-12cd-5c09-ab9e-d366e0e688f9" .
+
+<https://data.vlaanderen.be/id/voorwaardes/3e750a52-9da6-4f13-bb40-e8ebf764b60c>
+  a ns5:Requirement ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/Reden> ;
+  ns4:expectedValue "Bezit een garage of standplaats in de zone"@nl-be ;
+  ns5:hasEvidenceTypeList <https://data.vlaanderen.be/id/bewijstypelijsten/05990454-f809-4d15-85f0-f1505db726e9> ;
+  ns3:uuid "25ea87f7-05ad-5de3-b575-0afb69aca3d0" .
+
+<http://data.lblod.info/id/besluiten/8eba8b40-42b1-11f0-9bd2-418e90b4fc70>
+  ns9:title "Test citerra besluit 2" ;
+  a <http://data.vlaanderen.be/ns/besluit#Besluit>, ns4:BesluitNieuweStijl, <https://data.vlaanderen.be/id/concept/BesluitType/e96ec8af-6480-4b32-876a-fefe5f0a3793> ;
+  ns9:description "besluit citerra" ;
+  ns0:extractedDecisionContent <http://data.lblod.info/id/files/7e2fbbe1-4d08-11f0-a391-7330c191222a> ;
+  ns10:motivering "geef bestuursorgaan op,BevoegdheidRechtsgrond die bepaalt dat dit orgaan bevoegd is.Juridische contextVoeg juridische context inFeitelijke context en argumentatieVoeg context en argumentatie in"@nl ;
+  ns9:language <http://publications.europa.eu/resource/authority/language/NLD> ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns9:has_part <http://data.lblod.info/artikels/8eba8b41-42b1-11f0-9bd2-418e90b4fc70> ;
+  prov:value "Enig artikel 1De raad keurt het volgende reglement goedReglementaire bijlage: test publicatie citerraReglement toegang autoluwe zonesZonedefinitiesVoor zones:Testzone aTestzone bgeldt:Toegang met vergunningHouders van een vergunning mogen de zone betreden met hun voertuig.Een vergunning kan worden verstrekt voor voertuigen uit een van de volgende categorieën:Ondernemingen, gevestigd in de zone, met een garage of standplaats in de zoneDe onderneming voldoet aan de volgende voorwaarden:De onderneming is gevestigd in de zone.De onderneming bezit een garage of standplaats binnen de zone, en kan dit aantonen aan de hand van onderstaande bewijsstukken:Eigendomsbewijs van een garage of standplaats binnen de zone.Ondernemingen die voorzien in het vervoer van leerlingenDe onderneming voldoet aan de volgende voorwaarden:De onderneming voorziet in het vervoer van leerlingen.Dit wordt bepaald op basis van informatie uit het MAGDA profiel." ;
+  ns9:related_to <http://data.lblod.info/document-containers/6842399D7C3C5580D522066E> ;
+  ns3:uuid "aee940dd-d037-5530-90b0-fc43f62f5e96" .
+
+<http://data.lblod.info/artikels/8eba8b41-42b1-11f0-9bd2-418e90b4fc70>
+  a ns10:Artikel ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  prov:value "Enig artikel 1De raad keurt het volgende reglement goed" ;
+  ns0:extractedDecisionContent <http://data.lblod.info/id/files/7e33b381-4d08-11f0-a391-7330c191222a> ;
+  ns9:title "Enig artikel 1" ;
+  ns9:number "1" ;
+  ns11:body "<p class=\"say-paragraph\">De raad keurt het volgende reglement goed</p>"^^rdf:HTML ;
+  ns3:uuid "eb651a6e-492f-5559-bdad-71d79428c9f0" .
+
+<https://data.vlaanderen.be/id/ca356c1e-b865-451f-b2e9-3b63b0572d77>
+  a ns5:EvidenceType ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns5:evidenceTypeClassification <https://data.vlaanderen.be/id/concept/bewijstype/eigendom> ;
+  ns3:uuid "ef4a1a11-c9f8-5eb1-9d60-87c7f88da13c" .
+
+<https://data.vlaanderen.be/id/voorwaardecollecties/3b54d9ba-9894-48fa-9803-e74fefc5d9fd>
+  a ns1:Voorwaardecollectie ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns1:operatie <http://data.vlaanderen.be/id/concept/operaties/and> ;
+  ns5:isRequirementOf <https://data.vlaanderen.be/id/voorwaardes/68b3eacb-2c26-4c14-987e-33dd06809daf>, <https://data.vlaanderen.be/id/voorwaardes/fc555388-c0f9-4ac1-b4f6-63af8c383b2e> ;
+  ns3:uuid "1e340dfb-ba5b-5c83-b8bf-b0a0a1ceff9b" .
+
+<http://data.lblod.info/id/zittingen/684A824E7C3C5580D522067B>
+  a ns10:Zitting ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns10:isGehoudenDoor <http://data.lblod.info/id/bestuursorganen/c5f16af66d81bc6a8d09e9d53c67d9cf0af3f638687bd56c9fcf93a35cc1ae44> ;
+  ns10:geplandeStart "2025-06-11T07:31:07.869Z"^^xsd:dateTime ;
+  prov:startedAtTime "2025-06-11T07:31:07.869Z"^^xsd:dateTime ;
+  prov:endedAtTime "2025-06-11T07:31:38.596Z"^^xsd:dateTime ;
+  ns3:uuid "69fa5756-53ad-52f0-a924-bba9cd9ef55e" .
+
+<http://data.lblod.info/id/behandelingen-van-agendapunten/684A82717C3C5580D522067C>
+  a ns10:BehandelingVanAgendapunt ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  ns10:openbaar true ;
+  dc:subject <http://data.lblod.info/id/agendapunten/684A82717C3C5580D522067D> ;
+  dc:title "Kopie van Test citerra 2"@nl ;
+  ns3:uuid "208ef114-0eee-5323-8469-77c498c5890e" .
+
+<https://data.vlaanderen.be/id/voorwaardes/4c9c7a1d-3560-4813-9074-e099588b6443>
+  a ns5:Requirement ;
+  prov:wasDerivedFrom <https://publicatie.dev.gelinkt-notuleren.lblod.info/Affligem/Gemeente/zittingen/9b6fdc70-475f-11f0-80dd-8f157e2a3603/uittreksels/9b7dbf20-475f-11f0-80dd-8f157e2a3603/raw> ;
+  dc:type <https://data.vlaanderen.be/id/concept/VoorwaardeType/RelatieZone> ;
+  ns3:uuid "e37e14c0-5897-5dd9-ad3d-e312f589e583" .

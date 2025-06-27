@@ -1,6 +1,6 @@
 INSERT DATA {
   GRAPH <http://mu.semte.ch/graphs/public> {
-  <https://data.gent.be/id/agendapunten/24.1210.2218.2928>
+  <https://lblod.laarne.be/LBLODWeb/id/agendapunt/4c348544d0b347db8994ee523fed2006-456438>
   <https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#heeftThema>
   <https://data.vlaanderen.be/id/concept/BesluitThema/ab7f27bb-c039-4e3b-ac03-653e7e21bea6> .
   }

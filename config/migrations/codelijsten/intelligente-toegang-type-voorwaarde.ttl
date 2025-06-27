@@ -1,0 +1,69 @@
+<https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "5409f68d-ecad-43aa-a577-33ee6b39d7c4" ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Type Voorwaarde"@nl ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Codelijst van type voorwaarde binnen het kader van intelligente toegang."@nl .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/0d903f9f-730b-45ed-9f04-d2449d7a8018>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "0d903f9f-730b-45ed-9f04-d2449d7a8018" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "De voorwaarde beschrijft welk type aanvrager een vergunning kan aanvragen."@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Type Aanvrager"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/ee4624cd-951c-4612-8e54-ae635c3cddac>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "ee4624cd-951c-4612-8e54-ae635c3cddac" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "De voorwaarde beschrijft welke relatie tot de zone wordt verwacht van de aanvrager."@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Relatie zone"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/d5c0c89a-3ba4-49fd-bfe4-f41405b4cbf1>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "d5c0c89a-3ba4-49fd-bfe4-f41405b4cbf1" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "De voorwaarde toont aan in welke zone de vergunning kan aangevraagd worden."@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - In zone"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/0bfeab4c-a69b-44cd-9a2c-6fd18ebd5761>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "0bfeab4c-a69b-44cd-9a2c-6fd18ebd5761" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "De voorwaarde geeft reden aan dat toelaat om de zone binnen te rijden. Dit kan een functie, speciale toestand of activiteit zijn."@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Reden"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/4ba244a0-f936-4974-a4f6-efb1ddaf17a7>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "4ba244a0-f936-4974-a4f6-efb1ddaf17a7" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Voorwaarde duidt het aantal zones aan dat aangevraagd kan worden."@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Aantal zones"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/2f22ab86-5338-40e0-8d4e-9f6eb31045d8>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "2f22ab86-5338-40e0-8d4e-9f6eb31045d8" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Voorwaarde is van het type Duurtijd"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Duurtijd"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/f20f4f1b-89c0-41e2-8316-a298dbf6cb03>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "f20f4f1b-89c0-41e2-8316-a298dbf6cb03" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Voorwaarde is van het type Tijdsvenster"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Tijdsvenster"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
+
+<https://data.vlaanderen.be/id/concept/IntelligenteToegang-TypeVoorwaarde/ae86eff3-09a6-4aef-bf25-3da91c361b67>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://mu.semte.ch/vocabularies/core/uuid> "ae86eff3-09a6-4aef-bf25-3da91c361b67" ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Voorwaarde is van het type Aantal nummerplaten"@nl ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Voorwaarde - Aantal nummerplaten"@nl ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://data.vlaanderen.be/id/conceptscheme/IntelligenteToegang-TypeVoorwaarde> .
