@@ -30,7 +30,7 @@ ENV['JENA_HOME']='/opt/jena'
 puts "installing jena riot for turtle validation"
 `apt-get update && apt-get install -y openjdk-17-jdk wget unzip`
 `wget -qO- https://downloads.apache.org/jena/binaries/apache-jena-5.5.0.tar.gz | tar xz -C /opt && \
-    mv /opt/apache-jena-5.3.0 $JENA_HOME && \
+    mv /opt/apache-jena-5.5.0 $JENA_HOME && \
     ln -s $JENA_HOME/bin/riot /usr/local/bin/riot`
 
 
