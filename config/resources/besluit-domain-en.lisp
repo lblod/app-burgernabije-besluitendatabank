@@ -110,6 +110,9 @@
 (define-resource governing-body-classification-code ()
   :class (s-prefix "ext:BestuursorgaanClassificatieCode")
   :properties `((:label :string ,(s-prefix "skos:prefLabel")))
+  :has-many `((governing-body :via ,(s-prefix "besluit:classificatie")
+                              :inverse t
+                              :as "governing-bodies"))
   :resource-base (s-url "http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/")
   :features '(include-uri)
   :on-path "governing-body-classification-codes")
