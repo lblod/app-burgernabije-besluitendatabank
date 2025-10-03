@@ -26,14 +26,6 @@ ENV['LOG_SPARQL_ALL']='false'
 ENV['MU_SPARQL_ENDPOINT']='http://database:8890/sparql'
 ENV['JENA_HOME']='/opt/jena'
 
-# using jena riot because we need streaming validation because of large files
-puts "installing jena riot for turtle validation"
-`apt-get update && apt-get install -y openjdk-17-jdk wget unzip`
-`wget -qO- https://downloads.apache.org/jena/binaries/apache-jena-5.5.0.tar.gz | tar xz -C /opt && \
-    mv /opt/apache-jena-5.5.0 $JENA_HOME && \
-    ln -s $JENA_HOME/bin/riot /usr/local/bin/riot`
-
-
 require 'odbc'
 require 'tty-prompt'
 
@@ -82,6 +74,38 @@ def get_db_connection
   end
 end
 
+def get_file_extension(format)
+  case format
+  when "application/x-xz"
+    ".ttl.xz"
+  when "application/gzip"
+    ".ttl.gz"
+  when "application/x-bzip2"
+    ".ttl.bz2"
+  else
+    ".ttl"
+  end
+end
+
+def decompress_file(file_path, format, prompt)
+  case format
+  when "application/x-xz"
+    prompt.say "Decompressing XZ file #{file_path}"
+    system("unxz #{file_path}")
+    file_path.sub(/\.xz$/, '')
+  when "application/gzip"
+    prompt.say "Decompressing GZ file #{file_path}"
+    system("gunzip #{file_path}")
+    file_path.sub(/\.gz$/, '')
+  when "application/x-bzip2"
+    prompt.say "Decompressing BZ2 file #{file_path}"
+    system("bunzip2 #{file_path}")
+    file_path.sub(/\.bz2$/, '')
+  else
+    file_path
+  end
+end
+
 def get_latest_dump_file(sync_base_url, subject)
   sync_base_url = sync_base_url.end_with?("/") ? sync_base_url : "#{sync_base_url}/"
   sync_dataset_endpoint = "#{sync_base_url}datasets"
@@ -93,14 +117,25 @@ def get_latest_dump_file(sync_base_url, subject)
     dataset = JSON.parse(response_dataset.body)
 
     if dataset['data'].any?
-      distribution_metadata = dataset['data'][0]['attributes']
+      dataset_metadata = dataset['data'][0]['attributes']
       distribution_related_link = dataset['data'][0]['relationships']['distributions']['links']['related']
       distribution_uri = "#{sync_base_url}#{distribution_related_link}"
 
       puts "Retrieving distribution from #{distribution_uri}"
       result_distribution = Typhoeus.get("#{distribution_uri}?include=subject", headers: { 'Accept' => 'application/vnd.api+json' })
       distribution = JSON.parse(result_distribution.body)
-      return [distribution['data'][0].dig('relationships','subject','data'), distribution_metadata]
+
+      # Prioritize compressed formats: xz > gzip > bzip2 > uncompressed ttl
+      distributions = distribution['data']
+      selected_distribution = distributions.find { |dist| dist.dig('attributes', 'format') == 'application/x-xz' } ||
+                              distributions.find { |dist| dist.dig('attributes', 'format') == 'application/gzip' } ||
+                              distributions.find { |dist| dist.dig('attributes', 'format') == 'application/x-bzip2' } ||
+                              distributions.find { |dist| dist.dig('attributes', 'format') == 'text/turtle' } ||
+                              distributions[0]
+
+      format = selected_distribution.dig('attributes', 'format')
+      puts "Selected distribution format: #{format}"
+      return [selected_distribution, dataset_metadata]
     else
       raise 'No dataset was found at the producing endpoint.'
     end
@@ -111,11 +146,17 @@ def get_latest_dump_file(sync_base_url, subject)
 end
 
 def fetch_and_store_file(prompt, sync_base_url, sync_dataset_subject)
-  distribution, distribution_metadata = get_latest_dump_file(sync_base_url, sync_dataset_subject)
-  prompt.say "Dateset has release-date #{distribution_metadata["release-date"]}"
-  distribution_url = "#{sync_base_url}files/#{distribution["id"]}/download"
+  selected_distribution, dataset_metadata = get_latest_dump_file(sync_base_url, sync_dataset_subject)
+  file_id = selected_distribution.dig('relationships','subject','data','id')
+  unless file_id
+    raise "could not find distribution file id in distribution"
+  end
+  prompt.say "Dataset has release-date #{dataset_metadata["release-date"]}"
+  distribution_url = "#{sync_base_url}files/#{file_id}/download"
   progressbar = nil
-  tmp_file_path = "/project/tmp-#{distribution["id"]}.ttl"
+  format = selected_distribution.dig('attributes', 'format')
+  extension = get_file_extension(format)
+  tmp_file_path = "/project/tmp-#{selected_distribution["id"]}#{extension}"
   prompt.say "Downloading file from #{distribution_url} to #{tmp_file_path}"
   progressbar = TTY::ProgressBar.new("Downloading: :byte_rate/s :current_byte :elapsed")
   file = File.open(tmp_file_path, 'wb')
@@ -124,7 +165,6 @@ def fetch_and_store_file(prompt, sync_base_url, sync_dataset_subject)
     if response.code != 200
       raise "Failed to download file, response code #{response.code}"
     end
-    puts response.headers["Content-Encoding"]
   end
   request.on_body do |chunk|
     file.write(chunk)
@@ -135,7 +175,7 @@ def fetch_and_store_file(prompt, sync_base_url, sync_dataset_subject)
     progressbar.finish
   end
   request.run
-  return [tmp_file_path, distribution_metadata["release-date"]]
+  return [tmp_file_path, dataset_metadata["release-date"], selected_distribution]
 end
 
 prompt = TTY::Prompt.new
@@ -179,19 +219,31 @@ end
 fetch_from = prompt.select("Fetch file from endpoint or filesystem?", ["endpoint", "filesystem"])
 start=DateTime.now
 if fetch_from == "endpoint"
-  tmp_file_path, distribution_id, release_date = fetch_and_store_file(prompt, sync_base_url,sync_dataset_subject)
+  tmp_file_path, release_date, selected_distribution = fetch_and_store_file(prompt, sync_base_url,sync_dataset_subject)
+  distribution_id = selected_distribution['id']
+  format = selected_distribution.dig('attributes', 'format')
 else
   tmp_file_path = prompt.ask("Where is the file located (project folder mounted under /project)", default: "/project/dump.ttl")
   release_date = prompt.ask("What was the generation time for this file (used by delta-consumer as since)", default: DateTime.now.xmlschema)
   distribution_id = prompt.ask("Enter the distribution id", default: SecureRandom.uuid)
+  format = "text/turtle"
 end
-prompt.say "Validating file #{tmp_file_path}"
-system("/usr/local/bin/riot --validate #{tmp_file_path}")
+
+# Decompress file if needed
+decompressed_file_path = decompress_file(tmp_file_path, format, prompt)
+
+# Validate the decompressed file
+prompt.say "Validating file #{decompressed_file_path}"
+system("/usr/local/bin/riot --validate #{decompressed_file_path}")
 unless $?.success?
-  raise "Downloaded turtle file is not a valid turtle file"
+  continue_anyway = prompt.yes?("Validation failed. Continue anyway?", default: false)
+  unless continue_anyway
+    raise "File validation failed and user chose not to continue"
+  end
+  prompt.say "Continuing with invalid file as requested"
 end
 filename="dataset-#{SecureRandom.uuid}.ttl"
-File.rename(tmp_file_path,"/project/data/db/toLoad/#{filename}")
+File.rename(decompressed_file_path,"/project/data/db/toLoad/#{filename}")
 prompt.say("Moved validated ttl to data/db/toLoad/#{filename}")
 load_file = prompt.yes?("Load file via virtuoso odbc")
 if load_file
