@@ -12,7 +12,7 @@ services:
   # START CONSUMER HARVESTER 0
   #################################################################################
   besluiten-consumer:
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     environment:
       # #### START: "intialSync operation mode" in optimal performance for direct virtuoso (needs full-reindex though)
       # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
@@ -42,7 +42,7 @@ services:
   #################################################################################
   besluiten-consumer-1:
     ################################# START "default" config
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files-1/besluiten:/consumer-files/
@@ -92,7 +92,7 @@ services:
   #################################################################################
   besluiten-consumer-2:
     ################################# START "default" config
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files-2/besluiten:/consumer-files/
@@ -145,7 +145,7 @@ services:
   #################################################################################
   besluiten-consumer-3:
     ################################# START "default" config
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files-3/besluiten:/consumer-files/
