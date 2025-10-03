@@ -8,7 +8,7 @@ services:
   # HTTP Proxy for identifying sessions
   # https://github.com/mu-semtech/mu-identifier
   identifier:
-    image: semtech/mu-identifier:1.10.3
+    image: semtech/mu-identifier:1.11.0
     environment:
       SESSION_COOKIE_SECURE: "on"
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: '[{"variables":[],"name":"public"}]'
@@ -56,7 +56,7 @@ services:
   # Allows accessing linked data as a JSON:API endpoint. Used by frontend
   # https://github.com/mu-semtech/mu-cl-resources
   resources:
-    image: semtech/mu-cl-resources:1.25.0
+    image: semtech/mu-cl-resources:1.27.2
     environment:
       CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     links:
@@ -125,7 +125,7 @@ services:
   # Service that generates uuid's for imported data to allow linked-data usage
   # https://github.com/redpencilio/uuid-generation-service
   uuid-generation:
-    image: redpencil/uuid-generation:0.3.0
+    image: redpencil/uuid-generation:0.4.1
     volumes:
       - ./config/uuid-generation/:/config
     links:
@@ -138,7 +138,7 @@ services:
   # Imports endpoint data into the triplestore
   # https://github.com/lblod/delta-consumer
   mandatendatabank-consumer:
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     environment:
       DCR_SYNC_BASE_URL: "https://loket.lokaalbestuur.vlaanderen.be/"
       DCR_SERVICE_NAME: "mandatendatabank-consumer"
@@ -162,7 +162,7 @@ services:
     labels:
       - "logging=true"
   op-public-consumer:
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     environment:
       DCR_SYNC_BASE_URL: "https://organisaties.abb.vlaanderen.be/"
       DCR_SERVICE_NAME: "op-public-consumer"
@@ -186,7 +186,7 @@ services:
     labels:
       - "logging=true"
   besluiten-consumer:
-    image: lblod/delta-consumer:0.1.4
+    image: lblod/delta-consumer:0.1.6
     environment:
       DCR_SYNC_BASE_URL: "https://harvesting-self-service.lblod.info/"
       DCR_SERVICE_NAME: "besluiten-consumer"
@@ -225,7 +225,7 @@ services:
   # Elasticsearch backend to be used with mu-search
   # https://github.com/mu-semtech/mu-search-elastic-backend/
   elasticsearch:
-    image: semtech/mu-search-elastic-backend:1.1.0
+    image: semtech/mu-search-elastic-backend:1.2.0
     volumes:
       - ./data/elasticsearch/:/usr/share/elasticsearch/data
     environment:
@@ -237,7 +237,7 @@ services:
   # Generic service to generate reports about data
   # https://github.com/lblod/loket-report-generation-service
   report-generation:
-    image: lblod/loket-report-generation-service:0.8.2
+    image: lblod/loket-report-generation-service:0.9.0
     environment:
       LOG_SPARQL_ALL: "false"
       DEBUG_AUTH_HEADERS: "false"
@@ -271,7 +271,7 @@ services:
     restart: always
     logging: *default-logging
   deliver-email-service:
-    image: redpencil/deliver-email-service:0.2.0
+    image: redpencil/deliver-email-service:0.4.1
     environment:
       MAILBOX_URI: "http://data.lblod.info/id/mailboxes/1"
     labels:
