@@ -219,6 +219,8 @@ services:
     volumes:
       - ./config/search:/config
     restart: always
+    environment:
+      JAVA_OPTS: "-Xms1g -Xmx4g"    
     logging: *default-logging
     labels:
       - "logging=true"
