@@ -186,7 +186,7 @@ services:
     labels:
       - "logging=true"
   besluiten-consumer:
-    image: lblod/delta-consumer:0.1.6
+    image: lblod/delta-consumer:feature-initial-sync-with-virtuoso-dump
     environment:
       DCR_SYNC_BASE_URL: "https://harvesting-self-service.lblod.info/"
       DCR_SERVICE_NAME: "besluiten-consumer"
@@ -203,8 +203,6 @@ services:
       DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
       INGEST_GRAPH: "http://mu.semte.ch/graphs/harvester-0"
       BATCH_SIZE: 250
-      # You play with following variable in the docker-compose.override.yml.
-      PARALLEL_CALLS: 1
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files/besluiten:/consumer-files/

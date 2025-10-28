@@ -1,4 +1,4 @@
-const PREFIXES = `
+export const PREFIXES = `
 PREFIX adms: <http://www.w3.org/ns/adms#>
 PREFIX adres: <https://data.vlaanderen.be/ns/adres#>
 PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
@@ -28,7 +28,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>`;
 
-const contextConfig = {
+export const contextConfig = {
   addTypes: {
     scope: "none", // 'inserts, 'deletes', 'all' or none. To add rdf:type to subjects of inserts, deletes or both
     exhausitive: false, // true or false: find all types for a subject, even if one is already present in delta
@@ -36,7 +36,3 @@ const contextConfig = {
   contextQueries: [],
 };
 
-module.exports = {
-  contextConfig,
-  PREFIXES,
-};
