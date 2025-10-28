@@ -1,11 +1,7 @@
-const { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
+import { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
-  BATCH_SIZE,
-  SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-  PARALLEL_CALLS
-} = require('./config');
-const { parallelisedBatchedUpdate } = require('./utils');
+} from './config';
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT; //Defaults to mu-auth
 
 
@@ -22,9 +18,9 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT
  *         ]
  * @return {void} Nothing
  */
-async function dispatch(lib, data) {
-  const { mu, } = lib;
+export async function dispatch(lib, data) {
   const { termObjectChangeSets } = data;
+    const { insertIntoGraph, deleteFromGraph } = lib;
 
   for (let { deletes, inserts } of termObjectChangeSets) {
 
@@ -33,41 +29,9 @@ async function dispatch(lib, data) {
     }
     console.log(`Using ${endpoint} to insert triples`);
 
-    const deleteStatements = deletes.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
-    await parallelisedBatchedUpdate(
-      lib,
-      deleteStatements,
-      INGEST_GRAPH,
-      SLEEP_BETWEEN_BATCHES,
-      BATCH_SIZE,
-      {},
-      endpoint,
-      "DELETE",
-      //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-      // as fallback
-      !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-      PARALLEL_CALLS
-    );
-
-    const insertStatements = inserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
-    await parallelisedBatchedUpdate(
-      lib,
-      insertStatements,
-      INGEST_GRAPH,
-      SLEEP_BETWEEN_BATCHES,
-      BATCH_SIZE,
-      {},
-      endpoint,
-      "INSERT",
-      //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-      // as fallback
-      !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-      PARALLEL_CALLS
-    );
+    await deleteFromGraph(deletes, endpoint, INGEST_GRAPH, {});
+    await insertIntoGraph(inserts, endpoint, INGEST_GRAPH, {});
 
   }
 }
 
-module.exports = {
-  dispatch
-};

@@ -12,19 +12,17 @@ services:
   # START CONSUMER HARVESTER 0
   #################################################################################
   besluiten-consumer:
-    image: lblod/delta-consumer:0.1.6
+    image: lblod/delta-consumer:feature-initial-sync-with-virtuoso-dump
     environment:
       # #### START: "intialSync operation mode" in optimal performance for direct virtuoso (needs full-reindex though)
       # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       # BATCH_SIZE: 500
       # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
-      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
       # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
 
       # #### START: "normal operation mode" in optimal performance for mu-auth
       BATCH_SIZE: "1"
       SLEEP_BETWEEN_BATCHES: "1"
-      PARALLEL_CALLS: "8"
       # #### END: "normal operation mode" in optimal performance for mu-auth
 
       DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-0.s.redhost.be/"
@@ -42,7 +40,7 @@ services:
   #################################################################################
   besluiten-consumer-1:
     ################################# START "default" config
-    image: lblod/delta-consumer:0.1.6
+    image: lblod/delta-consumer:feature-initial-sync-with-virtuoso-dump
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files-1/besluiten:/consumer-files/
@@ -66,13 +64,11 @@ services:
       #  SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       # BATCH_SIZE: 500
       # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
-      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
       # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
 
       # #### START: "normal operation mode" in optimal performance for mu-auth
       BATCH_SIZE: "1"
       SLEEP_BETWEEN_BATCHES: "1"
-      PARALLEL_CALLS: "8"
       # #### END: "normal operation mode" in optimal performance for mu-auth
       DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-1.s.redhost.be/"
       DCR_DISABLE_DELTA_INGEST: "false" # set to false to enable data ingestion
@@ -92,7 +88,7 @@ services:
   #################################################################################
   besluiten-consumer-2:
     ################################# START "default" config
-    image: lblod/delta-consumer:0.1.6
+    image: lblod/delta-consumer:feature-initial-sync-with-virtuoso-dump
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files-2/besluiten:/consumer-files/
@@ -116,13 +112,11 @@ services:
       # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       # BATCH_SIZE: 500
       # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
-      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
       # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
 
       # #### START: "normal operation mode" in optimal performance for mu-auth
       BATCH_SIZE: "1"
       SLEEP_BETWEEN_BATCHES: "1"
-      PARALLEL_CALLS: "8"
       # #### END: "normal operation mode" in optimal performance for mu-auth
 
       DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-2.s.redhost.be/"
@@ -145,7 +139,7 @@ services:
   #################################################################################
   besluiten-consumer-3:
     ################################# START "default" config
-    image: lblod/delta-consumer:0.1.6
+    image: lblod/delta-consumer:feature-initial-sync-with-virtuoso-dump
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files-3/besluiten:/consumer-files/
@@ -168,13 +162,11 @@ services:
       # SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       # BATCH_SIZE: 500
       # BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
-      # PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let"s try
       # #### END: "intialSync operation mode" in optimal performance for direct virtuoso
 
       # #### START: "normal operation mode" in optimal performance for mu-auth
       BATCH_SIZE: "1"
       SLEEP_BETWEEN_BATCHES: "1"
-      PARALLEL_CALLS: "8"
       # #### END: "normal operation mode" in optimal performance for mu-auth
 
       DCR_START_FROM_DELTA_TIMESTAMP: "2025-02-01T00:00:00Z" 
