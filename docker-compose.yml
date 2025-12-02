@@ -36,7 +36,7 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    image: lblod/frontend-burgernabije-besluitendatabank:0.8.6
+    image: lblod/frontend-burgernabije-besluitendatabank:0.8.9
     restart: always
     logging: *default-logging
     labels:
