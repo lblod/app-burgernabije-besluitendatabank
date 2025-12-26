@@ -284,6 +284,7 @@ services:
       - "logging=true"
     restart: always
     logging: *default-logging
+
   metrics:
     image: lblod/metrics-service
     volumes:
