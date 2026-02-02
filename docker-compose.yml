@@ -86,7 +86,7 @@ services:
   # SPARQL Endpoint authorization service. Adds an authentication layer to the triplestore
   # https://github.com/mu-semtech/sparql-parser
   database:
-    image: semtech/sparql-parser:0.0.14
+    image: semtech/sparql-parser:0.0.15
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
