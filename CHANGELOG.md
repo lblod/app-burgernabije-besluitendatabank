@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+
+## 1.3.0 (2026-02-09)
 ### :bug: Bug fixes
 - Fix sparql-parser configuration
 
