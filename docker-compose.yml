@@ -114,7 +114,7 @@ services:
   # Sends notifications to the uuid-generation & resources when new data is found on specific data.vlaanderen.be urls
   # https://github.com/mu-semtech/delta-notifier
   delta-notifier:
-    image: semtech/mu-delta-notifier:0.4.0
+    image: nvdk/mu-delta-notifier:1.1.0
     volumes:
       - ./config/delta:/config
     restart: always
