@@ -1,13 +1,9 @@
-const { parallelisedBatchedUpdate } = require("./utils");
-const {
+import {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
   MU_CALL_SCOPE_ID_INITIAL_SYNC,
-  BATCH_SIZE,
-  SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-  PARALLEL_CALLS,
-} = require("./config");
+} from "./config";
 
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
   ? DIRECT_DATABASE_ENDPOINT
@@ -26,32 +22,16 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
  *         ]
  * @return {void} Nothing
  */
-async function dispatch(lib, data) {
-  const { mu } = lib;
-
-  const triples = data.termObjects.map(
-    (o) => `${o.subject} ${o.predicate} ${o.object}.`,
-  );
+export async function dispatch(lib, data) {
+  const { insertIntoGraph } = lib;
 
   if (BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES) {
     console.warn(`Service configured to skip MU_AUTH!`);
   }
-  console.log(`Using ${endpoint} to insert triples`);
 
-  await parallelisedBatchedUpdate (
-    lib,
-    triples,
-    INGEST_GRAPH,
-    SLEEP_BETWEEN_BATCHES,
-    BATCH_SIZE,
-    { "mu-call-scope-id": MU_CALL_SCOPE_ID_INITIAL_SYNC },
-    endpoint,
-    "INSERT",
-    //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-    // as fallback
-    !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-    PARALLEL_CALLS
-  );
+  console.log(`Using ${endpoint} to insert triples`);
+    await insertIntoGraph(data.termObjects, endpoint, INGEST_GRAPH, { "mu-call-scope-id": MU_CALL_SCOPE_ID_INITIAL_SYNC });
+
 }
 
 /**
@@ -60,7 +40,7 @@ async function dispatch(lib, data) {
  * @param { mu, muAuthSudo, fech } lib - The provided libraries from the host service.
  * @return {void} Nothing
  */
-async function onFinishInitialIngest(_lib) {
+export async function onFinishInitialIngest(_) {
   console.log(`
     onFinishInitialIngest was called!
     Current implementation does nothing, no worries.
@@ -68,7 +48,3 @@ async function onFinishInitialIngest(_lib) {
   `);
 }
 
-module.exports = {
-  dispatch,
-  onFinishInitialIngest,
-};

@@ -37,14 +37,6 @@ services:
       SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       BATCH_SIZE: 500
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: 'true'
-      PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let's try
-      # #### END: 'intialSync operation mode' in optimal performance for direct virtuoso
-
-      # #### START: 'normal operation mode' in optimal performance for mu-auth
-      # BATCH_SIZE: "1"
-      # SLEEP_BETWEEN_BATCHES: "1"
-      # PARALLEL_CALLS: "8"
-      # #### END: 'normal operation mode' in optimal performance for mu-auth
     restart: "no"
   op-public-consumer:
     environment:
@@ -57,33 +49,18 @@ services:
       SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       BATCH_SIZE: 500
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: 'true'
-      PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let's try
-      # #### END: 'intialSync operation mode' in optimal performance for direct virtuoso
-
-      # #### START: 'normal operation mode' in optimal performance for mu-auth
-      # BATCH_SIZE: "1"
-      # SLEEP_BETWEEN_BATCHES: "1"
-      # PARALLEL_CALLS: "8"
-      # #### END: 'normal operation mode' in optimal performance for mu-auth
     restart: "no"
   besluiten-consumer:
+    build: 
+      context: /home/nbittich/work/lblod/delta-consumer/.
     environment:
-      DCR_SYNC_BASE_URL: "https://dev.harvesting-self-service.lblod.info/"
+      DCR_SYNC_BASE_URL: "https://lokaalbeslist-harvester-1.s.redhost.be/"
       DCR_DISABLE_DELTA_INGEST: "false" # uncomment to enable data ingestion
       DCR_DISABLE_INITIAL_SYNC: "false" # uncomment to enable initial sync
       SUDO_QUERY_RETRY: 'true'
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
-
       # #### START: 'intialSync operation mode' in optimal performance for direct virtuoso (needs full-reindex though)
       SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
       BATCH_SIZE: 500
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: 'true'
-      PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let's try
-      # #### END: 'intialSync operation mode' in optimal performance for direct virtuoso
-
-      # #### START: 'normal operation mode' in optimal performance for mu-auth
-      # BATCH_SIZE: "1"
-      # SLEEP_BETWEEN_BATCHES: "1"
-      # PARALLEL_CALLS: "8"
-      # #### END: 'normal operation mode' in optimal performance for mu-auth
     restart: "no"
