@@ -21,7 +21,7 @@ export default [
       sendMatchesOnly: true,
       foldEffectiveChanges: true
     }
-  }
+  },
   {
     match: { },
     callback: {
