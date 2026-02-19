@@ -1,4 +1,4 @@
-const { parallelisedBatchedUpdate } = require("./utils");
+const { batchedUpdate } = require("./utils");
 const {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
@@ -6,7 +6,6 @@ const {
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-  PARALLEL_CALLS,
 } = require("./config");
 
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
@@ -15,7 +14,7 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
 
 /**
  * Dispatch the fetched information to a target graph.
- * @param { mu, muAuthSudo, fech } lib - The provided libraries from the host service.
+ * @param { mu, muAuthSudo, fetch } lib - The provided libraries from the host service.
  * @param { termObjects } data - The fetched quad information, which objects of serialized Terms
  *          [ {
  *              graph: "<http://foo>",
@@ -27,8 +26,6 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
  * @return {void} Nothing
  */
 async function dispatch(lib, data) {
-  const { mu } = lib;
-
   const triples = data.termObjects.map(
     (o) => `${o.subject} ${o.predicate} ${o.object}.`,
   );
@@ -36,9 +33,8 @@ async function dispatch(lib, data) {
   if (BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES) {
     console.warn(`Service configured to skip MU_AUTH!`);
   }
-  console.log(`Using ${endpoint} to insert triples`);
 
-  await parallelisedBatchedUpdate (
+  await batchedUpdate(
     lib,
     triples,
     INGEST_GRAPH,
@@ -47,25 +43,11 @@ async function dispatch(lib, data) {
     { "mu-call-scope-id": MU_CALL_SCOPE_ID_INITIAL_SYNC },
     endpoint,
     "INSERT",
-    //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-    // as fallback
-    !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-    PARALLEL_CALLS
   );
 }
 
-/**
- * A callback you can override to do extra manipulations
- *   after initial ingest.
- * @param { mu, muAuthSudo, fech } lib - The provided libraries from the host service.
- * @return {void} Nothing
- */
 async function onFinishInitialIngest(_lib) {
-  console.log(`
-    onFinishInitialIngest was called!
-    Current implementation does nothing, no worries.
-    You can overrule it for extra manipulations after initial ingest.
-  `);
+  console.log(`onFinishInitialIngest was called. Nothing extra to do.`);
 }
 
 module.exports = {

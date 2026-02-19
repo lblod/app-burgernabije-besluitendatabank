@@ -3,11 +3,9 @@ const { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-  PARALLEL_CALLS
 } = require('./config');
-const { parallelisedBatchedUpdate } = require('./utils');
-const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT; //Defaults to mu-auth
-
+const { batchedUpdate } = require('./utils');
+const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT;
 
 /**
  * Dispatch the fetched information to a target graph.
@@ -23,7 +21,6 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT
  * @return {void} Nothing
  */
 async function dispatch(lib, data) {
-  const { mu, } = lib;
   const { termObjectChangeSets } = data;
 
   for (let { deletes, inserts } of termObjectChangeSets) {
@@ -31,10 +28,9 @@ async function dispatch(lib, data) {
     if (BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES) {
       console.warn(`Service configured to skip MU_AUTH!`);
     }
-    console.log(`Using ${endpoint} to insert triples`);
 
     const deleteStatements = deletes.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
-    await parallelisedBatchedUpdate(
+    await batchedUpdate(
       lib,
       deleteStatements,
       INGEST_GRAPH,
@@ -43,14 +39,10 @@ async function dispatch(lib, data) {
       {},
       endpoint,
       "DELETE",
-      //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-      // as fallback
-      !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-      PARALLEL_CALLS
     );
 
     const insertStatements = inserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
-    await parallelisedBatchedUpdate(
+    await batchedUpdate(
       lib,
       insertStatements,
       INGEST_GRAPH,
@@ -59,12 +51,7 @@ async function dispatch(lib, data) {
       {},
       endpoint,
       "INSERT",
-      //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-      // as fallback
-      !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-      PARALLEL_CALLS
     );
-
   }
 }
 
