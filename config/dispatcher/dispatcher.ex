@@ -101,9 +101,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resource/geometries/"
   end
 
-  match "/sparql/*path" do
-    Proxy.forward conn, path, "http://triplestore:8890/sparql/"
-  end #remove this in production
+  # match "/sparql/*path" do
+  #  Proxy.forward conn, path, "http://triplestore:8890/sparql/"
+  #end
+  #uncomment if you want to enable direct SPARQL access to the triplestore.
 
   match "/adresses-register/*path" do
     forward conn, path, "http://adressenregister"
