@@ -8,7 +8,7 @@
         "arguments": []
       },
       "environment": {
-        "image": "nvdk/ruby-semantic-works-cli",
+        "image": "nvdk/ruby-semantic-works-cli:1.1.0",
         "interactive": true,
         "script": "import-dumps/run.rb",
         "join_networks": true

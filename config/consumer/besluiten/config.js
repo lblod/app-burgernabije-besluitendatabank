@@ -1,4 +1,4 @@
-const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || 1);
+const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || 100);
 const PARALLEL_CALLS = parseInt(process.env.PARALLEL_CALLS || 1);
 const MU_CALL_SCOPE_ID_INITIAL_SYNC =
   process.env.MU_CALL_SCOPE_ID_INITIAL_SYNC ||
@@ -16,6 +16,8 @@ const SLEEP_TIME_AFTER_FAILED_DB_OPERATION = parseInt(
 );
 const INGEST_GRAPH =
   process.env.INGEST_GRAPH || `http://mu.semte.ch/graphs/public`;
+const DEAD_LETTER_FILE =
+  process.env.DEAD_LETTER_FILE || "/consumer-files/dead-letter-triples.nt";
 
 module.exports = {
   BATCH_SIZE,
@@ -27,4 +29,5 @@ module.exports = {
   SLEEP_BETWEEN_BATCHES,
   SLEEP_TIME_AFTER_FAILED_DB_OPERATION,
   INGEST_GRAPH,
+  DEAD_LETTER_FILE,
 };
