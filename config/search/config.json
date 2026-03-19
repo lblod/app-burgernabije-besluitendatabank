@@ -350,7 +350,23 @@
           "^http://purl.org/dc/terms/subject",
           "http://www.w3.org/ns/prov#generated",
           "http://data.europa.eu/eli/ontology#description"
-        ]
+        ],
+        "themas": {
+          "via": "https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#heeftThema",
+          "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "conceptScheme": "http://www.w3.org/2004/02/skos/core#inScheme"
+          }
+        },
+        "address_geometry_coord": {
+          "via": [
+            "https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#heeftLocatie",
+            "http://www.w3.org/ns/locn#geometry",
+            "http://www.opengis.net/ont/geosparql#asWKT"
+          ],
+          "type": "lambert-72"
+        }
       },
       "mappings": {
         "properties": {
@@ -448,6 +464,9 @@
           },
           "search_location_id": {
             "type": "keyword"
+          },
+          "address_geometry_coord": {
+            "type": "geo_point"
           }
         }
       }
