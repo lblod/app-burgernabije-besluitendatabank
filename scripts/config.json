@@ -16,6 +16,23 @@
       "mounts": {
         "app": "/project"
       }
+    },
+        {
+      "documentation": {
+        "command": "delete-resource",
+        "description": "delete resource based on its prov:wasDerivedFrom vaue",
+        "arguments": []
+      },
+      "environment": {
+        "image": "semtech/mu-javascript-template:1.9.1",
+        "interactive": true,
+        "script": "delete-resource/run.sh",
+        "join_networks": true
+      },
+      "mounts": {
+        "app": "/project"
+      }
     }
+
   ]
 }
