@@ -99,11 +99,13 @@ services:
   # A linked-data database. All consumed data ends up here
   # https://github.com/redpencilio/docker-virtuoso
   triplestore:
-    image: redpencil/virtuoso:1.3.0
+    image: redpencil/virtuoso:feature-geosparql-support
+    # image: nbittich/virtuoso
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/graphs/public"
     volumes:
+      - ./data/import:/import
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
     restart: always
@@ -282,3 +284,34 @@ services:
     volumes:
       - ./scripts/:/app/scripts/
     restart: "no"
+
+  #################################################################################
+  # START Mijn Burgerprofiel Lokaalbeslist
+  #################################################################################
+  mbp-identifier:
+    image: semtech/mu-identifier:1.9.1
+    links:
+      - mbp-dispatcher:dispatcher
+    environment:
+      SESSION_COOKIE_SECURE: "on"
+      DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: '[{"variables":[],"name":"public"}]'
+      DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  mbp-dispatcher:
+    image: semtech/mu-dispatcher:2.1.0-beta.2
+    volumes:
+      - ./config/dispatcher/mbp-dispatcher.ex:/config/dispatcher.ex
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  mbp-frontend:
+    image: lblod/frontend-lokaal-beslist-mijn-burgerprofiel:0.1.0
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
