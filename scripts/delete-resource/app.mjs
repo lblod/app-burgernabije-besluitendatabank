@@ -2,7 +2,7 @@ import { updateSudo } from "@lblod/mu-auth-sudo";
 const q = `PREFIX prov: <http://www.w3.org/ns/prov#>
 DELETE WHERE {
 graph ?g {
-  ?s prov:wasDerivedFrom <${DERIVED_FROM_URL}>; ?p ?o.
+  ?s prov:wasDerivedFrom <${process.env.DERIVED_FROM_URL}>; ?p ?o.
 }
 }`;
 
