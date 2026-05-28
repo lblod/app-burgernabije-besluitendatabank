@@ -43,10 +43,6 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resources/governing-body-classification-codes/"
   end
 
-  get "/governing-body-classification-codes/*path", @any do
-    Proxy.forward conn, path, "http://resources/governing-body-classification-codes/"
-  end
-
   get "/locations/*path", @any do
     Proxy.forward conn, path, "http://resources/locations/"
   end
@@ -87,9 +83,9 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resources/geometries/"
   end
 
-  #match "/sparql/*path" do
-    #Proxy.forward conn, path, "http://triplestore:8890/sparql/"
-  #end #remove this in production
+  match "/sparql/*path" do
+    Proxy.forward conn, path, "http://triplestore:8890/sparql/"
+  end #remove this in production
 
   match "/adresses-register/*path" do
     forward conn, path, "http://adressenregister"
@@ -110,25 +106,25 @@ defmodule Dispatcher do
 
 
 
+
   ###############
   # SSO
   ###############
 
   # Called server-to-server by the MBP backend to exchange an ACM token for a handover token.
   post "/auth/v1/token", @json do
-    Proxy.forward conn, [], "http://sso/auth/v1/token"
+    Proxy.forward conn, [], "http://mbp-sso/auth/v1/token"
   end
 
   # Called by the embed frontend to redeem the handover token and start a session.
   post "/auth/v1/exchange", @json do
-    Proxy.forward conn, [], "http://sso/auth/v1/exchange"
+    Proxy.forward conn, [], "http://mbp-sso/auth/v1/exchange"
   end
 
   # Called by the embed frontend on logout.
   delete "/auth/v1/session", @json do
-    Proxy.forward conn, [], "http://sso/auth/v1/session"
+    Proxy.forward conn, [], "http://mbp-sso/auth/v1/session"
   end
-
 
   ###############
   # MBP - PUSH NOTIFICATIONS (FILTERS)
@@ -153,29 +149,17 @@ defmodule Dispatcher do
   ###############
   # FRONTEND
   ###############
-
-  # mbp-frontend
-  match "/index.html",  %{reverse_host: ["mbp" | _rest], layer: :static} do
-    forward(conn, [], "http://mbp-frontend/index.html")
+  match "/assets/*path", @any do
+    Proxy.forward conn, path, "http://mbp-frontend/assets/"
   end
 
-  get "/assets/*path", %{reverse_host: ["mbp" | _rest], layer: :static} do
-    forward(conn, path, "http://mbp-frontend/assets/")
+  match "/@appuniversum/*path", @any do
+    Proxy.forward conn, path, "http://mbp-frontend/@appuniversum/"
   end
 
-  get "/@appuniversum/*path",  %{reverse_host: ["mbp" | _rest], layer: :static} do
-    forward(conn, path, "http://mbp-frontend/@appuniversum/")
+  match "/*_path", @html do
+    Proxy.forward conn, [], "http://mbp-frontend/index.html"
   end
-
-  match "/*_path", %{reverse_host: ["mbp" | _rest], accept: %{html: true}, layer: :frontend} do
-    forward(conn, [], "http://mbp-frontend/index.html")
-  end
-
-
-  match "/sparql/*path" do
-    Proxy.forward conn, path, "http://triplestore:8890/sparql/"
-  end
-
 
   #################
   # NOT FOUND
