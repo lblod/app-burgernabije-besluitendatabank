@@ -36,7 +36,7 @@ const contextConfig = {
   contextQueries: [],
 };
 
-module.exports = {
+export {
   contextConfig,
   PREFIXES,
 };

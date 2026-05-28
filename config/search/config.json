@@ -136,7 +136,31 @@
           "^http://purl.org/dc/terms/subject",
           "http://www.w3.org/ns/prov#generated",
           "http://data.europa.eu/eli/ontology#description"
-        ]
+        ],
+        "address_geometry_coord": {
+          "via": [
+            "http://data.vlaanderen.be/ns/besluit#behandelt",
+            "^http://purl.org/dc/terms/subject",
+            "http://www.w3.org/ns/prov#generated",
+            "http://www.w3.org/ns/prov#atLocation",
+            "https://data.vlaanderen.be/ns/adres#positie",
+            "http://www.opengis.net/ont/geosparql#asWKT"
+          ],
+          "type": "lambert-72"
+        },
+        "resolution_themas": {
+          "via": [
+            "http://data.vlaanderen.be/ns/besluit#behandelt",
+            "^http://purl.org/dc/terms/subject",
+            "http://www.w3.org/ns/prov#generated",
+            "http://purl.org/dc/terms/subject"
+          ],
+          "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "id": "http://mu.semte.ch/vocabularies/core/uuid"
+          }
+        }
       },
       "mappings": {
         "properties": {
@@ -233,6 +257,20 @@
             "type": "keyword"
           },
           "search_location_id": {
+            "type": "keyword"
+          },
+          "address_geometry_coord": {
+            "type": "geo_point"
+          },
+          "resolution_themas": {
+            "properties": {
+              "id": {
+                "type": "keyword",
+                "copy_to": "search_theme_id"
+              }
+            }
+          },
+          "search_theme_id": {
             "type": "keyword"
           }
         }
@@ -359,10 +397,24 @@
             "conceptScheme": "http://www.w3.org/2004/02/skos/core#inScheme"
           }
         },
+        "resolution_themas": {
+          "via": [
+            "^http://purl.org/dc/terms/subject",
+            "http://www.w3.org/ns/prov#generated",
+            "http://purl.org/dc/terms/subject"
+          ],
+          "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
+          "properties": {
+            "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "id": "http://mu.semte.ch/vocabularies/core/uuid"
+          }
+        },
         "address_geometry_coord": {
           "via": [
-            "https://data.vlaanderen.be/ns/slimmeraadpleegomgeving#heeftLocatie",
-            "http://www.w3.org/ns/locn#geometry",
+            "^http://purl.org/dc/terms/subject",
+            "http://www.w3.org/ns/prov#generated",
+            "http://www.w3.org/ns/prov#atLocation",
+            "https://data.vlaanderen.be/ns/adres#positie",
             "http://www.opengis.net/ont/geosparql#asWKT"
           ],
           "type": "lambert-72"
@@ -467,6 +519,25 @@
           },
           "address_geometry_coord": {
             "type": "geo_point"
+          },
+          "themas": {
+            "properties": {
+              "uuid": {
+                "type": "keyword",
+                "copy_to": "search_theme_id"
+              }
+            }
+          },
+          "resolution_themas": {
+            "properties": {
+              "id": {
+                "type": "keyword",
+                "copy_to": "search_theme_id"
+              }
+            }
+          },
+          "search_theme_id": {
+            "type": "keyword"
           }
         }
       }

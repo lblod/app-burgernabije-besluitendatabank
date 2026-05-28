@@ -1,10 +1,13 @@
-const { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
+import { batchedUpdate, normalizeGeometries, hasLocnGeometry } from "./utils";
+import {
+  BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
+  MU_CALL_SCOPE_ID_INITIAL_SYNC,
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-} = require('./config');
-const { batchedUpdate } = require('./utils');
+} from "./config";
+
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT;
 
 /**
@@ -52,9 +55,11 @@ async function dispatch(lib, data) {
       endpoint,
       "INSERT",
     );
+
+    if (hasLocnGeometry(inserts)) {
+      await normalizeGeometries(lib);
+    }
   }
 }
 
-module.exports = {
-  dispatch
-};
+export { dispatch };

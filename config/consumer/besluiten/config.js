@@ -19,7 +19,7 @@ const INGEST_GRAPH =
 const DEAD_LETTER_FILE =
   process.env.DEAD_LETTER_FILE || "/consumer-files/dead-letter-triples.nt";
 
-module.exports = {
+export {
   BATCH_SIZE,
   PARALLEL_CALLS,
   MU_CALL_SCOPE_ID_INITIAL_SYNC,

@@ -12,3 +12,4 @@
 (read-domain-file "address-scheme.lisp")
 
 (setf *fetch-all-types-in-construct-queries* t)
+(setf *treat-uknown-literal-datatypes-from-sparql-as-string-p* t)
