@@ -47,6 +47,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resources/locations/"
   end
 
+  get "/places/*path", @any do
+    Proxy.forward conn, path, "http://resources/places/"
+  end
+
   get "/mandataries/*path", @any do
     Proxy.forward conn, path, "http://resources/mandataries/"
   end

@@ -10,7 +10,7 @@
 (define-resource geometry ()
   :class (s-prefix "locn:Geometry")
   :properties `(
-    (:coordinates :<http://www.openlinksw.com/schemas/virtrdf#Geometry> ,(s-prefix "geosparql:asWKT"))
+    (:coordinates :string ,(s-prefix "geosparql:asWKT"))
     )
   :resource-base (s-url "http://lblod.data.gift/geometries/")
   :features `(include-uri)

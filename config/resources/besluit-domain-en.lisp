@@ -132,6 +132,18 @@
   :features '(include-uri)
   :on-path "locations")
 
+;; Physical place / venue of a resolution (e.g. "Kinepolis Gent").
+;; Unlike `location` (prov:Location werkingsgebied) these are locn:Location
+;; resources linked from the besluit via prov:atLocation.
+(define-resource place ()
+  :class (s-prefix "locn:Location")
+  :properties `((:label :string ,(s-prefix "rdfs:label")))
+  :has-one `((geometry :via ,(s-prefix "locn:geometry")
+                       :as "geometry"))
+  :resource-base (s-url "http://data.lblod.info/id/plaats/")
+  :features '(include-uri)
+  :on-path "places")
+
 (define-resource resolution ()
   :class (s-prefix "besluit:Besluit")
   :properties `((:description :string ,(s-prefix "eli:description"))
@@ -142,7 +154,9 @@
                 (:title :string ,(s-prefix "eli:title")))
   :has-one `((agenda-item-handling :via ,(s-prefix "prov:generated")
                                    :inverse t
-                                   :as "generated-by"))
+                                   :as "generated-by")
+             (place :via ,(s-prefix "prov:atLocation")
+                    :as "has-location"))
   :has-many `((article :via ,(s-prefix "eli:has_part")
                        :as "articles")
               (published-resource :via ,(s-prefix "prov:wasDerivedFrom")
