@@ -134,11 +134,7 @@ defmodule Dispatcher do
   # MBP - PUSH NOTIFICATIONS (FILTERS)
   ###############
 
-  # Manual test trigger — fires a simple notification to the signed-in user.
-  # ( /send-notifications stays internal and is deliberately NOT exposed. )
-  post "/test-notification", @json do
-    Proxy.forward conn, [], "http://mbp-push-notifications/test-notification"
-  end
+  # /send-notifications stays internal and is deliberately NOT exposed via the dispatcher.
 
   get "/saved-filters", @json do
     Proxy.forward conn, [], "http://mbp-push-notifications/saved-filters"
