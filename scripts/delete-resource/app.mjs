@@ -4,6 +4,7 @@ if(!derived) {
 	console.log("please provide an url to delete (the url the agenda point was derived from)");
 	process.exit(-1);
 }
+
 const q = `PREFIX prov: <http://www.w3.org/ns/prov#>
 DELETE WHERE {
 graph ?g {
