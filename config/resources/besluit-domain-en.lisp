@@ -86,6 +86,10 @@
                                   :as "administrative-unit")
              (governing-body-classification-code :via ,(s-prefix "besluit:classificatie")
                                                 :as "classification")
+             ;; Some bestuursorganen link their classification through
+             ;; org:classification instead of besluit:classificatie (data fault).
+             (governing-body-classification-code :via ,(s-prefix "org:classification")
+                                                :as "org-classification")
              (governing-body :via ,(s-prefix "mandaat:isTijdspecialisatieVan")
                              :as "is-time-specialization-of")
   ;;            (rechtstreekse-verkiezing :via ,(s-prefix "mandaat:steltSamen")
@@ -132,7 +136,7 @@
   :class (s-prefix "besluit:Besluit")
   :properties `((:description :string ,(s-prefix "eli:description"))
                 (:motivation :string ,(s-prefix "besluit:motivering"))
-                (:publication-date :date ,(s-prefix "eli:date_publication")) 
+                (:publication-date :date ,(s-prefix "eli:date_publication"))
                 (:value :string ,(s-prefix "prov:value"))
                 (:language :url ,(s-prefix "eli:language"))
                 (:title :string ,(s-prefix "eli:title")))
@@ -176,7 +180,7 @@
   :resource-base (s-url "http://data.lblod.info/id/zittingen/")
   :features '(include-uri)
   :on-path "sessions")
-  
+
 (define-resource vote ()
   :class (s-prefix "besluit:Stemming")
   :properties `((:number-of-abstentions :number ,(s-prefix "besluit:aantalOnthouders"))
