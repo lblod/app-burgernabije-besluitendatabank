@@ -36,7 +36,7 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    image: lblod/frontend-burgernabije-besluitendatabank:0.8.10
+    image: lblod/frontend-burgernabije-besluitendatabank:0.8.11
     restart: always
     logging: *default-logging
     labels:
@@ -220,7 +220,12 @@ services:
       - ./config/search:/config
     restart: always
     environment:
-      JAVA_OPTS: "-Xms1g -Xmx4g"    
+      JAVA_OPTS: "-Xms1g -Xmx4g"
+      # This image ignores batch_size/connection_pool_size in config.json; set
+      # them as env vars (env takes precedence) to actually speed up indexing.
+      BATCH_SIZE: "500"
+      NUMBER_OF_THREADS: "8"
+      CONNECTION_POOL_SIZE: "50"
     logging: *default-logging
     labels:
       - "logging=true"
@@ -235,7 +240,25 @@ services:
       - "ES_JAVA_OPTS=-Xms1g -Xmx4g"
       - "cluster.routing.allocation.disk.watermark.low=96%"
       - "cluster.routing.allocation.disk.watermark.high=97%"
-      - "cluster.routing.allocation.disk.watermark.flood_stage=98%"      
+      - "cluster.routing.allocation.disk.watermark.flood_stage=98%"
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  # Nightly reconciliation: re-indexes sessions/agenda-items that drifted out of
+  # the mu-search index (the live delta path is lossy). See scripts/reconcile-search.rb
+  search-reconciler:
+    image: ruby:3.3-alpine
+    command: ["ruby", "/scripts/reconcile-search.rb"]
+    environment:
+      SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
+      SEARCH_BASE: "http://search"
+      ALLOWED_GROUPS: '[{"variables":[],"name":"public"}]'
+      RECONCILE_DAYS: "120"
+      RECONCILE_INTERVAL_HOURS: "24"
+      BATCH: "200"
+    volumes:
+      - ./scripts:/scripts:ro
     restart: always
     logging: *default-logging
     labels:
