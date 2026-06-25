@@ -1,19 +1,38 @@
-import { updateSudo } from "@lblod/mu-auth-sudo";
-const derived = (process.env.DERIVED_FROM_URL || '').trim();
-if(!derived) {
-	console.log("please provide an url to delete (the url the agenda point was derived from)");
+import { updateSudo, querySudo } from "@lblod/mu-auth-sudo";
+const agendaPointId = (process.env.DERIVED_FROM_URL || '').trim();
+if(!agendaPointId) {
+	console.log("please provide an agenda point id to delete");
 	process.exit(-1);
 }
-
-const q = `PREFIX prov: <http://www.w3.org/ns/prov#>
-DELETE WHERE {
-graph ?g {
-  ?s prov:wasDerivedFrom <${derived}>.
-  ?s ?p ?o.
-}}`;
-
 async function main() {
+
+const derivedFromBindings = await querySudo(`
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/> 
+SELECT ?derived WHERE {
+  ?s mu:uuid "${agendaPointId.trim()}".
+  ?s prov:wasDerivedFrom ?derived.
+}
+`);
+
+
+if(derivedFromBindings.results.bindings.length) {
+for(const derivedRes of derivedFromBindings.results.bindings) {
+  const derived = derivedRes.derived.value;
+  console.log('deleting derived from', derived);
+  const q = `PREFIX prov: <http://www.w3.org/ns/prov#>
+              PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+              DELETE WHERE {
+              graph ?g {
+              ?x prov:wasDerivedFrom <${derived}>.
+                ?x ?xp ?xo.
+              }}`;
   await updateSudo(q, {}, {});
+
+}
+}else {
+  console.log("no bindings");
+}
 }
 
 main().then(() => {
