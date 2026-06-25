@@ -36,7 +36,7 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    image: lblod/frontend-burgernabije-besluitendatabank:0.8.10
+    image: lblod/frontend-burgernabije-besluitendatabank:0.8.11
     restart: always
     logging: *default-logging
     labels:
@@ -222,7 +222,7 @@ services:
       - ./config/search:/config
     restart: always
     environment:
-      JAVA_OPTS: "-Xms1g -Xmx4g"    
+      JAVA_OPTS: "-Xms1g -Xmx4g"
     logging: *default-logging
     labels:
       - "logging=true"
@@ -237,7 +237,7 @@ services:
       - "ES_JAVA_OPTS=-Xms1g -Xmx4g"
       - "cluster.routing.allocation.disk.watermark.low=96%"
       - "cluster.routing.allocation.disk.watermark.high=97%"
-      - "cluster.routing.allocation.disk.watermark.flood_stage=98%"      
+      - "cluster.routing.allocation.disk.watermark.flood_stage=98%"
     restart: always
     logging: *default-logging
     labels:
