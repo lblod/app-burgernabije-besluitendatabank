@@ -288,6 +288,26 @@ services:
   #################################################################################
   # START Mijn Burgerprofiel Lokaalbeslist
   #################################################################################
+  slimme-lokale-bron-consumer:
+    image: lblod/delta-consumer:feature-initial-sync-with-virtuoso-dump
+    environment:
+      DCR_SERVICE_NAME: "slimme-lokale-bron-consumer"
+      DCR_SYNC_BASE_URL: "https://slimme-lokale-bron-testgemeente.s.redhost.be"
+      DCR_DISABLE_DELTA_INGEST: "true"
+      DCR_DISABLE_INITIAL_SYNC: "true"
+      DCR_SYNC_FILES_PATH: "/sync/besluiten/files"
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/initialPublicationGraphSyncing/besluiten"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/healingOperation/besluiten"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/slimme-lokale-bron-consumer"
+      BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "true"
+      DIRECT_DATABASE_ENDPOINT: "http://triplestore:8890/sparql"
+      BATCH_SIZE: 500
+    volumes:
+      - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
+      - ./data/consumer-files/besluiten:/consumer-files/
+
+
   mbp-identifier:
     image: semtech/mu-identifier:1.9.1
     links:
@@ -298,16 +318,7 @@ services:
       DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
     restart: always
     logging: *default-logging
-    labels:
-      - "logging=true"
-  mbp-dispatcher:
-    image: semtech/mu-dispatcher:2.1.0-beta.2
-    volumes:
-      - ./config/dispatcher/mbp-dispatcher.ex:/config/dispatcher.ex
-    restart: always
-    logging: *default-logging
-    labels:
-      - "logging=true"
+
   mbp-frontend:
     image: lblod/frontend-lokaal-beslist-mijn-burgerprofiel:0.1.0
     restart: always
@@ -315,3 +326,52 @@ services:
     labels:
       - "logging=true"
 
+  mbp-dispatcher:
+    image: semtech/mu-dispatcher:2.1.0-beta.2
+    volumes:
+      - ./config/dispatcher/mbp-dispatcher.ex:/config/dispatcher.ex
+    labels:
+      - "logging=true"
+    restart: always
+    logging: *default-logging
+
+  mbp-sso:
+    image: lblod/mbp-sso-service:latest
+    environment:
+      ACM_INTROSPECTION_URL: "https://authenticatie-ti.vlaanderen.be/op/v1/introspect"
+      ACM_CLIENT_ID: ""
+      ACM_CLIENT_SECRET: ""
+      MU_SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
+
+  mbp-push-notifications:
+    image: lblod/mbp-push-notification-service:latest
+    environment:
+      MU_SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
+      NOTIFICATION_SERVICE_URL: "http://mbp-notification-delivery-service"
+      TEST_NOTIFICATION_DELAY_MS: "0"
+
+  # CRON JOB: Every day at 7 AM, trigger the notification sending process
+  mbp-push-notifications-cron:
+    image: alpine:3
+    restart: always
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        apk add --no-cache curl &&
+        echo "0 7 * * * curl -fsS -X POST http://mbp-push-notifications/send-notifications >/proc/1/fd/1 2>&1" | crontab - &&
+        crond -f -L /dev/stdout
+    depends_on:
+      - mbp-push-notifications
+
+  mbp-notification-delivery-service:
+    image: lblod/mbp-notification-delivery-service:latest
+    platform: linux/amd64
+    environment:
+      NOTIFICATIE_API_BASE_URL: "https://notificaties.api.tni-vlaanderen.be"
+      NOTIFICATIE_TOKEN_URL: "https://authenticatie-ti.vlaanderen.be/op/v1/token"
+      NOTIFICATIE_CLIENT_ID: ""
+      NOTIFICATIE_PRIVATE_KEY_FILE: "/config/private.jwk"
+      NOTIFICATIE_SCOPE: "dv_notificaties_import vo_info"
+      LOKAALBESLIST_PRODUCT_ID: "1541"
+    volumes:
+      - ./config/mbp-notification:/config:ro
