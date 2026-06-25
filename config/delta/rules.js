@@ -19,7 +19,9 @@ export default [
       resourceFormat: 'v0.0.1',
       gracePeriod: 5000,
       sendMatchesOnly: true,
-      foldEffectiveChanges: true
+      foldEffectiveChanges: true,
+      retry: 6,
+      retryTimeout: 2500
     }
   },
   {
@@ -31,7 +33,9 @@ export default [
     options: {
       resourceFormat: "v0.0.1",
       gracePeriod: 5000,
-      foldEffectiveChanges: true
+      foldEffectiveChanges: true,
+      retry: 6,
+      retryTimeout: 2500
     }
   },
   // NOTE:
