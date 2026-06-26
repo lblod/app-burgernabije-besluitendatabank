@@ -396,6 +396,7 @@
           "rdf_type": "http://www.w3.org/2004/02/skos/core#Concept",
           "properties": {
             "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "id": "http://mu.semte.ch/vocabularies/core/uuid",
             "conceptScheme": "http://www.w3.org/2004/02/skos/core#inScheme"
           }
         },
@@ -524,7 +525,7 @@
           },
           "themas": {
             "properties": {
-              "uuid": {
+              "id": {
                 "type": "keyword",
                 "copy_to": "search_theme_id"
               }
