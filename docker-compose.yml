@@ -83,6 +83,20 @@ services:
     labels:
       - "logging=true"
 
+  # Runs periodic SPARQL cleanup jobs (defined as cleanup:Job resources) at cron intervals.
+  db-cleanup:
+    image: lblod/db-cleanup-service:0.5.1
+    environment:
+      MU_SPARQL_ENDPOINT: "http://database:8890/sparql"
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
+      CRON_PATTERN: "0 3 * * *"
+    links:
+      - database:database
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
   # SPARQL Endpoint authorization service. Adds an authentication layer to the triplestore
   # https://github.com/mu-semtech/sparql-parser
   database:
