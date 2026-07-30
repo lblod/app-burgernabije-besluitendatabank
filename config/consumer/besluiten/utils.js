@@ -1,7 +1,7 @@
-const fs = require("fs");
-const { DEAD_LETTER_FILE } = require("./config");
+import fs from "fs";
+import { DEAD_LETTER_FILE } from "./config.js";
 
-async function batchedUpdate(
+export async function batchedUpdate(
   lib,
   nTriples,
   targetGraph,
@@ -73,7 +73,3 @@ function writeToDeadLetterFile(triples, targetGraph, operation, error) {
   console.warn(`Failed triples: ${triples.join(" ")}`);
   fs.appendFileSync(DEAD_LETTER_FILE, entry);
 }
-
-module.exports = {
-  batchedUpdate,
-};

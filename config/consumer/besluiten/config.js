@@ -19,7 +19,26 @@ const INGEST_GRAPH =
 const DEAD_LETTER_FILE =
   process.env.DEAD_LETTER_FILE || "/consumer-files/dead-letter-triples.nt";
 
-module.exports = {
+const AUTHORITATIVE_GRAPHS = (
+  process.env.AUTHORITATIVE_GRAPHS ||
+  "http://mu.semte.ch/graphs/mandaten,http://mu.semte.ch/graphs/organisations"
+)
+  .split(",")
+  .map((graph) => graph.trim())
+  .filter((graph) => graph.length);
+const ENABLE_AUTHORITATIVE_SUBJECT_FILTER =
+  process.env.ENABLE_AUTHORITATIVE_SUBJECT_FILTER == "false" ? false : true;
+const AUTHORITATIVE_SUBJECTS_TTL = parseInt(
+  process.env.AUTHORITATIVE_SUBJECTS_TTL || 3600000,
+);
+const AUTHORITATIVE_SUBJECTS_PAGE_SIZE = parseInt(
+  process.env.AUTHORITATIVE_SUBJECTS_PAGE_SIZE || 500000,
+);
+
+const AUTHORITATIVE_SUBJECTS_ENDPOINT =
+  process.env.AUTHORITATIVE_SUBJECTS_ENDPOINT || DIRECT_DATABASE_ENDPOINT;
+
+export {
   BATCH_SIZE,
   PARALLEL_CALLS,
   MU_CALL_SCOPE_ID_INITIAL_SYNC,
@@ -30,4 +49,9 @@ module.exports = {
   SLEEP_TIME_AFTER_FAILED_DB_OPERATION,
   INGEST_GRAPH,
   DEAD_LETTER_FILE,
+  AUTHORITATIVE_GRAPHS,
+  ENABLE_AUTHORITATIVE_SUBJECT_FILTER,
+  AUTHORITATIVE_SUBJECTS_TTL,
+  AUTHORITATIVE_SUBJECTS_PAGE_SIZE,
+  AUTHORITATIVE_SUBJECTS_ENDPOINT,
 };

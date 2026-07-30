@@ -1,10 +1,12 @@
-const { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
+import { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-} = require('./config');
-const { batchedUpdate } = require('./utils');
+  ENABLE_AUTHORITATIVE_SUBJECT_FILTER,
+} from './config.js';
+import { batchedUpdate } from './utils.js';
+import { getAuthoritativeSubjects } from './authoritative-subjects.js';
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT;
 
 /**
@@ -20,8 +22,12 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT
  *         ]
  * @return {void} Nothing
  */
-async function dispatch(lib, data) {
+export async function dispatch(lib, data) {
   const { termObjectChangeSets } = data;
+
+  const authoritativeSubjects = ENABLE_AUTHORITATIVE_SUBJECT_FILTER
+    ? await getAuthoritativeSubjects(lib)
+    : null;
 
   for (let { deletes, inserts } of termObjectChangeSets) {
 
@@ -41,7 +47,14 @@ async function dispatch(lib, data) {
       "DELETE",
     );
 
-    const insertStatements = inserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
+    const keptInserts = authoritativeSubjects
+      ? inserts.filter(o => !authoritativeSubjects.has(o.subject))
+      : inserts;
+    if (keptInserts.length < inserts.length) {
+      console.log(`Skipping ${inserts.length - keptInserts.length} of ${inserts.length} inserts about subjects managed by an authoritative source.`);
+    }
+
+    const insertStatements = keptInserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
     await batchedUpdate(
       lib,
       insertStatements,
@@ -54,7 +67,3 @@ async function dispatch(lib, data) {
     );
   }
 }
-
-module.exports = {
-  dispatch
-};

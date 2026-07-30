@@ -1,12 +1,12 @@
-const { batchedUpdate } = require("./utils");
-const {
+import { batchedUpdate } from "./utils.js";
+import {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
   MU_CALL_SCOPE_ID_INITIAL_SYNC,
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-} = require("./config");
+} from "./config.js";
 
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
   ? DIRECT_DATABASE_ENDPOINT
@@ -25,7 +25,7 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
  *         ]
  * @return {void} Nothing
  */
-async function dispatch(lib, data) {
+export async function dispatch(lib, data) {
   const triples = data.termObjects.map(
     (o) => `${o.subject} ${o.predicate} ${o.object}.`,
   );
@@ -46,11 +46,6 @@ async function dispatch(lib, data) {
   );
 }
 
-async function onFinishInitialIngest(_lib) {
+export async function onFinishInitialIngest(_lib) {
   console.log(`onFinishInitialIngest was called. Nothing extra to do.`);
 }
-
-module.exports = {
-  dispatch,
-  onFinishInitialIngest,
-};
