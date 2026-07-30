@@ -1,5 +1,24 @@
 import fs from "fs";
-import { DEAD_LETTER_FILE } from "./config.js";
+import { DEAD_LETTER_FILE, DENIED_PREDICATES } from "./config.js";
+
+let deniedPredicateTerms = null;
+function getDeniedPredicateTerms(sparqlEscapeUri) {
+  deniedPredicateTerms ??= new Set(DENIED_PREDICATES.map(sparqlEscapeUri));
+  return deniedPredicateTerms;
+}
+
+export function rejectDeniedPredicates(termObjects, sparqlEscapeUri, context) {
+  const denied = getDeniedPredicateTerms(sparqlEscapeUri);
+  if (!denied.size) return termObjects;
+
+  const kept = termObjects.filter((o) => !denied.has(o.predicate));
+  if (kept.length < termObjects.length) {
+    console.log(
+      `Skipping ${termObjects.length - kept.length} of ${termObjects.length} ${context} on denied predicates.`,
+    );
+  }
+  return kept;
+}
 
 export async function batchedUpdate(
   lib,

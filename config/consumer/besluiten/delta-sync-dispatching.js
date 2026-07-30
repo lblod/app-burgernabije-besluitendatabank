@@ -5,7 +5,7 @@ import { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   INGEST_GRAPH,
   ENABLE_AUTHORITATIVE_SUBJECT_FILTER,
 } from './config.js';
-import { batchedUpdate } from './utils.js';
+import { batchedUpdate, rejectDeniedPredicates } from './utils.js';
 import { getAuthoritativeSubjects } from './authoritative-subjects.js';
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT;
 
@@ -47,11 +47,13 @@ export async function dispatch(lib, data) {
       "DELETE",
     );
 
+    const allowedInserts = rejectDeniedPredicates(inserts, lib.sparqlEscapeUri, "inserts");
+
     const keptInserts = authoritativeSubjects
-      ? inserts.filter(o => !authoritativeSubjects.has(o.subject))
-      : inserts;
-    if (keptInserts.length < inserts.length) {
-      console.log(`Skipping ${inserts.length - keptInserts.length} of ${inserts.length} inserts about subjects managed by an authoritative source.`);
+      ? allowedInserts.filter(o => !authoritativeSubjects.has(o.subject))
+      : allowedInserts;
+    if (keptInserts.length < allowedInserts.length) {
+      console.log(`Skipping ${allowedInserts.length - keptInserts.length} of ${allowedInserts.length} inserts about subjects managed by an authoritative source.`);
     }
 
     const insertStatements = keptInserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);

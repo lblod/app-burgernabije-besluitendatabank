@@ -1,4 +1,4 @@
-import { batchedUpdate } from "./utils.js";
+import { batchedUpdate, rejectDeniedPredicates } from "./utils.js";
 import {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
@@ -26,9 +26,11 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
  * @return {void} Nothing
  */
 export async function dispatch(lib, data) {
-  const triples = data.termObjects.map(
-    (o) => `${o.subject} ${o.predicate} ${o.object}.`,
-  );
+  const triples = rejectDeniedPredicates(
+    data.termObjects,
+    lib.sparqlEscapeUri,
+    "triples",
+  ).map((o) => `${o.subject} ${o.predicate} ${o.object}.`);
 
   if (BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES) {
     console.warn(`Service configured to skip MU_AUTH!`);

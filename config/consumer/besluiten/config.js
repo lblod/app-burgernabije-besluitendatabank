@@ -38,6 +38,17 @@ const AUTHORITATIVE_SUBJECTS_PAGE_SIZE = parseInt(
 const AUTHORITATIVE_SUBJECTS_ENDPOINT =
   process.env.AUTHORITATIVE_SUBJECTS_ENDPOINT || DIRECT_DATABASE_ENDPOINT;
 
+const DEFAULT_DENIED_PREDICATES = [
+  "http://lblod.data.gift/vocabularies/besluit/extractedDecisionContent",
+];
+const DENIED_PREDICATES = (
+  process.env.DENIED_PREDICATES
+    ? process.env.DENIED_PREDICATES.split(",")
+    : DEFAULT_DENIED_PREDICATES
+)
+  .map((predicate) => predicate.trim())
+  .filter((predicate) => predicate.length);
+
 export {
   BATCH_SIZE,
   PARALLEL_CALLS,
@@ -54,4 +65,5 @@ export {
   AUTHORITATIVE_SUBJECTS_TTL,
   AUTHORITATIVE_SUBJECTS_PAGE_SIZE,
   AUTHORITATIVE_SUBJECTS_ENDPOINT,
+  DENIED_PREDICATES,
 };
