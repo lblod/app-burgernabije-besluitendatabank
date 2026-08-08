@@ -95,7 +95,8 @@ services:
     labels:
       - "logging=true"
     environment:
-      LISP_DYNAMIC_SPACE_SIZE: "2048"
+      LSP_DYNAMIC_SPACE_SIZE: "4096"
+      LISP_CONTROL_STACK_SIZE: 8
   # A linked-data database. All consumed data ends up here
   # https://github.com/redpencilio/docker-virtuoso
   triplestore:
