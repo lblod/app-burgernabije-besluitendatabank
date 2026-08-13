@@ -7,6 +7,7 @@ import { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
 } from './config.js';
 import { batchedUpdate, rejectDeniedPredicates } from './utils.js';
 import { getAuthoritativeSubjects } from './authoritative-subjects.js';
+import { governingBodySubjects, syncGoverningBodyAbstract } from './governing-body-abstract.js';
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT;
 
 /**
@@ -67,5 +68,10 @@ export async function dispatch(lib, data) {
       endpoint,
       "INSERT",
     );
+
+    await syncGoverningBodyAbstract(lib, [
+      ...governingBodySubjects(deletes, lib.sparqlEscapeUri),
+      ...governingBodySubjects(keptInserts, lib.sparqlEscapeUri),
+    ]);
   }
 }

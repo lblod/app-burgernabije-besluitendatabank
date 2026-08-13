@@ -1,4 +1,5 @@
 import { batchedUpdate, rejectDeniedPredicates } from "./utils.js";
+import { backfillGoverningBodyAbstract } from "./governing-body-abstract.js";
 import {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
@@ -48,6 +49,7 @@ export async function dispatch(lib, data) {
   );
 }
 
-export async function onFinishInitialIngest(_lib) {
-  console.log(`onFinishInitialIngest was called. Nothing extra to do.`);
+export async function onFinishInitialIngest(lib) {
+  console.log(`onFinishInitialIngest was called, deriving ext:governingBodyAbstract.`);
+  await backfillGoverningBodyAbstract(lib);
 }

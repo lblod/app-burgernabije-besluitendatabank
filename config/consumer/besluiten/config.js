@@ -49,6 +49,28 @@ const DENIED_PREDICATES = (
   .map((predicate) => predicate.trim())
   .filter((predicate) => predicate.length);
 
+const GOVERNING_BODY_ABSTRACT_PREDICATE =
+  process.env.GOVERNING_BODY_ABSTRACT_PREDICATE ||
+  "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract";
+const ENABLE_GOVERNING_BODY_ABSTRACT =
+  process.env.ENABLE_GOVERNING_BODY_ABSTRACT == "false" ? false : true;
+
+const GOVERNING_BODY_LOOKUP_GRAPHS = (
+  process.env.GOVERNING_BODY_LOOKUP_GRAPHS
+    ? process.env.GOVERNING_BODY_LOOKUP_GRAPHS.split(",")
+    : [INGEST_GRAPH, ...AUTHORITATIVE_GRAPHS]
+)
+  .map((graph) => graph.trim())
+  .filter((graph, index, graphs) => graph.length && graphs.indexOf(graph) === index);
+const GOVERNING_BODY_LOOKUP_ENDPOINT =
+  process.env.GOVERNING_BODY_LOOKUP_ENDPOINT || DIRECT_DATABASE_ENDPOINT;
+const GOVERNING_BODY_SUBJECT_CHUNK_SIZE = parseInt(
+  process.env.GOVERNING_BODY_SUBJECT_CHUNK_SIZE || 500,
+);
+const GOVERNING_BODY_BACKFILL_PAGE_SIZE = parseInt(
+  process.env.GOVERNING_BODY_BACKFILL_PAGE_SIZE || 5000,
+);
+
 export {
   BATCH_SIZE,
   PARALLEL_CALLS,
@@ -66,4 +88,10 @@ export {
   AUTHORITATIVE_SUBJECTS_PAGE_SIZE,
   AUTHORITATIVE_SUBJECTS_ENDPOINT,
   DENIED_PREDICATES,
+  GOVERNING_BODY_ABSTRACT_PREDICATE,
+  ENABLE_GOVERNING_BODY_ABSTRACT,
+  GOVERNING_BODY_LOOKUP_GRAPHS,
+  GOVERNING_BODY_LOOKUP_ENDPOINT,
+  GOVERNING_BODY_SUBJECT_CHUNK_SIZE,
+  GOVERNING_BODY_BACKFILL_PAGE_SIZE,
 };
