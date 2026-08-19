@@ -23,6 +23,8 @@ async function batchedUpdate(
   console.log(`Batch size: ${nTriples.length}`);
 
   const chunkedArray = chunk(nTriples, batch);
+  const escapedGraph = targetGraph ? sparqlEscapeUri(targetGraph) : "?g";
+  const operationSuffix = operation.toUpperCase() === 'DELETE' ? 'WHERE' : 'DATA';
   let chunkCounter = 1;
 
   for (const chunkedTriple of chunkedArray) {
@@ -31,8 +33,8 @@ async function batchedUpdate(
     );
     try {
       const updateQuery = `
-        ${operation} DATA {
-           GRAPH ${sparqlEscapeUri(targetGraph)} {
+        ${operation} ${operationSuffix} {
+           GRAPH ${escapedGraph} {
              ${chunkedTriple.join("")}
            }
         }

@@ -36,7 +36,7 @@ async function dispatch(lib, data) {
     await batchedUpdate(
       lib,
       deleteStatements,
-      INGEST_GRAPH,
+      null,
       SLEEP_BETWEEN_BATCHES,
       BATCH_SIZE,
       {},
