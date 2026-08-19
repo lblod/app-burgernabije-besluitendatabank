@@ -13,78 +13,78 @@ defmodule Dispatcher do
   define_layers([:static, :api_services, :frontend, :not_found])
 
   ###############
-  # RESOURCES
+  # cache
   ###############
   get "/articles/*path", @any do
-    Proxy.forward conn, path, "http://resources/articles/"
+    Proxy.forward conn, path, "http://cache/articles/"
   end
 
   get "/administrative-units/*path", @any do
-    Proxy.forward conn, path, "http://resources/administrative-units/"
+    Proxy.forward conn, path, "http://cache/administrative-units/"
   end
 
   get "/administrative-unit-classification-codes/*path", @any do
-    Proxy.forward conn, path, "http://resources/administrative-unit-classification-codes/"
+    Proxy.forward conn, path, "http://cache/administrative-unit-classification-codes/"
   end
 
   get "/agenda-item-handlings/*path", @any do
-    Proxy.forward conn, path, "http://resources/agenda-item-handlings/"
+    Proxy.forward conn, path, "http://cache/agenda-item-handlings/"
   end
 
   get "/agenda-items/*path", @any do
-    Proxy.forward conn, path, "http://resources/agenda-items/"
+    Proxy.forward conn, path, "http://cache/agenda-items/"
   end
 
   get "/governing-bodies/*path", @any do
-    Proxy.forward conn, path, "http://resources/governing-bodies/"
+    Proxy.forward conn, path, "http://cache/governing-bodies/"
   end
 
   get "/governing-body-classification-codes/*path", @any do
-    Proxy.forward conn, path, "http://resources/governing-body-classification-codes/"
+    Proxy.forward conn, path, "http://cache/governing-body-classification-codes/"
   end
 
   get "/locations/*path", @any do
-    Proxy.forward conn, path, "http://resources/locations/"
+    Proxy.forward conn, path, "http://cache/locations/"
   end
 
   get "/places/*path", @any do
-    Proxy.forward conn, path, "http://resources/places/"
+    Proxy.forward conn, path, "http://cache/places/"
   end
 
   get "/mandataries/*path", @any do
-    Proxy.forward conn, path, "http://resources/mandataries/"
+    Proxy.forward conn, path, "http://cache/mandataries/"
   end
 
   get "/memberships/*path", @any do
-    Proxy.forward conn, path, "http://resources/memberships/"
+    Proxy.forward conn, path, "http://cache/memberships/"
   end
 
   get "/resolutions/*path", @any do
-    Proxy.forward conn, path, "http://resources/resolutions/"
+    Proxy.forward conn, path, "http://cache/resolutions/"
   end
 
   get "/sessions/*path", @any do
-    Proxy.forward conn, path, "http://resources/sessions/"
+    Proxy.forward conn, path, "http://cache/sessions/"
   end
 
   get "/votes/*path", @any do
-    Proxy.forward conn, path, "http://resources/votes/"
+    Proxy.forward conn, path, "http://cache/votes/"
   end
 
   get "/concept-schemes/*path", @any do
-    Proxy.forward conn, path, "http://resources/concept-schemes/"
+    Proxy.forward conn, path, "http://cache/concept-schemes/"
   end
 
   get "/concepts/*path", @any do
-    Proxy.forward conn, path, "http://resources/concepts/"
+    Proxy.forward conn, path, "http://cache/concepts/"
   end
 
   get "/addresses/*path", @any do
-    Proxy.forward conn, path, "http://resources/addresses/"
+    Proxy.forward conn, path, "http://cache/addresses/"
   end
 
   get "/geometries/*path", @any do
-    Proxy.forward conn, path, "http://resources/geometries/"
+    Proxy.forward conn, path, "http://cache/geometries/"
   end
 
   match "/sparql/*path" do

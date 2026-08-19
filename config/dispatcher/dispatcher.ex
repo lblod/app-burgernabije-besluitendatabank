@@ -80,19 +80,19 @@ defmodule Dispatcher do
   end
 
   get "/concept-schemes/*path", @any do
-    Proxy.forward conn, path, "http://resource/concept-schemes/"
+    Proxy.forward conn, path, "http://cache/concept-schemes/"
   end
 
   get "/concepts/*path", @any do
-    Proxy.forward conn, path, "http://resource/concepts/"
+    Proxy.forward conn, path, "http://cache/concepts/"
   end
 
   get "/addresses/*path", @any do
-    Proxy.forward conn, path, "http://resource/addresses/"
+    Proxy.forward conn, path, "http://cache/addresses/"
   end
 
   get "/geometries/*path", @any do
-    Proxy.forward conn, path, "http://resource/geometries/"
+    Proxy.forward conn, path, "http://cache/geometries/"
   end
 
   # match "/sparql/*path" do
