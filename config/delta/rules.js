@@ -19,7 +19,9 @@ export default [
       resourceFormat: 'v0.0.1',
       gracePeriod: 5000,
       sendMatchesOnly: true,
-      foldEffectiveChanges: true
+      foldEffectiveChanges: true,
+      retry: 6,
+      retryTimeout: 2500
     }
   },
   {
@@ -31,26 +33,25 @@ export default [
     options: {
       resourceFormat: "v0.0.1",
       gracePeriod: 5000,
-      foldEffectiveChanges: true
+      foldEffectiveChanges: true,
+      retry: 6,
+      retryTimeout: 2500
     }
   },
   // NOTE:
-  // Deliberate disabling of delta-notifications for resources
-  // Under heavy load; resources has issues clearing cache
-  // This means we can't use mu-cache ATM.
-  // Please; check dispatcher for more info
-  // {
-  //     match: {
-  //         subject: {}
-  //     },
-  //     callback: {
-  //         url: "http://resources/.mu/delta",
-  //         method: "POST"
-  //     },
-  //     options: {
-  //         resourceFormat: "v0.0.1",
-  //         gracePeriod: 250,
-  //         ignoreFromSelf: true
-  //     }
-  // }
+  // Cache-invalidation notifications for mu-cl-resources.
+  {
+    match: { },
+    callback: {
+      url: "http://resources/.mu/delta",
+      method: "POST"
+    },
+    options: {
+      resourceFormat: "v0.0.1",
+      gracePeriod: 5000,
+      ignoreFromSelf: true,
+      foldEffectiveChanges: true,
+      retry: 6
+    }
+  }
 ];

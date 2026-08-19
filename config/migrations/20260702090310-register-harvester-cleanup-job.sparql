@@ -1,0 +1,87 @@
+# Registers recurring db-cleanup-service jobs (one per harvester graph) that remove
+# non-authoritative triples from the harvester graphs for resources that already exist
+# in an authoritative graph (mandaten / organisations).
+#
+# One job per harvester graph keeps the resource-selection query cheap and lets the jobs
+# be staggered (03:00 / 04:00 / 05:00 / 06:00) so they don't all run at once. The authority
+# check uses FILTER EXISTS to avoid multiplying rows by ?type. deletePattern only touches the
+# harvester graph, so authoritative graphs are never modified. The jobs are idempotent: once a
+# resource's harvester triples are gone it no longer matches selectPattern.
+
+PREFIX cleanup: <http://mu.semte.ch/vocabularies/ext/cleanup/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+
+    <http://data.lblod.info/id/cleanup-jobs/03198645-b05d-49c2-bf99-5334bc1e6f8d>
+      a cleanup:Job ;
+      mu:uuid "03198645-b05d-49c2-bf99-5334bc1e6f8d" ;
+      dcterms:title "Remove non-authoritative triples from harvester-0 for resources present in mandaten/organisations" ;
+      cleanup:cronPattern "0 3 * * *" ;
+      cleanup:selectPattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-0> { ?resource ?p ?o . }
+        FILTER EXISTS {
+          { GRAPH <http://mu.semte.ch/graphs/mandaten> { ?resource a ?t } }
+          UNION
+          { GRAPH <http://mu.semte.ch/graphs/organisations> { ?resource a ?t } }
+        }
+      """ ;
+      cleanup:deletePattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-0> { ?resource ?p ?o . }
+      """ .
+
+    <http://data.lblod.info/id/cleanup-jobs/8f219f5c-cf9e-40c5-a613-7938a38af4c0>
+      a cleanup:Job ;
+      mu:uuid "8f219f5c-cf9e-40c5-a613-7938a38af4c0" ;
+      dcterms:title "Remove non-authoritative triples from harvester-1 for resources present in mandaten/organisations" ;
+      cleanup:cronPattern "0 4 * * *" ;
+      cleanup:selectPattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-1> { ?resource ?p ?o . }
+        FILTER EXISTS {
+          { GRAPH <http://mu.semte.ch/graphs/mandaten> { ?resource a ?t } }
+          UNION
+          { GRAPH <http://mu.semte.ch/graphs/organisations> { ?resource a ?t } }
+        }
+      """ ;
+      cleanup:deletePattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-1> { ?resource ?p ?o . }
+      """ .
+
+    <http://data.lblod.info/id/cleanup-jobs/1ad95d1a-39bb-4aee-a5bb-63585eeba391>
+      a cleanup:Job ;
+      mu:uuid "1ad95d1a-39bb-4aee-a5bb-63585eeba391" ;
+      dcterms:title "Remove non-authoritative triples from harvester-2 for resources present in mandaten/organisations" ;
+      cleanup:cronPattern "0 5 * * *" ;
+      cleanup:selectPattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-2> { ?resource ?p ?o . }
+        FILTER EXISTS {
+          { GRAPH <http://mu.semte.ch/graphs/mandaten> { ?resource a ?t } }
+          UNION
+          { GRAPH <http://mu.semte.ch/graphs/organisations> { ?resource a ?t } }
+        }
+      """ ;
+      cleanup:deletePattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-2> { ?resource ?p ?o . }
+      """ .
+
+    <http://data.lblod.info/id/cleanup-jobs/73ad8bbb-8e9c-4d71-8c07-cc89d1503d98>
+      a cleanup:Job ;
+      mu:uuid "73ad8bbb-8e9c-4d71-8c07-cc89d1503d98" ;
+      dcterms:title "Remove non-authoritative triples from harvester-3 for resources present in mandaten/organisations" ;
+      cleanup:cronPattern "0 6 * * *" ;
+      cleanup:selectPattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-3> { ?resource ?p ?o . }
+        FILTER EXISTS {
+          { GRAPH <http://mu.semte.ch/graphs/mandaten> { ?resource a ?t } }
+          UNION
+          { GRAPH <http://mu.semte.ch/graphs/organisations> { ?resource a ?t } }
+        }
+      """ ;
+      cleanup:deletePattern """
+        GRAPH <http://mu.semte.ch/graphs/harvester-3> { ?resource ?p ?o . }
+      """ .
+
+  }
+}

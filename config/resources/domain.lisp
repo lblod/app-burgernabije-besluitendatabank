@@ -8,5 +8,8 @@
 
 (read-domain-file "besluit-domain-en.lisp")
 (read-domain-file "mandaat-domain-en.lisp")
+(read-domain-file "concept-scheme.lisp")
+(read-domain-file "address-scheme.lisp")
 
 (setf *fetch-all-types-in-construct-queries* t)
+(setf *treat-uknown-literal-datatypes-from-sparql-as-string-p* t)

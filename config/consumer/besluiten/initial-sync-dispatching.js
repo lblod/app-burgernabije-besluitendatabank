@@ -1,12 +1,14 @@
-const { batchedUpdate } = require("./utils");
-const {
+
+import { batchedUpdate, normalizeGeometries } from "./utils";
+import {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
   MU_CALL_SCOPE_ID_INITIAL_SYNC,
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-} = require("./config");
+} from "./config";
+
 
 const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
   ? DIRECT_DATABASE_ENDPOINT
@@ -46,11 +48,13 @@ async function dispatch(lib, data) {
   );
 }
 
-async function onFinishInitialIngest(_lib) {
-  console.log(`onFinishInitialIngest was called. Nothing extra to do.`);
+async function onFinishInitialIngest(lib) {
+  console.log(`onFinishInitialIngest: normalizing locn:geometry → adres:positie`);
+  await normalizeGeometries(lib);
+  console.log(`onFinishInitialIngest: geometry normalization complete`);
 }
 
-module.exports = {
+export {
   dispatch,
   onFinishInitialIngest,
-};
+}
