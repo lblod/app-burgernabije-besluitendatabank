@@ -1,0 +1,526 @@
+@prefix cms: <http://mu.semte.ch/vocabulary/cms/>.
+@prefix task: <http://redpencil.data.gift/vocabularies/tasks/>.
+@prefix cogs: <http://vocab.deri.ie/cogs#>.
+@prefix oslc: <http://open-services.net/ns/core#>.
+@prefix lblodJob: <http://lblod.data.gift/vocabularies/lblodJob/>.
+@prefix nuao: <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#>.
+@prefix http: <http://www.w3.org/2011/http#>.
+@prefix rpioHttp: <http://redpencil.data.gift/vocabularies/http/>.
+@prefix ndo: <http://oscaf.sourceforge.net/ndo.html#>.
+@prefix hrvst: <http://lblod.data.gift/vocabularies/harvesting/>.
+@prefix sign: <http://mu.semte.ch/vocabularies/ext/signing/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix elod: <http://linkedeconomy.org/ontology#>.
+@prefix muAccount: <http://mu.semte.ch/vocabularies/account/>.
+@prefix lblodBesluit: <http://lblod.data.gift/vocabularies/besluit/>.
+@prefix melding: <http://lblod.data.gift/vocabularies/automatische-melding/>.
+@prefix meb: <http://rdf.myexperiment.org/ontologies/base/>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix qb: <http://purl.org/linked-data/cube#>.
+@prefix sdmxCode: <http://purl.org/linked-data/sdmx/2009/code#>.
+@prefix sdmxMeasure: <http://purl.org/linked-data/sdmx/2009/measure#>.
+@prefix sdmxAttr: <http://purl.org/linked-data/sdmx/2009/attribute#>.
+@prefix sdmxDim: <http://purl.org/linked-data/sdmx/2009/dimension#>.
+@prefix empl: <http://lblod.data.gift/vocabularies/employee/>.
+@prefix adres: <https://data.vlaanderen.be/ns/adres#>.
+@prefix locn: <http://www.w3.org/ns/locn#>.
+@prefix rlog: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/rlog#>.
+@prefix lblodlg: <http://data.lblod.info/vocabularies/leidinggevenden/>.
+@prefix email: <http://mu.semte.ch/vocabularies/ext/email/>.
+@prefix nmo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#>.
+@prefix toezichtReport: <http://mu.semte.ch/vocabularies/ext/supervision/reporting/>.
+@prefix toezicht: <http://mu.semte.ch/vocabularies/ext/supervision/>.
+@prefix validation: <http://mu.semte.ch/vocabularies/validation/>.
+@prefix bbcdr: <http://mu.semte.ch/vocabularies/ext/bbcdr/>.
+@prefix export: <http://mu.semte.ch/vocabularies/ext/export/>.
+@prefix dbpedia: <http://dbpedia.org/ontology/>.
+@prefix schema: <http://schema.org/>.
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>.
+@prefix nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>.
+@prefix pav: <http://purl.org/pav/>.
+@prefix nao: <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix regorg: <https://www.w3.org/ns/regorg#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix org: <http://www.w3.org/ns/org#>.
+@prefix person: <http://www.w3.org/ns/person#>.
+@prefix adms: <http://www.w3.org/ns/adms#>.
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>.
+@prefix cpsv: <http://purl.org/vocab/cpsv#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix m8g: <http://data.europa.eu/m8g/>.
+@prefix eli: <http://data.europa.eu/eli/ontology#>.
+@prefix generiek: <http://data.vlaanderen.be/ns/generiek#>.
+@prefix persoon: <http://data.vlaanderen.be/ns/persoon#>.
+@prefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>.
+@prefix besluit: <http://data.vlaanderen.be/ns/besluit#>.
+@prefix tmp: <http://mu.semte.ch/vocabularies/tmp/>.
+@prefix ext: <http://mu.semte.ch/vocabularies/ext/>.
+@prefix rm: <http://mu.semte.ch/vocabularies/logical-delete/>.
+@prefix typedLiterals: <http://mu.semte.ch/vocabularies/typed-literals/>.
+@prefix mu: <http://mu.semte.ch/vocabularies/core/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix app: <http://mu.semte.ch/app/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+<http://mu.semte.ch/ontology> rdf:type owl:Ontology.
+<http://mu.semte.ch/ontology> dc:title "Generated resource ontology". 
+<http://mu.semte.ch/ontology> dc:description "Generated resource ontology". 
+
+besluit:Stemming rdf:type owl:Class;
+  rdfs:label "vote".
+besluit:Artikel rdf:type owl:Class;
+  rdfs:label "article".
+besluit:Bestuursorgaan rdf:type owl:Class;
+  rdfs:label "governing-body".
+org:Membership rdf:type owl:Class;
+  rdfs:label "membership".
+mandaat:Fractie rdf:type owl:Class;
+  rdfs:label "parliamentary-group".
+ext:BeleidsdomeinCode rdf:type owl:Class;
+  rdfs:label "policy-domain".
+prov:Location rdf:type owl:Class;
+  rdfs:label "location".
+besluit:Besluit rdf:type owl:Class;
+  rdfs:label "resolution".
+mandaat:Mandaat rdf:type owl:Class;
+  rdfs:label "mandate".
+besluit:Zitting rdf:type owl:Class;
+  rdfs:label "session".
+ext:BestuursfunctieCode rdf:type owl:Class;
+  rdfs:label "board-position-code".
+person:Person rdf:type owl:Class;
+  rdfs:label "person".
+besluit:Agendapunt rdf:type owl:Class;
+  rdfs:label "agenda-item".
+ext:MandatarisStatusCode rdf:type owl:Class;
+  rdfs:label "mandatary-status-code".
+ext:BestuursorgaanClassificatieCode rdf:type owl:Class;
+  rdfs:label "governing-body-classification-code".
+besluit:BehandelingVanAgendapunt rdf:type owl:Class;
+  rdfs:label "agenda-item-handling".
+besluit:Bestuurseenheid rdf:type owl:Class;
+  rdfs:label "administrative-unit".
+mandaat:Mandataris rdf:type owl:Class;
+  rdfs:label "mandatary".
+ext:BestuurseenheidClassificatieCode rdf:type owl:Class;
+  rdfs:label "administrative-unit-classification-code".
+
+besluit:aantalOnthouders rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is besluit:aantalOnthouders.";
+  rdfs:label "number-of-abstentions";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+besluit:aantalTegenstanders rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is besluit:aantalTegenstanders.";
+  rdfs:label "number-of-opponents";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+besluit:aantalVoorstanders rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is besluit:aantalVoorstanders.";
+  rdfs:label "number-of-proponents";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+besluit:geheim rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is besluit:geheim.";
+  rdfs:label "secret";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+ext:local_id_1 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Agendapunt.
+ext:local_id_2 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+besluit:gevolg rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is besluit:gevolg.";
+  rdfs:label "consequence";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+besluit:onderwerp rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is besluit:onderwerp.";
+  rdfs:label "subject";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Stemming.
+eli:number rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is eli:number.";
+  rdfs:label "number";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Artikel.
+ext:local_id_3 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is prov:value.";
+  rdfs:label "value";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+ext:local_id_4 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is prov:value.";
+  rdfs:label "value";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Artikel.
+ext:local_id_5 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is eli:language.";
+  rdfs:label "language";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+ext:local_id_6 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is eli:language.";
+  rdfs:label "language";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Artikel.
+ext:local_id_7 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string-set.  Original predicate is prov:wasDerivedFrom.";
+  rdfs:label "alternate-link";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Agendapunt.
+ext:local_id_8 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string-set.  Original predicate is prov:wasDerivedFrom.";
+  rdfs:label "alternate-link";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+ext:local_id_9 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string-set.  Original predicate is prov:wasDerivedFrom.";
+  rdfs:label "alternate-link";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Artikel.
+ext:local_id_10 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:BestuurseenheidClassificatieCode.
+ext:local_id_11 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Bestuurseenheid.
+ext:local_id_12 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:BestuursorgaanClassificatieCode.
+ext:local_id_13 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:MandatarisStatusCode.
+ext:local_id_14 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:BestuursfunctieCode.
+ext:local_id_15 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:BeleidsdomeinCode.
+ext:local_id_16 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Bestuursorgaan.
+mandaat:bindingEinde rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is date.  Original predicate is mandaat:bindingEinde.";
+  rdfs:label "end-date";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Bestuursorgaan.
+mandaat:bindingStart rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is date.  Original predicate is mandaat:bindingStart.";
+  rdfs:label "start-date";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Bestuursorgaan.
+regorg:legalName rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is regorg:legalName.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain mandaat:Fractie.
+ext:local_id_17 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:scopeNote.";
+  rdfs:label "scope-note";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:MandatarisStatusCode.
+ext:local_id_18 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:scopeNote.";
+  rdfs:label "scope-note";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:BestuursfunctieCode.
+ext:local_id_19 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:scopeNote.";
+  rdfs:label "scope-note";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:BeleidsdomeinCode.
+rdfs:label rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is rdfs:label.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain prov:Location.
+ext:werkingsgebiedNiveau rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is ext:werkingsgebiedNiveau.";
+  rdfs:label "niveau";
+  rdfs:range rdfs:Literal;
+  rdfs:domain prov:Location.
+eli:description rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is eli:description.";
+  rdfs:label "description";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+besluit:motivering rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is besluit:motivering.";
+  rdfs:label "motivation";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+eli:date_publication rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is date.  Original predicate is eli:date_publication.";
+  rdfs:label "publication-date";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+eli:title rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is eli:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Besluit.
+besluit:geplandeStart rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is besluit:geplandeStart.";
+  rdfs:label "planned-start";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Zitting.
+prov:startedAtTime rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is prov:startedAtTime.";
+  rdfs:label "started-at";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Zitting.
+prov:endedAtTime rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is prov:endedAtTime.";
+  rdfs:label "ended-at";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Zitting.
+foaf:familyName rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is foaf:familyName.";
+  rdfs:label "family-name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain person:Person.
+persoon:gebruikteVoornaam rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is persoon:gebruikteVoornaam.";
+  rdfs:label "first-name-used";
+  rdfs:range rdfs:Literal;
+  rdfs:domain person:Person.
+dct:description rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:description.";
+  rdfs:label "description";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Agendapunt.
+besluit:geplandOpenbaar rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is besluit:geplandOpenbaar.";
+  rdfs:label "planned-public";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Agendapunt.
+ext:local_id_20 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is besluit:openbaar.";
+  rdfs:label "public";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:BehandelingVanAgendapunt.
+ext:local_id_21 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is besluit:openbaar.";
+  rdfs:label "public";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Agendapunt.
+besluit:Agendapunt.type rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is uri-set.  Original predicate is besluit:Agendapunt.type.";
+  rdfs:label "type";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Agendapunt.
+mandaat:rangorde rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is mandaat:rangorde.";
+  rdfs:label "ranking";
+  rdfs:range rdfs:Literal;
+  rdfs:domain mandaat:Mandataris.
+mandaat:start rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is mandaat:start.";
+  rdfs:label "start-date";
+  rdfs:range rdfs:Literal;
+  rdfs:domain mandaat:Mandataris.
+mandaat:einde rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is mandaat:einde.";
+  rdfs:label "end-date";
+  rdfs:range rdfs:Literal;
+  rdfs:domain mandaat:Mandataris.
+
+
+ext:local_id_22 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:heeftAanwezige";
+  rdfs:label "has-presents";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range mandaat:Mandataris.
+ext:local_id_23 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:heeftAanwezige";
+  rdfs:label "has-presents";
+  rdfs:domain besluit:Stemming;
+  rdfs:range mandaat:Mandataris.
+besluit:heeftOnthouder rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "has-abstainers";
+  rdfs:domain besluit:Stemming;
+  rdfs:range mandaat:Mandataris.
+besluit:heeftStemmer rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "has-voters";
+  rdfs:domain besluit:Stemming;
+  rdfs:range mandaat:Mandataris.
+besluit:heeftTegenstander rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "has-opponents";
+  rdfs:domain besluit:Stemming;
+  rdfs:range mandaat:Mandataris.
+besluit:heeftVoorstander rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "has-proponents";
+  rdfs:domain besluit:Stemming;
+  rdfs:range mandaat:Mandataris.
+besluit:heeftStemming rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "has-votes";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range besluit:Stemming.
+eli:has_part rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "articles";
+  rdfs:domain besluit:Besluit;
+  rdfs:range besluit:Artikel.
+mandaat:isTijdspecialisatieVan rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "is-time-specialization-of";
+  rdfs:domain besluit:Bestuursorgaan;
+  rdfs:range besluit:Bestuursorgaan.
+besluit:isGehoudenDoor rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "governing-body";
+  rdfs:domain besluit:Zitting;
+  rdfs:range besluit:Bestuursorgaan.
+besluit:bestuurt rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "administrative-unit";
+  rdfs:domain besluit:Bestuursorgaan;
+  rdfs:range besluit:Bestuurseenheid.
+ext:local_id_24 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:classificatie";
+  rdfs:label "classification";
+  rdfs:domain besluit:Bestuurseenheid;
+  rdfs:range ext:BestuurseenheidClassificatieCode.
+ext:local_id_25 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:classificatie";
+  rdfs:label "classification";
+  rdfs:domain besluit:Bestuursorgaan;
+  rdfs:range ext:BestuursorgaanClassificatieCode.
+org:classification rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "org-classification";
+  rdfs:domain besluit:Bestuursorgaan;
+  rdfs:range ext:BestuursorgaanClassificatieCode.
+org:organisation rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "inner-group";
+  rdfs:domain org:Membership;
+  rdfs:range mandaat:Fractie.
+org:hasMembership rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "has-membership";
+  rdfs:domain mandaat:Mandataris;
+  rdfs:range org:Membership.
+org:memberOf rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "member-of";
+  rdfs:domain mandaat:Fractie;
+  rdfs:range besluit:Bestuursorgaan.
+org:linkedTo rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "linked-to";
+  rdfs:domain mandaat:Fractie;
+  rdfs:range besluit:Bestuurseenheid.
+mandaat:beleidsdomein rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "policy-domain";
+  rdfs:domain mandaat:Mandataris;
+  rdfs:range ext:BeleidsdomeinCode.
+besluit:werkingsgebied rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "location";
+  rdfs:domain besluit:Bestuurseenheid;
+  rdfs:range prov:Location.
+prov:generated rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "resolutions";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range besluit:Besluit.
+org:holds rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "holds";
+  rdfs:domain mandaat:Mandataris;
+  rdfs:range mandaat:Mandaat.
+org:role rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "role-board";
+  rdfs:domain mandaat:Mandaat;
+  rdfs:range ext:BestuursfunctieCode.
+besluit:heeftAanwezigeBijStart rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "attendees-at-start";
+  rdfs:domain besluit:Zitting;
+  rdfs:range mandaat:Mandataris.
+besluit:behandelt rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "agenda-items";
+  rdfs:domain besluit:Zitting;
+  rdfs:range besluit:Agendapunt.
+ext:local_id_26 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:heeftSecretaris";
+  rdfs:label "has-secretary";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range mandaat:Mandataris.
+ext:local_id_27 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:heeftSecretaris";
+  rdfs:label "has-secretary";
+  rdfs:domain besluit:Zitting;
+  rdfs:range mandaat:Mandataris.
+ext:local_id_28 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:heeftVoorzitter";
+  rdfs:label "has-chairman";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range mandaat:Mandataris.
+ext:local_id_29 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is besluit:heeftVoorzitter";
+  rdfs:label "has-chairman";
+  rdfs:domain besluit:Zitting;
+  rdfs:range mandaat:Mandataris.
+mandaat:isBestuurlijkeAliasVan rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "alias";
+  rdfs:domain mandaat:Mandataris;
+  rdfs:range person:Person.
+besluit:aangebrachtNa rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "added-after";
+  rdfs:domain besluit:Agendapunt;
+  rdfs:range besluit:Agendapunt.
+dct:subject rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "subject";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range besluit:Agendapunt.
+besluit:gebeurtNa rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "takes-place-after";
+  rdfs:domain besluit:BehandelingVanAgendapunt;
+  rdfs:range besluit:BehandelingVanAgendapunt.
+mandaat:status rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "status";
+  rdfs:domain mandaat:Mandataris;
+  rdfs:range ext:MandatarisStatusCode.
+
+
+
