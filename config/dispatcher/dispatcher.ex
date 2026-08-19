@@ -135,8 +135,12 @@ defmodule Dispatcher do
   # SEARCH
   ###############################################################
 
-  match "/search/*path", @json do
-    Proxy.forward conn, path, "http://search/"
+  get "/search/sessions/search", @json do
+    Proxy.forward conn, [], "http://search/sessions/search"
+  end
+
+  get "/search/agenda-items/search", @json do
+    Proxy.forward conn, [], "http://search/agenda-items/search"
   end
 
   #################################################################
