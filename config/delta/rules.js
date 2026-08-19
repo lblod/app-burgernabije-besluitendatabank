@@ -46,7 +46,8 @@ export default [
       resourceFormat: "v0.0.1",
       gracePeriod: 5000,
       ignoreFromSelf: true,
-      foldEffectiveChanges: true
+      foldEffectiveChanges: true,
+      retry: 6
     }
   }
 ];
