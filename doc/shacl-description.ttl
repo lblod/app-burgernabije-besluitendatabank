@@ -1,0 +1,1592 @@
+@prefix cms: <http://mu.semte.ch/vocabulary/cms/>.
+@prefix task: <http://redpencil.data.gift/vocabularies/tasks/>.
+@prefix cogs: <http://vocab.deri.ie/cogs#>.
+@prefix oslc: <http://open-services.net/ns/core#>.
+@prefix lblodJob: <http://lblod.data.gift/vocabularies/lblodJob/>.
+@prefix nuao: <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#>.
+@prefix http: <http://www.w3.org/2011/http#>.
+@prefix rpioHttp: <http://redpencil.data.gift/vocabularies/http/>.
+@prefix ndo: <http://oscaf.sourceforge.net/ndo.html#>.
+@prefix hrvst: <http://lblod.data.gift/vocabularies/harvesting/>.
+@prefix sign: <http://mu.semte.ch/vocabularies/ext/signing/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix elod: <http://linkedeconomy.org/ontology#>.
+@prefix muAccount: <http://mu.semte.ch/vocabularies/account/>.
+@prefix lblodBesluit: <http://lblod.data.gift/vocabularies/besluit/>.
+@prefix melding: <http://lblod.data.gift/vocabularies/automatische-melding/>.
+@prefix meb: <http://rdf.myexperiment.org/ontologies/base/>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix qb: <http://purl.org/linked-data/cube#>.
+@prefix sdmxCode: <http://purl.org/linked-data/sdmx/2009/code#>.
+@prefix sdmxMeasure: <http://purl.org/linked-data/sdmx/2009/measure#>.
+@prefix sdmxAttr: <http://purl.org/linked-data/sdmx/2009/attribute#>.
+@prefix sdmxDim: <http://purl.org/linked-data/sdmx/2009/dimension#>.
+@prefix empl: <http://lblod.data.gift/vocabularies/employee/>.
+@prefix adres: <https://data.vlaanderen.be/ns/adres#>.
+@prefix locn: <http://www.w3.org/ns/locn#>.
+@prefix rlog: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/rlog#>.
+@prefix lblodlg: <http://data.lblod.info/vocabularies/leidinggevenden/>.
+@prefix email: <http://mu.semte.ch/vocabularies/ext/email/>.
+@prefix nmo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#>.
+@prefix toezichtReport: <http://mu.semte.ch/vocabularies/ext/supervision/reporting/>.
+@prefix toezicht: <http://mu.semte.ch/vocabularies/ext/supervision/>.
+@prefix validation: <http://mu.semte.ch/vocabularies/validation/>.
+@prefix bbcdr: <http://mu.semte.ch/vocabularies/ext/bbcdr/>.
+@prefix export: <http://mu.semte.ch/vocabularies/ext/export/>.
+@prefix dbpedia: <http://dbpedia.org/ontology/>.
+@prefix schema: <http://schema.org/>.
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>.
+@prefix nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>.
+@prefix pav: <http://purl.org/pav/>.
+@prefix nao: <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix regorg: <https://www.w3.org/ns/regorg#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix org: <http://www.w3.org/ns/org#>.
+@prefix person: <http://www.w3.org/ns/person#>.
+@prefix adms: <http://www.w3.org/ns/adms#>.
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>.
+@prefix cpsv: <http://purl.org/vocab/cpsv#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix m8g: <http://data.europa.eu/m8g/>.
+@prefix eli: <http://data.europa.eu/eli/ontology#>.
+@prefix generiek: <http://data.vlaanderen.be/ns/generiek#>.
+@prefix persoon: <http://data.vlaanderen.be/ns/persoon#>.
+@prefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>.
+@prefix besluit: <http://data.vlaanderen.be/ns/besluit#>.
+@prefix tmp: <http://mu.semte.ch/vocabularies/tmp/>.
+@prefix ext: <http://mu.semte.ch/vocabularies/ext/>.
+@prefix rm: <http://mu.semte.ch/vocabularies/logical-delete/>.
+@prefix typedLiterals: <http://mu.semte.ch/vocabularies/typed-literals/>.
+@prefix mu: <http://mu.semte.ch/vocabularies/core/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix app: <http://mu.semte.ch/app/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix ext: <http://mu.semte.ch/vocabluries/ext/>.
+@prefix mu: <http://mu.semte.ch/vocabularies/core/>.
+
+
+# SERVICE DESCRIPTION
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  a mu:Microservice;
+  dct:title "Auto-converted microservice.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape>.
+
+# API ENDPOINTS
+
+## Processes for vote
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/vote>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/vote>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/vote>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/vote>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/vote>
+  a ext:Process;
+  dct:title "Show vote resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/vote>
+  a ext:Process;
+  dct:title "List vote resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/vote>
+ a ext:Process;
+  dct:title "Create new vote resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/vote>
+ a ext:Process;
+  dct:title "Updates a vote resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/vote>
+ a ext:Process;
+  dct:title "Deletes a vote resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>.
+
+
+## Processes for article
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/article>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/article>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/article>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/article>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/article>
+  a ext:Process;
+  dct:title "Show article resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/article>
+  a ext:Process;
+  dct:title "List article resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/article>
+ a ext:Process;
+  dct:title "Create new article resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/article>
+ a ext:Process;
+  dct:title "Updates a article resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/article>
+ a ext:Process;
+  dct:title "Deletes a article resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>.
+
+
+## Processes for governing-body
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/governing-body>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/governing-body>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/governing-body>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/governing-body>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/governing-body>
+  a ext:Process;
+  dct:title "Show governing-body resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/governing-body>
+  a ext:Process;
+  dct:title "List governing-body resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/governing-body>
+ a ext:Process;
+  dct:title "Create new governing-body resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/governing-body>
+ a ext:Process;
+  dct:title "Updates a governing-body resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/governing-body>
+ a ext:Process;
+  dct:title "Deletes a governing-body resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>.
+
+
+## Processes for membership
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/membership>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/membership>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/membership>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/membership>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/membership>
+  a ext:Process;
+  dct:title "Show membership resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/membership>
+  a ext:Process;
+  dct:title "List membership resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/membership>
+ a ext:Process;
+  dct:title "Create new membership resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/membership>
+ a ext:Process;
+  dct:title "Updates a membership resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/membership>
+ a ext:Process;
+  dct:title "Deletes a membership resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>.
+
+
+## Processes for parliamentary-group
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/parliamentary-group>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/parliamentary-group>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/parliamentary-group>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/parliamentary-group>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/parliamentary-group>
+  a ext:Process;
+  dct:title "Show parliamentary-group resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/parliamentary-group>
+  a ext:Process;
+  dct:title "List parliamentary-group resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/parliamentary-group>
+ a ext:Process;
+  dct:title "Create new parliamentary-group resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/parliamentary-group>
+ a ext:Process;
+  dct:title "Updates a parliamentary-group resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/parliamentary-group>
+ a ext:Process;
+  dct:title "Deletes a parliamentary-group resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>.
+
+
+## Processes for policy-domain
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/policy-domain>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/policy-domain>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/policy-domain>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/policy-domain>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/policy-domain>
+  a ext:Process;
+  dct:title "Show policy-domain resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/policy-domain>
+  a ext:Process;
+  dct:title "List policy-domain resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/policy-domain>
+ a ext:Process;
+  dct:title "Create new policy-domain resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/policy-domain>
+ a ext:Process;
+  dct:title "Updates a policy-domain resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/policy-domain>
+ a ext:Process;
+  dct:title "Deletes a policy-domain resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>.
+
+
+## Processes for location
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/location>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/location>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/location>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/location>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/location>
+  a ext:Process;
+  dct:title "Show location resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/location>
+  a ext:Process;
+  dct:title "List location resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/location>
+ a ext:Process;
+  dct:title "Create new location resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/location>
+ a ext:Process;
+  dct:title "Updates a location resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/location>
+ a ext:Process;
+  dct:title "Deletes a location resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>.
+
+
+## Processes for resolution
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/resolution>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/resolution>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/resolution>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/resolution>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/resolution>
+  a ext:Process;
+  dct:title "Show resolution resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/resolution>
+  a ext:Process;
+  dct:title "List resolution resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/resolution>
+ a ext:Process;
+  dct:title "Create new resolution resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/resolution>
+ a ext:Process;
+  dct:title "Updates a resolution resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/resolution>
+ a ext:Process;
+  dct:title "Deletes a resolution resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>.
+
+
+## Processes for mandate
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/mandate>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/mandate>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/mandate>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/mandate>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/mandate>
+  a ext:Process;
+  dct:title "Show mandate resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/mandate>
+  a ext:Process;
+  dct:title "List mandate resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/mandate>
+ a ext:Process;
+  dct:title "Create new mandate resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/mandate>
+ a ext:Process;
+  dct:title "Updates a mandate resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/mandate>
+ a ext:Process;
+  dct:title "Deletes a mandate resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>.
+
+
+## Processes for session
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/session>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/session>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/session>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/session>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/session>
+  a ext:Process;
+  dct:title "Show session resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/session>
+  a ext:Process;
+  dct:title "List session resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/session>
+ a ext:Process;
+  dct:title "Create new session resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/session>
+ a ext:Process;
+  dct:title "Updates a session resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/session>
+ a ext:Process;
+  dct:title "Deletes a session resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>.
+
+
+## Processes for board-position-code
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/board-position-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/board-position-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/board-position-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/board-position-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/board-position-code>
+  a ext:Process;
+  dct:title "Show board-position-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/board-position-code>
+  a ext:Process;
+  dct:title "List board-position-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/board-position-code>
+ a ext:Process;
+  dct:title "Create new board-position-code resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/board-position-code>
+ a ext:Process;
+  dct:title "Updates a board-position-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/board-position-code>
+ a ext:Process;
+  dct:title "Deletes a board-position-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>.
+
+
+## Processes for person
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/person>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/person>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/person>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/person>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/person>
+  a ext:Process;
+  dct:title "Show person resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/person>
+  a ext:Process;
+  dct:title "List person resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/person>
+ a ext:Process;
+  dct:title "Create new person resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/person>
+ a ext:Process;
+  dct:title "Updates a person resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/person>
+ a ext:Process;
+  dct:title "Deletes a person resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>.
+
+
+## Processes for agenda-item
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/agenda-item>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/agenda-item>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/agenda-item>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/agenda-item>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/agenda-item>
+  a ext:Process;
+  dct:title "Show agenda-item resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/agenda-item>
+  a ext:Process;
+  dct:title "List agenda-item resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/agenda-item>
+ a ext:Process;
+  dct:title "Create new agenda-item resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/agenda-item>
+ a ext:Process;
+  dct:title "Updates a agenda-item resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/agenda-item>
+ a ext:Process;
+  dct:title "Deletes a agenda-item resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>.
+
+
+## Processes for mandatary-status-code
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/mandatary-status-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/mandatary-status-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/mandatary-status-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/mandatary-status-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/mandatary-status-code>
+  a ext:Process;
+  dct:title "Show mandatary-status-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/mandatary-status-code>
+  a ext:Process;
+  dct:title "List mandatary-status-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/mandatary-status-code>
+ a ext:Process;
+  dct:title "Create new mandatary-status-code resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/mandatary-status-code>
+ a ext:Process;
+  dct:title "Updates a mandatary-status-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/mandatary-status-code>
+ a ext:Process;
+  dct:title "Deletes a mandatary-status-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>.
+
+
+## Processes for governing-body-classification-code
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/governing-body-classification-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/governing-body-classification-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/governing-body-classification-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/governing-body-classification-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/governing-body-classification-code>
+  a ext:Process;
+  dct:title "Show governing-body-classification-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/governing-body-classification-code>
+  a ext:Process;
+  dct:title "List governing-body-classification-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/governing-body-classification-code>
+ a ext:Process;
+  dct:title "Create new governing-body-classification-code resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/governing-body-classification-code>
+ a ext:Process;
+  dct:title "Updates a governing-body-classification-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/governing-body-classification-code>
+ a ext:Process;
+  dct:title "Deletes a governing-body-classification-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>.
+
+
+## Processes for agenda-item-handling
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/agenda-item-handling>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/agenda-item-handling>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/agenda-item-handling>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/agenda-item-handling>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/agenda-item-handling>
+  a ext:Process;
+  dct:title "Show agenda-item-handling resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/agenda-item-handling>
+  a ext:Process;
+  dct:title "List agenda-item-handling resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/agenda-item-handling>
+ a ext:Process;
+  dct:title "Create new agenda-item-handling resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/agenda-item-handling>
+ a ext:Process;
+  dct:title "Updates a agenda-item-handling resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/agenda-item-handling>
+ a ext:Process;
+  dct:title "Deletes a agenda-item-handling resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>.
+
+
+## Processes for administrative-unit
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/administrative-unit>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/administrative-unit>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/administrative-unit>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/administrative-unit>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/administrative-unit>
+  a ext:Process;
+  dct:title "Show administrative-unit resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/administrative-unit>
+  a ext:Process;
+  dct:title "List administrative-unit resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/administrative-unit>
+ a ext:Process;
+  dct:title "Create new administrative-unit resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/administrative-unit>
+ a ext:Process;
+  dct:title "Updates a administrative-unit resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/administrative-unit>
+ a ext:Process;
+  dct:title "Deletes a administrative-unit resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>.
+
+
+## Processes for mandatary
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/mandatary>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/mandatary>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/mandatary>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/mandatary>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/mandatary>
+  a ext:Process;
+  dct:title "Show mandatary resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/mandatary>
+  a ext:Process;
+  dct:title "List mandatary resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/mandatary>
+ a ext:Process;
+  dct:title "Create new mandatary resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/mandatary>
+ a ext:Process;
+  dct:title "Updates a mandatary resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/mandatary>
+ a ext:Process;
+  dct:title "Deletes a mandatary resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>.
+
+
+## Processes for administrative-unit-classification-code
+
+<http://services.redpencil.io/mu-cl-resources/my-resources>
+  ext:hasProcess
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/administrative-unit-classification-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/administrative-unit-classification-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/administrative-unit-classification-code>,
+    <http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/administrative-unit-classification-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/show/administrative-unit-classification-code>
+  a ext:Process;
+  dct:title "Show administrative-unit-classification-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/list/administrative-unit-classification-code>
+  a ext:Process;
+  dct:title "List administrative-unit-classification-code resource.";
+  ext:input <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>;
+  ext:output ext:emptyShape.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/new/administrative-unit-classification-code>
+ a ext:Process;
+  dct:title "Create new administrative-unit-classification-code resource.";
+  ext:input ext:emptyShape;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/update/administrative-unit-classification-code>
+ a ext:Process;
+  dct:title "Updates a administrative-unit-classification-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>.
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/processes/delete/administrative-unit-classification-code>
+ a ext:Process;
+  dct:title "Deletes a administrative-unit-classification-code resource.";
+  ext:input  <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>;
+  ext:output <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>.
+
+
+
+
+# SHACL SHAPES
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>
+  a sh:NodeShape;
+  sh:targetClass besluit:Stemming.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/NUMBER-OF-ABSTENTIONS>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/NUMBER-OF-ABSTENTIONS>
+  sh:path besluit:aantalOnthouders;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:decimal.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/NUMBER-OF-OPPONENTS>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/NUMBER-OF-OPPONENTS>
+  sh:path besluit:aantalTegenstanders;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:decimal.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/NUMBER-OF-PROPONENTS>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/NUMBER-OF-PROPONENTS>
+  sh:path besluit:aantalVoorstanders;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/SECRET>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/SECRET>
+  sh:path besluit:geheim;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:boolean.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/TITLE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/TITLE>
+  sh:path dct:title;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/CONSEQUENCE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/CONSEQUENCE>
+  sh:path besluit:gevolg;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/SUBJECT>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/SUBJECT>
+  sh:path besluit:onderwerp;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-presents>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-presents>
+  sh:path besluit:heeftAanwezige;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-abstainers>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-abstainers>
+  sh:path besluit:heeftOnthouder;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-voters>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-voters>
+  sh:path besluit:heeftStemmer;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-opponents>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-opponents>
+  sh:path besluit:heeftTegenstander;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-proponents>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/has-proponents>
+  sh:path besluit:heeftVoorstander;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/handled-by>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/handled-by>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/handled-by/paths>;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:BehandelingVanAgendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote/properties/handled-by/paths> sh:inversePath besluit:heeftStemming.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>
+  a sh:NodeShape;
+  sh:targetClass besluit:Artikel.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/NUMBER>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/NUMBER>
+  sh:path eli:number;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/VALUE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/VALUE>
+  sh:path prov:value;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/LANGUAGE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/LANGUAGE>
+  sh:path eli:language;
+  sh:minCount 0;
+  sh:maxCount 1.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/ALTERNATE-LINK>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/ALTERNATE-LINK>
+  sh:path prov:wasDerivedFrom;
+  sh:minCount 0;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/resolution>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/resolution>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/resolution/paths>;
+  sh:minCount 0;
+  sh:class besluit:Besluit;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article/properties/resolution/paths> sh:inversePath eli:has_part.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>
+  a sh:NodeShape;
+  sh:targetClass besluit:Bestuursorgaan.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/NAME>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/NAME>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/END-DATE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/END-DATE>
+  sh:path mandaat:bindingEinde;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:date.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/START-DATE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/START-DATE>
+  sh:path mandaat:bindingStart;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:date.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/has-time-specializations>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/has-time-specializations>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/has-time-specializations/paths>;
+  sh:minCount 0;
+  sh:class besluit:Bestuursorgaan;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/has-time-specializations/paths> sh:inversePath mandaat:isTijdspecialisatieVan.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/sessions>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/sessions>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/sessions/paths>;
+  sh:minCount 0;
+  sh:class besluit:Zitting;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/sessions/paths> sh:inversePath besluit:isGehoudenDoor.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/administrative-unit>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/administrative-unit>
+  sh:path besluit:bestuurt;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:Bestuurseenheid;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/classification>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/classification>
+  sh:path besluit:classificatie;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class ext:BestuursorgaanClassificatieCode;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/org-classification>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/org-classification>
+  sh:path org:classification;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class ext:BestuursorgaanClassificatieCode;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/is-time-specialization-of>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body/properties/is-time-specialization-of>
+  sh:path mandaat:isTijdspecialisatieVan;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:Bestuursorgaan;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>
+  a sh:NodeShape;
+  sh:targetClass org:Membership.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership/properties/inner-group>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership/properties/inner-group>
+  sh:path org:organisation;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Fractie;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership/properties/has-membership>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership/properties/has-membership>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership/properties/has-membership/paths>;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership/properties/has-membership/paths> sh:inversePath org:hasMembership.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>
+  a sh:NodeShape;
+  sh:targetClass mandaat:Fractie.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group/properties/NAME>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group/properties/NAME>
+  sh:path regorg:legalName;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group/properties/member-of>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group/properties/member-of>
+  sh:path org:memberOf;
+  sh:minCount 0;
+  sh:class besluit:Bestuursorgaan;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group/properties/linked-to>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group/properties/linked-to>
+  sh:path org:linkedTo;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:Bestuurseenheid;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>
+  a sh:NodeShape;
+  sh:targetClass ext:BeleidsdomeinCode.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/LABEL>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/LABEL>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/SCOPE-NOTE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/SCOPE-NOTE>
+  sh:path skos:scopeNote;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/mandataries>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/mandataries>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/mandataries/paths>;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain/properties/mandataries/paths> sh:inversePath mandaat:beleidsdomein.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>
+  a sh:NodeShape;
+  sh:targetClass prov:Location.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/LABEL>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/LABEL>
+  sh:path rdfs:label;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/NIVEAU>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/NIVEAU>
+  sh:path ext:werkingsgebiedNiveau;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/administrative-units>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/administrative-units>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/administrative-units/paths>;
+  sh:minCount 0;
+  sh:class besluit:Bestuurseenheid;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location/properties/administrative-units/paths> sh:inversePath besluit:werkingsgebied.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>
+  a sh:NodeShape;
+  sh:targetClass besluit:Besluit.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/DESCRIPTION>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/DESCRIPTION>
+  sh:path eli:description;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/MOTIVATION>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/MOTIVATION>
+  sh:path besluit:motivering;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/PUBLICATION-DATE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/PUBLICATION-DATE>
+  sh:path eli:date_publication;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:date.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/VALUE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/VALUE>
+  sh:path prov:value;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/LANGUAGE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/LANGUAGE>
+  sh:path eli:language;
+  sh:minCount 0;
+  sh:maxCount 1.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/TITLE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/TITLE>
+  sh:path eli:title;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/ALTERNATE-LINK>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/ALTERNATE-LINK>
+  sh:path prov:wasDerivedFrom;
+  sh:minCount 0;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/articles>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/articles>
+  sh:path eli:has_part;
+  sh:minCount 0;
+  sh:class besluit:Artikel;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/generated-by>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/generated-by>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/generated-by/paths>;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:BehandelingVanAgendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution/properties/generated-by/paths> sh:inversePath prov:generated.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>
+  a sh:NodeShape;
+  sh:targetClass mandaat:Mandaat.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate/properties/held-by>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate/properties/held-by>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate/properties/held-by/paths>;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate/properties/held-by/paths> sh:inversePath org:holds.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate/properties/role-board>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate/properties/role-board>
+  sh:path org:role;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class ext:BestuursfunctieCode;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>
+  a sh:NodeShape;
+  sh:targetClass besluit:Zitting.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/PLANNED-START>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/PLANNED-START>
+  sh:path besluit:geplandeStart;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:dateTime.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/STARTED-AT>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/STARTED-AT>
+  sh:path prov:startedAtTime;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:dateTime.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/ENDED-AT>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/ENDED-AT>
+  sh:path prov:endedAtTime;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:dateTime.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/attendees-at-start>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/attendees-at-start>
+  sh:path besluit:heeftAanwezigeBijStart;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/agenda-items>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/agenda-items>
+  sh:path besluit:behandelt;
+  sh:minCount 0;
+  sh:class besluit:Agendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/governing-body>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/governing-body>
+  sh:path besluit:isGehoudenDoor;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:Bestuursorgaan;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/has-secretary>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/has-secretary>
+  sh:path besluit:heeftSecretaris;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/has-chairman>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session/properties/has-chairman>
+  sh:path besluit:heeftVoorzitter;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>
+  a sh:NodeShape;
+  sh:targetClass ext:BestuursfunctieCode.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code/properties/LABEL>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code/properties/LABEL>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code/properties/SCOPE-NOTE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code/properties/SCOPE-NOTE>
+  sh:path skos:scopeNote;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>
+  a sh:NodeShape;
+  sh:targetClass person:Person.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/FAMILY-NAME>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/FAMILY-NAME>
+  sh:path foaf:familyName;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/FIRST-NAME-USED>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/FIRST-NAME-USED>
+  sh:path persoon:gebruikteVoornaam;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/is-appointed-as>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/is-appointed-as>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/is-appointed-as/paths>;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person/properties/is-appointed-as/paths> sh:inversePath mandaat:isBestuurlijkeAliasVan.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>
+  a sh:NodeShape;
+  sh:targetClass besluit:Agendapunt.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/DESCRIPTION>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/DESCRIPTION>
+  sh:path dct:description;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/PLANNED-PUBLIC>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/PLANNED-PUBLIC>
+  sh:path besluit:geplandOpenbaar;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:boolean.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/PUBLIC>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/PUBLIC>
+  sh:path besluit:openbaar;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:boolean.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/TITLE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/TITLE>
+  sh:path dct:title;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/TYPE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/TYPE>
+  sh:path besluit:Agendapunt.type;
+  sh:minCount 0.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/ALTERNATE-LINK>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/ALTERNATE-LINK>
+  sh:path prov:wasDerivedFrom;
+  sh:minCount 0;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/sessions>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/sessions>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/sessions/paths>;
+  sh:minCount 0;
+  sh:class besluit:Zitting;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/sessions/paths> sh:inversePath besluit:behandelt.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/added-after>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/added-after>
+  sh:path besluit:aangebrachtNa;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:Agendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/handled-by>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/handled-by>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/handled-by/paths>;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:BehandelingVanAgendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item/properties/handled-by/paths> sh:inversePath dct:subject.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>
+  a sh:NodeShape;
+  sh:targetClass ext:MandatarisStatusCode.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code/properties/LABEL>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code/properties/LABEL>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code/properties/SCOPE-NOTE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code/properties/SCOPE-NOTE>
+  sh:path skos:scopeNote;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>
+  a sh:NodeShape;
+  sh:targetClass ext:BestuursorgaanClassificatieCode.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code/properties/LABEL>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code/properties/LABEL>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code/properties/governing-bodies>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code/properties/governing-bodies>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code/properties/governing-bodies/paths>;
+  sh:minCount 0;
+  sh:class besluit:Bestuursorgaan;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code/properties/governing-bodies/paths> sh:inversePath besluit:classificatie.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>
+  a sh:NodeShape;
+  sh:targetClass besluit:BehandelingVanAgendapunt.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/PUBLIC>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/PUBLIC>
+  sh:path besluit:openbaar;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:boolean.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/resolutions>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/resolutions>
+  sh:path prov:generated;
+  sh:minCount 0;
+  sh:class besluit:Besluit;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-presents>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-presents>
+  sh:path besluit:heeftAanwezige;
+  sh:minCount 0;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-votes>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-votes>
+  sh:path besluit:heeftStemming;
+  sh:minCount 0;
+  sh:class besluit:Stemming;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/takes-place-after>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/takes-place-after>
+  sh:path besluit:gebeurtNa;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:BehandelingVanAgendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/subject>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/subject>
+  sh:path dct:subject;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class besluit:Agendapunt;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-secretary>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-secretary>
+  sh:path besluit:heeftSecretaris;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-chairman>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling/properties/has-chairman>
+  sh:path besluit:heeftVoorzitter;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Mandataris;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>
+  a sh:NodeShape;
+  sh:targetClass besluit:Bestuurseenheid.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/NAME>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/NAME>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/governing-bodies>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/governing-bodies>
+  sh:path <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/governing-bodies/paths>;
+  sh:minCount 0;
+  sh:class besluit:Bestuursorgaan;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/governing-bodies/paths> sh:inversePath besluit:bestuurt.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/location>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/location>
+  sh:path besluit:werkingsgebied;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class prov:Location;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/classification>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit/properties/classification>
+  sh:path besluit:classificatie;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class ext:BestuurseenheidClassificatieCode;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>
+  a sh:NodeShape;
+  sh:targetClass mandaat:Mandataris.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/RANKING>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/RANKING>
+  sh:path mandaat:rangorde;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/START-DATE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/START-DATE>
+  sh:path mandaat:start;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:dateTime.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/END-DATE>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/END-DATE>
+  sh:path mandaat:einde;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:dateTime.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/policy-domain>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/policy-domain>
+  sh:path mandaat:beleidsdomein;
+  sh:minCount 0;
+  sh:class ext:BeleidsdomeinCode;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/holds>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/holds>
+  sh:path org:holds;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class mandaat:Mandaat;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/has-membership>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/has-membership>
+  sh:path org:hasMembership;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class org:Membership;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/alias>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/alias>
+  sh:path mandaat:isBestuurlijkeAliasVan;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class person:Person;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/status>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary/properties/status>
+  sh:path mandaat:status;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:class ext:MandatarisStatusCode;
+  sh:nodeKind sh:IRI.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary> sh:closed false.
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>
+  a sh:NodeShape;
+  sh:targetClass ext:BestuurseenheidClassificatieCode.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code> sh:property <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code/properties/LABEL>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code/properties/LABEL>
+  sh:path skos:prefLabel;
+  sh:minCount 0;
+  sh:maxCount 1;
+  sh:dataType xsd:string.
+<http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code> sh:closed false.
+
+
+
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape> a sh:NodeShape.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape> sh:or <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/0>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/0> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/vote>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/1>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/1> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/article>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/2>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/2> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/3>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/3> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/membership>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/4>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/4> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/parliamentary-group>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/5>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/5> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/policy-domain>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/6>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/6> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/location>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/7>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/7> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/resolution>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/8>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/8> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandate>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/9>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/9> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/session>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/10>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/10> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/board-position-code>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/11>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/11> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/person>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/12>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/12> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/13>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/13> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary-status-code>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/14>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/14> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/governing-body-classification-code>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/15>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/15> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/agenda-item-handling>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/16>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/16> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/17>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/17> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/mandatary>; rdf:rest <http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/18>.
+<http://services.redpencil.io/mu-cl-resources/my-resources/full-shape/or-list/18> rdf:first <http://services.redpencil.io/mu-cl-resources/my-resources/shapes/administrative-unit-classification-code>.
+
