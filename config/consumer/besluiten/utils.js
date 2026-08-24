@@ -1,7 +1,26 @@
-const fs = require("fs");
-const { DEAD_LETTER_FILE } = require("./config");
+import fs from "fs";
+import { DEAD_LETTER_FILE, DENIED_PREDICATES } from "./config.js";
 
-async function batchedUpdate(
+let deniedPredicateTerms = null;
+function getDeniedPredicateTerms(sparqlEscapeUri) {
+  deniedPredicateTerms ??= new Set(DENIED_PREDICATES.map(sparqlEscapeUri));
+  return deniedPredicateTerms;
+}
+
+export function rejectDeniedPredicates(termObjects, sparqlEscapeUri, context) {
+  const denied = getDeniedPredicateTerms(sparqlEscapeUri);
+  if (!denied.size) return termObjects;
+
+  const kept = termObjects.filter((o) => !denied.has(o.predicate));
+  if (kept.length < termObjects.length) {
+    console.log(
+      `Skipping ${termObjects.length - kept.length} of ${termObjects.length} ${context} on denied predicates.`,
+    );
+  }
+  return kept;
+}
+
+export async function batchedUpdate(
   lib,
   nTriples,
   targetGraph,
@@ -75,7 +94,3 @@ function writeToDeadLetterFile(triples, targetGraph, operation, error) {
   console.warn(`Failed triples: ${triples.join(" ")}`);
   fs.appendFileSync(DEAD_LETTER_FILE, entry);
 }
-
-module.exports = {
-  batchedUpdate,
-};

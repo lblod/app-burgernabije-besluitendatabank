@@ -19,7 +19,59 @@ const INGEST_GRAPH =
 const DEAD_LETTER_FILE =
   process.env.DEAD_LETTER_FILE || "/consumer-files/dead-letter-triples.nt";
 
-module.exports = {
+const AUTHORITATIVE_GRAPHS = (
+  process.env.AUTHORITATIVE_GRAPHS ||
+  "http://mu.semte.ch/graphs/mandaten,http://mu.semte.ch/graphs/organisations"
+)
+  .split(",")
+  .map((graph) => graph.trim())
+  .filter((graph) => graph.length);
+const ENABLE_AUTHORITATIVE_SUBJECT_FILTER =
+  process.env.ENABLE_AUTHORITATIVE_SUBJECT_FILTER == "false" ? false : true;
+const AUTHORITATIVE_SUBJECTS_TTL = parseInt(
+  process.env.AUTHORITATIVE_SUBJECTS_TTL || 3600000,
+);
+const AUTHORITATIVE_SUBJECTS_PAGE_SIZE = parseInt(
+  process.env.AUTHORITATIVE_SUBJECTS_PAGE_SIZE || 500000,
+);
+
+const AUTHORITATIVE_SUBJECTS_ENDPOINT =
+  process.env.AUTHORITATIVE_SUBJECTS_ENDPOINT || DIRECT_DATABASE_ENDPOINT;
+
+const DEFAULT_DENIED_PREDICATES = [
+  "http://lblod.data.gift/vocabularies/besluit/extractedDecisionContent",
+];
+const DENIED_PREDICATES = (
+  process.env.DENIED_PREDICATES
+    ? process.env.DENIED_PREDICATES.split(",")
+    : DEFAULT_DENIED_PREDICATES
+)
+  .map((predicate) => predicate.trim())
+  .filter((predicate) => predicate.length);
+
+const GOVERNING_BODY_ABSTRACT_PREDICATE =
+  process.env.GOVERNING_BODY_ABSTRACT_PREDICATE ||
+  "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract";
+const ENABLE_GOVERNING_BODY_ABSTRACT =
+  process.env.ENABLE_GOVERNING_BODY_ABSTRACT == "false" ? false : true;
+
+const GOVERNING_BODY_LOOKUP_GRAPHS = (
+  process.env.GOVERNING_BODY_LOOKUP_GRAPHS
+    ? process.env.GOVERNING_BODY_LOOKUP_GRAPHS.split(",")
+    : [INGEST_GRAPH, ...AUTHORITATIVE_GRAPHS]
+)
+  .map((graph) => graph.trim())
+  .filter((graph, index, graphs) => graph.length && graphs.indexOf(graph) === index);
+const GOVERNING_BODY_LOOKUP_ENDPOINT =
+  process.env.GOVERNING_BODY_LOOKUP_ENDPOINT || DIRECT_DATABASE_ENDPOINT;
+const GOVERNING_BODY_SUBJECT_CHUNK_SIZE = parseInt(
+  process.env.GOVERNING_BODY_SUBJECT_CHUNK_SIZE || 500,
+);
+const GOVERNING_BODY_BACKFILL_PAGE_SIZE = parseInt(
+  process.env.GOVERNING_BODY_BACKFILL_PAGE_SIZE || 5000,
+);
+
+export {
   BATCH_SIZE,
   PARALLEL_CALLS,
   MU_CALL_SCOPE_ID_INITIAL_SYNC,
@@ -30,4 +82,16 @@ module.exports = {
   SLEEP_TIME_AFTER_FAILED_DB_OPERATION,
   INGEST_GRAPH,
   DEAD_LETTER_FILE,
+  AUTHORITATIVE_GRAPHS,
+  ENABLE_AUTHORITATIVE_SUBJECT_FILTER,
+  AUTHORITATIVE_SUBJECTS_TTL,
+  AUTHORITATIVE_SUBJECTS_PAGE_SIZE,
+  AUTHORITATIVE_SUBJECTS_ENDPOINT,
+  DENIED_PREDICATES,
+  GOVERNING_BODY_ABSTRACT_PREDICATE,
+  ENABLE_GOVERNING_BODY_ABSTRACT,
+  GOVERNING_BODY_LOOKUP_GRAPHS,
+  GOVERNING_BODY_LOOKUP_ENDPOINT,
+  GOVERNING_BODY_SUBJECT_CHUNK_SIZE,
+  GOVERNING_BODY_BACKFILL_PAGE_SIZE,
 };
