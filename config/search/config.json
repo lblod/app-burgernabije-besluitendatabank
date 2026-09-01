@@ -350,6 +350,11 @@
           "^http://purl.org/dc/terms/subject",
           "http://www.w3.org/ns/prov#generated",
           "http://data.europa.eu/eli/ontology#description"
+        ],
+        "resolution_body": [
+          "^http://purl.org/dc/terms/subject",
+          "http://www.w3.org/ns/prov#generated",
+          "http://www.w3.org/ns/prov#value"
         ]
       },
       "mappings": {
@@ -435,6 +440,10 @@
             ]
           },
           "resolution_description": {
+            "type": "text",
+            "copy_to": "search_content"
+          },
+          "resolution_body": {
             "type": "text",
             "copy_to": "search_content"
           },
