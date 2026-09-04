@@ -82,5 +82,5 @@
   :for-allowed-group "public")
 
 ;; increase the default read timeout. this allows waiting heavier queries
-(setf dexador.util:*default-read-timeout* 60)
+(setf dexador.util:*default-read-timeout* 300)
 
