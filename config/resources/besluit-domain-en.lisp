@@ -166,6 +166,8 @@
             )
   :has-one `((governing-body :via ,(s-prefix "besluit:isGehoudenDoor")
                              :as "governing-body")
+             (governing-body :via ,(s-prefix "ext:governingBodyAbstract")
+                             :as "governing-body-abstract")
              (mandatary :via ,(s-prefix "besluit:heeftSecretaris")
                         :as "has-secretary")
              (mandatary :via ,(s-prefix "besluit:heeftVoorzitter")
