@@ -1,0 +1,34 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  #################################################################################
+  # monitoring
+  #################################################################################
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
+    logging: *default-logging
+  grafana:
+    image: grafana/grafana:11.1.0
+    environment:
+      GF_SECURITY_ADMIN_USER: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "CHANGEME"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
+    volumes:
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+      - ./config/grafana/dashboards:/var/lib/grafana/dashboards
+  json-exporter:
+    image: prometheuscommunity/json-exporter:v0.6.0
+    volumes:
+      - ./config/json-exporter/config.yml:/config.yml
+    command: ["--config.file=/config.yml"]
+    labels:
+      - "logging=true"
+    logging: *default-logging
