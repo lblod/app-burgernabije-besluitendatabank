@@ -220,7 +220,7 @@ services:
       - ./config/search:/config
     restart: always
     environment:
-      JAVA_OPTS: "-Xms1g -Xmx4g"    
+      JAVA_OPTS: "-Xms1g -Xmx4g"
     logging: *default-logging
     labels:
       - "logging=true"
@@ -235,7 +235,7 @@ services:
       - "ES_JAVA_OPTS=-Xms1g -Xmx4g"
       - "cluster.routing.allocation.disk.watermark.low=96%"
       - "cluster.routing.allocation.disk.watermark.high=97%"
-      - "cluster.routing.allocation.disk.watermark.flood_stage=98%"      
+      - "cluster.routing.allocation.disk.watermark.flood_stage=98%"
     restart: always
     logging: *default-logging
     labels:
@@ -291,6 +291,7 @@ services:
       - ./config/metrics:/config
     environment:
       LOG_SPARQL_ALL: true
+      ALLOW_MU_AUTH_SUDO: "true"
     restart: always
     logging: *default-logging
   project-scripts:
