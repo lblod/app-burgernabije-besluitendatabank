@@ -38,69 +38,33 @@
         "http://data.vlaanderen.be/ns/besluit#Zitting"
       ],
       "properties": {
-        "abstract_location_id": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/besluit#bestuurt",
-          "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
-          "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
         "location_id": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://data.vlaanderen.be/ns/besluit#bestuurt",
           "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
           "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
-        "abstract_governing_body_location_name": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://data.vlaanderen.be/ns/besluit#bestuurt",
-          "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
-          "http://www.w3.org/2000/01/rdf-schema#label"
         ],
         "governing_body_location_name": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://data.vlaanderen.be/ns/besluit#bestuurt",
           "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
           "http://www.w3.org/2000/01/rdf-schema#label"
         ],
-        "abstract_governing_body_id": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
-        "abstract_governing_body_name": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://www.w3.org/2004/02/skos/core#prefLabel"
-        ],
-        "abstract_governing_body_classification_name": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://www.w3.org/ns/org#classification",
-          "http://www.w3.org/2004/02/skos/core#prefLabel"
-        ],
-        "abstract_governing_body_classification_id": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://www.w3.org/ns/org#classification",
-          "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
         "governing_body_id": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://mu.semte.ch/vocabularies/core/uuid"
         ],
         "governing_body_name": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://www.w3.org/2004/02/skos/core#prefLabel"
         ],
         "governing_body_classification_name": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://www.w3.org/ns/org#classification",
           "http://www.w3.org/2004/02/skos/core#prefLabel"
         ],
         "governing_body_classification_id": [
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://www.w3.org/ns/org#classification",
           "http://mu.semte.ch/vocabularies/core/uuid"
         ],
@@ -140,32 +104,12 @@
       },
       "mappings": {
         "properties": {
-          "abstract_location_id": {
-            "type": "keyword",
-            "copy_to": "search_location_id"
-          },
           "location_id": {
             "type": "keyword",
             "copy_to": "search_location_id"
           },
-          "abstract_governing_body_location_name": {
-            "type": "text"
-          },
           "governing_body_location_name": {
             "type": "text"
-          },
-          "abstract_governing_body_id": {
-            "type": "keyword"
-          },
-          "abstract_governing_body_name": {
-            "type": "text"
-          },
-          "abstract_governing_body_classification_name": {
-            "type": "text"
-          },
-          "abstract_governing_body_classification_id": {
-            "type": "keyword",
-            "copy_to": "search_governing_body_classification_id"
           },
           "governing_body_id": {
             "type": "keyword"
@@ -245,81 +189,39 @@
         "http://data.vlaanderen.be/ns/besluit#Agendapunt"
       ],
       "properties": {
-        "abstract_location_id": [
-          "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/besluit#bestuurt",
-          "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
-          "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
         "location_id": [
           "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://data.vlaanderen.be/ns/besluit#bestuurt",
           "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
           "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
-        "abstract_governing_body_location_name": [
-          "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://data.vlaanderen.be/ns/besluit#bestuurt",
-          "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
-          "http://www.w3.org/2000/01/rdf-schema#label"
         ],
         "governing_body_location_name": [
           "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://data.vlaanderen.be/ns/besluit#bestuurt",
           "http://data.vlaanderen.be/ns/besluit#werkingsgebied",
           "http://www.w3.org/2000/01/rdf-schema#label"
         ],
-        "abstract_governing_body_id": [
-          "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
-        "abstract_governing_body_name": [
-          "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://www.w3.org/2004/02/skos/core#prefLabel"
-        ],
-        "abstract_governing_body_classification_name": [
-          "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://www.w3.org/ns/org#classification",
-          "http://www.w3.org/2004/02/skos/core#prefLabel"
-        ],
-        "abstract_governing_body_classification_id": [
-          "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
-          "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
-          "http://www.w3.org/ns/org#classification",
-          "http://mu.semte.ch/vocabularies/core/uuid"
-        ],
         "governing_body_id": [
           "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://mu.semte.ch/vocabularies/core/uuid"
         ],
         "governing_body_name": [
           "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://www.w3.org/2004/02/skos/core#prefLabel"
         ],
         "governing_body_classification_name": [
           "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://www.w3.org/ns/org#classification",
           "http://www.w3.org/2004/02/skos/core#prefLabel"
         ],
         "governing_body_classification_id": [
           "^http://data.vlaanderen.be/ns/besluit#behandelt",
-          "http://data.vlaanderen.be/ns/besluit#isGehoudenDoor",
+          "http://mu.semte.ch/vocabularies/ext/governingBodyAbstract",
           "http://www.w3.org/ns/org#classification",
           "http://mu.semte.ch/vocabularies/core/uuid"
         ],
@@ -354,32 +256,12 @@
       },
       "mappings": {
         "properties": {
-          "abstract_location_id": {
-            "type": "keyword",
-            "copy_to": "search_location_id"
-          },
           "location_id": {
             "type": "keyword",
             "copy_to": "search_location_id"
           },
-          "abstract_governing_body_location_name": {
-            "type": "text"
-          },
           "governing_body_location_name": {
             "type": "text"
-          },
-          "abstract_governing_body_id": {
-            "type": "keyword"
-          },
-          "abstract_governing_body_name": {
-            "type": "text"
-          },
-          "abstract_governing_body_classification_name": {
-            "type": "text"
-          },
-          "abstract_governing_body_classification_id": {
-            "type": "keyword",
-            "copy_to": "search_governing_body_classification_id"
           },
           "governing_body_id": {
             "type": "keyword"

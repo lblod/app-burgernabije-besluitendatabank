@@ -1,0 +1,22 @@
+# Copy to docker-compose.monitor.override.yml and fill in the values below.
+# The copy is untracked, this template is not, so don't fill it in here.
+services:
+  grafana:
+    environment:
+      # openssl rand -hex 12
+      GF_SECURITY_ADMIN_USER: 'admin'
+      GF_SECURITY_ADMIN_PASSWORD: 'CHANGE_ME'
+
+      VIRTUAL_HOST: "monitoring.lokaalbeslist.lblod.info"
+      VIRTUAL_PORT: "3000"
+      LETSENCRYPT_HOST: "monitoring.lokaalbeslist.lblod.info"
+      LETSENCRYPT_EMAIL: "you@example.com"
+      GF_SERVER_ROOT_URL: "https://monitoring.lokaalbeslist.lblod.info/"
+    networks:
+      - default
+      - letsencrypt
+
+networks:
+  letsencrypt:
+    external: true
+    name: "letsencrypt_default"

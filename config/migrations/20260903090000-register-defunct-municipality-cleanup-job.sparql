@@ -1,0 +1,28 @@
+# Removes werkingsgebieden of municipalities that no longer exist, so they stop being
+# offered as a filter option by the frontend.
+
+PREFIX cleanup: <http://mu.semte.ch/vocabularies/ext/cleanup/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+
+    <http://data.lblod.info/id/cleanup-jobs/d4a4519b-8f91-4b96-b027-24fbff13e523>
+      a cleanup:Job ;
+      mu:uuid "d4a4519b-8f91-4b96-b027-24fbff13e523" ;
+      dcterms:title "Remove werkingsgebieden of municipalities that no longer exist" ;
+      dcterms:description "Kruishoutem merged into Kruisem in 2019 but is still published as a Gemeente. Add further URIs to the VALUES clause when other fusiegemeenten surface." ;
+      cleanup:cronPattern "0 2 * * *" ;
+      cleanup:selectPattern """
+        VALUES ?resource {
+          <http://data.lblod.info/id/werkingsgebieden/9398188baec8d653dec67da8687d5a3fec3868ca3e068306a79c6d72e5c88b19>
+        }
+        GRAPH ?g { ?resource ?p ?o . }
+      """ ;
+      cleanup:deletePattern """
+        GRAPH ?g { ?resource ?p ?o . }
+      """ .
+
+  }
+}

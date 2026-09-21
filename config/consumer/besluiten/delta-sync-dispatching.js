@@ -1,13 +1,14 @@
-const { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
+import { BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
   DIRECT_DATABASE_ENDPOINT,
   BATCH_SIZE,
   SLEEP_BETWEEN_BATCHES,
   INGEST_GRAPH,
-  PARALLEL_CALLS
-} = require('./config');
-const { parallelisedBatchedUpdate } = require('./utils');
-const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT; //Defaults to mu-auth
-
+  ENABLE_AUTHORITATIVE_SUBJECT_FILTER,
+} from './config.js';
+import { batchedUpdate, rejectDeniedPredicates } from './utils.js';
+import { getAuthoritativeSubjects } from './authoritative-subjects.js';
+import { governingBodySubjects, syncGoverningBodyAbstract } from './governing-body-abstract.js';
+const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : process.env.MU_SPARQL_ENDPOINT;
 
 /**
  * Dispatch the fetched information to a target graph.
@@ -22,35 +23,42 @@ const endpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT
  *         ]
  * @return {void} Nothing
  */
-async function dispatch(lib, data) {
-  const { mu, } = lib;
+export async function dispatch(lib, data) {
   const { termObjectChangeSets } = data;
+
+  const authoritativeSubjects = ENABLE_AUTHORITATIVE_SUBJECT_FILTER
+    ? await getAuthoritativeSubjects(lib)
+    : null;
 
   for (let { deletes, inserts } of termObjectChangeSets) {
 
     if (BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES) {
       console.warn(`Service configured to skip MU_AUTH!`);
     }
-    console.log(`Using ${endpoint} to insert triples`);
 
     const deleteStatements = deletes.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
-    await parallelisedBatchedUpdate(
+    await batchedUpdate(
       lib,
       deleteStatements,
-      INGEST_GRAPH,
+      null,
       SLEEP_BETWEEN_BATCHES,
       BATCH_SIZE,
       {},
       endpoint,
       "DELETE",
-      //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-      // as fallback
-      !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-      PARALLEL_CALLS
     );
 
-    const insertStatements = inserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
-    await parallelisedBatchedUpdate(
+    const allowedInserts = rejectDeniedPredicates(inserts, lib.sparqlEscapeUri, "inserts");
+
+    const keptInserts = authoritativeSubjects
+      ? allowedInserts.filter(o => !authoritativeSubjects.has(o.subject))
+      : allowedInserts;
+    if (keptInserts.length < allowedInserts.length) {
+      console.log(`Skipping ${allowedInserts.length - keptInserts.length} of ${allowedInserts.length} inserts about subjects managed by an authoritative source.`);
+    }
+
+    const insertStatements = keptInserts.map(o => `${o.subject} ${o.predicate} ${o.object}.`);
+    await batchedUpdate(
       lib,
       insertStatements,
       INGEST_GRAPH,
@@ -59,15 +67,11 @@ async function dispatch(lib, data) {
       {},
       endpoint,
       "INSERT",
-      //If we don't bypass mu-auth already from the start, we provide a direct database endpoint
-      // as fallback
-      !BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES ? DIRECT_DATABASE_ENDPOINT : '',
-      PARALLEL_CALLS
     );
 
+    await syncGoverningBodyAbstract(lib, [
+      ...governingBodySubjects(deletes, lib.sparqlEscapeUri),
+      ...governingBodySubjects(keptInserts, lib.sparqlEscapeUri),
+    ]);
   }
 }
-
-module.exports = {
-  dispatch
-};

@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 1.4.0 (2026-02-19)
+### :bug: Bug fixes
+- Fixed delta config, notify search on all changes
+- Simplified delta handling and added logic to skip failing triples
+
+### :arrow_up: Dependency updates
+- delta notifier bumped to nvdk/mu-delta-notifier:1.1.0 (was semtech/mu-delta-notifier:0.4.0)
+
+### :house: Infrastructure & configuration
+- fold changeSets in deltanotifier before sending to search
+- only send matching triples to uuid service to limit delta size
+- removed error-alert and deliver email service as these weren't used
+
 ## 1.3.0 (2026-02-09)
 ### :bug: Bug fixes
 - Fix sparql-parser configuration

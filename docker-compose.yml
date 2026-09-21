@@ -36,7 +36,7 @@ services:
   # Front-end made for BNB
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
-    image: lblod/frontend-burgernabije-besluitendatabank:0.8.10
+    image: lblod/frontend-burgernabije-besluitendatabank:0.8.11
     restart: always
     logging: *default-logging
     labels:
@@ -78,6 +78,20 @@ services:
       MU_SPARQL_TIMEOUT: "300"
     volumes:
       - ./config/migrations:/data/migrations
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
+  # Runs periodic SPARQL cleanup jobs (defined as cleanup:Job resources) at cron intervals.
+  db-cleanup:
+    image: lblod/db-cleanup-service:0.5.1
+    environment:
+      MU_SPARQL_ENDPOINT: "http://database:8890/sparql"
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
+      CRON_PATTERN: "0 3 * * *"
+    links:
+      - database:database
     restart: always
     logging: *default-logging
     labels:
@@ -269,22 +283,6 @@ services:
       - "logging=true"
     restart: always
     logging: *default-logging
-  error-alert:
-    image: lblod/loket-error-alert-service:1.0.0
-    volumes:
-      - ./config/error-alert:/config/
-    labels:
-      - "logging=true"
-    restart: always
-    logging: *default-logging
-  deliver-email-service:
-    image: redpencil/deliver-email-service:0.4.1
-    environment:
-      MAILBOX_URI: "http://data.lblod.info/id/mailboxes/1"
-    labels:
-      - "logging=true"
-    restart: always
-    logging: *default-logging
   metrics:
     image: lblod/metrics-service
     volumes:
@@ -292,6 +290,7 @@ services:
       - ./config/metrics:/config
     environment:
       LOG_SPARQL_ALL: true
+      ALLOW_MU_AUTH_SUDO: "true"
     restart: always
     logging: *default-logging
   project-scripts:

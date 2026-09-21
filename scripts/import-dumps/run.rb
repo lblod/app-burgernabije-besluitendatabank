@@ -7,6 +7,7 @@ require 'json'
 require 'tty-prompt'
 require 'securerandom'
 require 'date'
+require 'fileutils'
 
 $stdout.sync = true
 print "installing ruby dependencies..."
@@ -180,39 +181,61 @@ end
 
 prompt = TTY::Prompt.new
 prompt.say ""
-choices = [
-  {name: "https://lokaalbeslist-harvester-0.s.redhost.be/", value: 1 },
-  {name: "https://lokaalbeslist-harvester-1.s.redhost.be/", value: 2 },
-  {name: "https://lokaalbeslist-harvester-2.s.redhost.be/", value: 3 },
-  {name: "https://lokaalbeslist-harvester-3.s.redhost.be/", value: 4 },
-  {name: "https://dev.harvesting-self-service.lblod.info/", value: "dev" },
-  {name: "custom", value: "custom"}
-]
 
-harvester = prompt.select("From which harvester are you importing?", choices)
-if harvester == "custom"
+source = prompt.select("Which source are you importing?", [
+  { name: "besluiten (harvester)", value: "besluiten" },
+  { name: "op-public (organisaties.abb.vlaanderen.be)", value: "op" },
+  { name: "mandatendatabank (loket.lokaalbestuur.vlaanderen.be)", value: "mdb" },
+  { name: "custom", value: "custom" }
+])
+
+if source == "op"
+  sync_base_url = "https://organisaties.abb.vlaanderen.be/"
+  ingest_graph = "http://mu.semte.ch/graphs/organisations"
+  job_creator_uri = "http://data.lblod.info/services/id/op-public-consumer"
+  sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/PublicCacheGraphDump"
+  job_operation = "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/op-public"
+elsif source == "mdb"
+  sync_base_url = "https://loket.lokaalbestuur.vlaanderen.be/"
+  ingest_graph = "http://mu.semte.ch/graphs/mandaten"
+  job_creator_uri = "http://data.lblod.info/services/id/mandatendatabank-consumer"
+  sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/MandatarissenCacheGraphDump"
+  job_operation = "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/mandatarissen"
+elsif source == "custom"
   sync_base_url = prompt.ask('Enter the SYNC_BASE_URL:', default: "https://lokaalbeslist-harvester-0.s.redhost.be/")
   ingest_graph = prompt.ask("Enter the INGEST_GRAPH", default: "http://mu.semte.ch/graphs/public")
   job_creator_uri = prompt.ask("Enter the JOB_CREATOR_URI", default: "http://data.lblod.info/services/id/besluiten-consumer")
   default_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
   sync_dataset_subject = prompt.ask("Enter the dataset URI:", default: default_subject)
   job_operation = prompt.ask("Enter the job operation for the initalsync metadata", default: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten")
-elsif harvester == "dev"
-  sync_base_url = "https://dev.harvesting-self-service.lblod.info/"
-  ingest_graph = "http://mu.semte.ch/graphs/public"
-  job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer"
-  sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
-  job_operation =  "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten"
 else
-  # a prod harvester
-  sync_base_url = "https://lokaalbeslist-harvester-#{harvester-1}.s.redhost.be/"
-  ingest_graph = "http://mu.semte.ch/graphs/harvester-#{harvester-1}"
+  # besluiten — select specific harvester
   job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer"
   sync_dataset_subject = "http://data.lblod.info/datasets/delta-producer/dumps/lblod-harvester/BesluitenCacheGraphDump"
-  job_operation =  "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten"
-  if harvester > 1
-    job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer-#{harvester-1}"
-    job_operation = "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten-#{harvester-1}"
+  job_operation = "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten"
+
+  harvester_choices = [
+    {name: "https://lokaalbeslist-harvester-0.s.redhost.be/", value: 1 },
+    {name: "https://lokaalbeslist-harvester-1.s.redhost.be/", value: 2 },
+    {name: "https://lokaalbeslist-harvester-2.s.redhost.be/", value: 3 },
+    {name: "https://lokaalbeslist-harvester-3.s.redhost.be/", value: 4 },
+    {name: "https://harvesting-self-service.lblod.info/ (QA)", value: "qa" },
+    {name: "https://dev.harvesting-self-service.lblod.info/ (dev)", value: "dev" },
+  ]
+  harvester = prompt.select("From which harvester are you importing?", harvester_choices)
+  if harvester == "dev"
+    sync_base_url = "https://dev.harvesting-self-service.lblod.info/"
+    ingest_graph = "http://mu.semte.ch/graphs/public"
+  elsif harvester == "qa"
+    sync_base_url = "https://harvesting-self-service.lblod.info/"
+    ingest_graph = "http://mu.semte.ch/graphs/harvester-0"
+  else
+    sync_base_url = "https://lokaalbeslist-harvester-#{harvester-1}.s.redhost.be/"
+    ingest_graph = "http://mu.semte.ch/graphs/harvester-#{harvester-1}"
+    if harvester > 1
+      job_creator_uri = "http://data.lblod.info/services/id/besluiten-consumer-#{harvester-1}"
+      job_operation = "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/besluiten-#{harvester-1}"
+    end
   end
 end
 
@@ -243,6 +266,7 @@ unless $?.success?
   prompt.say "Continuing with invalid file as requested"
 end
 filename="dataset-#{SecureRandom.uuid}.ttl"
+FileUtils.mkdir_p("/project/data/db/toLoad")
 File.rename(decompressed_file_path,"/project/data/db/toLoad/#{filename}")
 prompt.say("Moved validated ttl to data/db/toLoad/#{filename}")
 load_file = prompt.yes?("Load file via virtuoso odbc")

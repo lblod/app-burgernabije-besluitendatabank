@@ -1,5 +1,6 @@
 import promClient from 'prom-client';
-import { querySudo as query } from '@lblod/mu-auth-sudo';
+import { query as muQuery } from 'mu';
+const query = (queryString) => muQuery(queryString, { sudo: true });
 const jobStatusGauge = new promClient.Gauge({
   name: 'semtech_job_status_count',
   help: 'jobs per status',

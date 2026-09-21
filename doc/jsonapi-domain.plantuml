@@ -1,0 +1,118 @@
+@startuml
+set namespaceSeparator none
+class "articles"
+"articles" : number
+"articles" : value
+"articles" : language
+"articles" : alternate-link
+"articles" --> "*" "resolutions" : resolution > 
+class "administrative-units"
+"administrative-units" : name
+"administrative-units" --> "1" "locations" : location > 
+"administrative-units" --> "1" "administrative-unit-classification-codes" : classification > 
+"administrative-units" --> "*" "governing-bodies" : governing-bodies > 
+class "votes"
+"votes" : number-of-abstentions
+"votes" : number-of-opponents
+"votes" : number-of-proponents
+"votes" : secret
+"votes" : title
+"votes" : consequence
+"votes" : subject
+"votes" --> "1" "agenda-item-handlings" : handled-by > 
+"votes" --> "*" "mandataries" : has-presents > 
+"votes" --> "*" "mandataries" : has-abstainers > 
+"votes" --> "*" "mandataries" : has-voters > 
+"votes" --> "*" "mandataries" : has-opponents > 
+"votes" --> "*" "mandataries" : has-proponents > 
+class "administrative-unit-classification-codes"
+"administrative-unit-classification-codes" : label
+class "people"
+"people" : family-name
+"people" : first-name-used
+"people" --> "*" "mandataries" : is-appointed-as > 
+class "governing-bodies"
+"governing-bodies" : name
+"governing-bodies" : end-date
+"governing-bodies" : start-date
+"governing-bodies" --> "1" "administrative-units" : administrative-unit > 
+"governing-bodies" --> "1" "governing-body-classification-codes" : classification > 
+"governing-bodies" --> "1" "governing-body-classification-codes" : org-classification > 
+"governing-bodies" --> "1" "governing-bodies" : is-time-specialization-of > 
+"governing-bodies" --> "*" "governing-bodies" : has-time-specializations > 
+"governing-bodies" --> "*" "sessions" : sessions > 
+class "parliamentary-groups"
+"parliamentary-groups" : name
+"parliamentary-groups" --> "1" "administrative-units" : linked-to > 
+"parliamentary-groups" --> "*" "governing-bodies" : member-of > 
+class "memberships"
+"memberships" --> "1" "parliamentary-groups" : inner-group > 
+"memberships" --> "1" "mandataries" : has-membership > 
+class "agenda-items"
+"agenda-items" : description
+"agenda-items" : planned-public
+"agenda-items" : public
+"agenda-items" : title
+"agenda-items" : type
+"agenda-items" : alternate-link
+"agenda-items" --> "1" "agenda-items" : added-after > 
+"agenda-items" --> "1" "agenda-item-handlings" : handled-by > 
+"agenda-items" --> "*" "sessions" : sessions > 
+class "policy-domains"
+"policy-domains" : label
+"policy-domains" : scope-note
+"policy-domains" --> "*" "mandataries" : mandataries > 
+class "agenda-item-handlings"
+"agenda-item-handlings" : public
+"agenda-item-handlings" --> "1" "agenda-item-handlings" : takes-place-after > 
+"agenda-item-handlings" --> "1" "agenda-items" : subject > 
+"agenda-item-handlings" --> "1" "mandataries" : has-secretary > 
+"agenda-item-handlings" --> "1" "mandataries" : has-chairman > 
+"agenda-item-handlings" --> "*" "resolutions" : resolutions > 
+"agenda-item-handlings" --> "*" "mandataries" : has-presents > 
+"agenda-item-handlings" --> "*" "votes" : has-votes > 
+class "mandatary-status-codes"
+"mandatary-status-codes" : label
+"mandatary-status-codes" : scope-note
+class "mandates"
+"mandates" --> "1" "board-position-codes" : role-board > 
+"mandates" --> "*" "mandataries" : held-by > 
+class "resolutions"
+"resolutions" : description
+"resolutions" : motivation
+"resolutions" : publication-date
+"resolutions" : value
+"resolutions" : language
+"resolutions" : title
+"resolutions" : alternate-link
+"resolutions" --> "1" "agenda-item-handlings" : generated-by > 
+"resolutions" --> "*" "articles" : articles > 
+class "sessions"
+"sessions" : planned-start
+"sessions" : started-at
+"sessions" : ended-at
+"sessions" --> "1" "governing-bodies" : governing-body > 
+"sessions" --> "1" "mandataries" : has-secretary > 
+"sessions" --> "1" "mandataries" : has-chairman > 
+"sessions" --> "*" "mandataries" : attendees-at-start > 
+"sessions" --> "*" "agenda-items" : agenda-items > 
+class "mandataries"
+"mandataries" : ranking
+"mandataries" : start-date
+"mandataries" : end-date
+"mandataries" --> "1" "mandates" : holds > 
+"mandataries" --> "1" "memberships" : has-membership > 
+"mandataries" --> "1" "people" : alias > 
+"mandataries" --> "1" "mandatary-status-codes" : status > 
+"mandataries" --> "*" "policy-domains" : policy-domain > 
+class "locations"
+"locations" : label
+"locations" : niveau
+"locations" --> "*" "administrative-units" : administrative-units > 
+class "governing-body-classification-codes"
+"governing-body-classification-codes" : label
+"governing-body-classification-codes" --> "*" "governing-bodies" : governing-bodies > 
+class "board-position-codes"
+"board-position-codes" : label
+"board-position-codes" : scope-note
+@enduml
