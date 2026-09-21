@@ -212,6 +212,80 @@ LIMIT 100
 Progression is visible via: `docker compose logs search -tf --tail=100`
 8. The app should now be available at `http://localhost`
 
+### Monitoring
+
+Prometheus, Grafana and a json-exporter live in `docker-compose.monitor.yml`.
+Prometheus scrapes `delta-notifier`, `search` (mu-search) and — through the
+json-exporter — the sparql-parser status of `database` (mu-authorization).
+Dashboards are provisioned from `config/grafana/dashboards`.
+
+Only Grafana is reachable from outside; Prometheus has no authentication of its
+own and stays on the internal docker network.
+
+#### Setup
+
+1. Set the Grafana admin credentials. The tracked compose files carry none, so
+   without this Grafana starts on its built-in `admin`/`admin`. They go in an
+   untracked override (`*.override.yml*` is in `.gitignore`).
+
+   Locally, add them to the `grafana` block in `docker-compose.override.yml`:
+
+   ```yaml
+   services:
+     grafana:
+       environment:
+         GF_SECURITY_ADMIN_USER: 'admin'
+         GF_SECURITY_ADMIN_PASSWORD: '<generated>'
+   ```
+
+   On QA and production, copy the template instead — it also carries the
+   letsencrypt wiring:
+
+   ```bash
+   cp docker-compose.monitor.override.yml.example docker-compose.monitor.override.yml
+   ```
+
+   `openssl rand -hex 12` generates a usable password.
+
+2. Add the monitoring files to `COMPOSE_FILE` in `.env`. On QA and production,
+   `docker-compose.monitor.override.yml` goes after `docker-compose.monitor.yml`:
+
+   ```
+   COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml:docker-compose.monitor.yml:docker-compose.monitor.override.yml
+   ```
+
+3. On QA and production, fill in the hostname, the certificate contact address
+   and the proxy network in the override. The network is the external docker
+   network of the nginx/letsencrypt proxy on the host; check it with `docker
+   network ls` if `letsencrypt_default` does not match. The DNS record for the
+   hostname has to point at the host before the certificate can be issued.
+
+4. Create the data directories with the ownership the images expect. Prometheus
+   runs as uid 65534 and Grafana as uid 472, so a root-owned directory makes them
+   fail to start:
+
+   ```bash
+   mkdir -p data/prometheus data/grafana
+   sudo chown -R 65534:65534 data/prometheus
+   sudo chown -R 472:472 data/grafana
+   ```
+
+5. `docker compose up -d`
+
+#### Accounts
+
+Anonymous access is disabled, so everyone signs in. There is one account: the
+Grafana admin, from `GF_SECURITY_ADMIN_USER` / `GF_SECURITY_ADMIN_PASSWORD` in
+the untracked override from step 1.
+
+To rotate it, change the password there and run `docker compose up -d grafana`;
+Grafana only re-reads the variable when the container is recreated.
+
+Grafana OSS cannot provision users from a file, so extra accounts are made by
+hand under *Administration → Users → New user*. They land in the main org as
+Viewer (`GF_USERS_AUTO_ASSIGN_ORG_ROLE`) and cannot edit the dashboards, which
+is preferable to sharing the admin password.
+
 ### Bestuursorganen Report
 
 The report is generated every Sunday at 23:00. The report is available at `/download-exports/exports/Bestuursorganen`. 

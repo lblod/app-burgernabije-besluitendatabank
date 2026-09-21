@@ -1,0 +1,64 @@
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  #################################################################################
+  # monitoring
+  #
+  # Enable by appending this file to COMPOSE_FILE in .env. See README.md for the
+  # variables it expects and for the one-time data directory setup.
+  #################################################################################
+  prometheus:
+    image: prom/prometheus:v3.5.5
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=90d"
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
+  # Dashboards on top of prometheus.
+  grafana:
+    image: grafana/grafana:12.4.10
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_USERS_VIEWERS_CAN_EDIT: "false"
+      # New users land in the main org as Viewer, so an operator adding an account
+      # through the UI cannot accidentally hand out write access.
+      GF_USERS_AUTO_ASSIGN_ORG_ROLE: "Viewer"
+      GF_SECURITY_COOKIE_SECURE: "true"
+      GF_SECURITY_DISABLE_GRAVATAR: "true"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_PLUGINS_PREINSTALL_DISABLED: "true"
+    volumes:
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+      - ./config/grafana/dashboards:/var/lib/grafana/dashboards
+      # Grafana keeps its users, sessions and annotations in a sqlite db here.
+      # Without this they disappear on every recreate.
+      - ./data/grafana:/var/lib/grafana
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
+  # Turns the sparql-parser status JSON served by mu-authorization into metrics
+  # prometheus can scrape. See config/json-exporter/config.yml.
+  json-exporter:
+    image: prometheuscommunity/json-exporter:v0.8.0
+    volumes:
+      - ./config/json-exporter/config.yml:/config.yml
+    command: ["--config.file=/config.yml"]
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"

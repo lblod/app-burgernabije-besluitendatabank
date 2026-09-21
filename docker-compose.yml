@@ -289,6 +289,7 @@ services:
       - ./config/metrics:/config
     environment:
       LOG_SPARQL_ALL: true
+      ALLOW_MU_AUTH_SUDO: "true"
     restart: always
     logging: *default-logging
   project-scripts:

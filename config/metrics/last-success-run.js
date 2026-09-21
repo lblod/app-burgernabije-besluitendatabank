@@ -1,6 +1,6 @@
 import promClient from 'prom-client';
-import { sparqlEscapeUri } from 'mu';
-import { querySudo as query } from '@lblod/mu-auth-sudo';
+import { sparqlEscapeUri, query as muQuery } from 'mu';
+const query = (queryString) => muQuery(queryString, { sudo: true });
 const  lastDeltaGauge = new promClient.Gauge({
   name: 'delta_sync_last_success_timestamp',
   help: 'Timestamp of the last successful job run as UNIX timestamp',
