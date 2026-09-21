@@ -235,6 +235,7 @@ services:
     restart: always
     environment:
       JAVA_OPTS: "-Xms1g -Xmx4g"
+      MAX_YAML_SIZE: 200_000_000
     logging: *default-logging
     labels:
       - "logging=true"
