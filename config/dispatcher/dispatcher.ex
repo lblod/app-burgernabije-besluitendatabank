@@ -79,6 +79,35 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/votes/"
   end
 
+  get "/concept-schemes/*path", @any do
+    Proxy.forward conn, path, "http://cache/concept-schemes/"
+  end
+
+  get "/concepts/*path", @any do
+    Proxy.forward conn, path, "http://cache/concepts/"
+  end
+
+  get "/addresses/*path", @any do
+    Proxy.forward conn, path, "http://cache/addresses/"
+  end
+
+  get "/geometries/*path", @any do
+    Proxy.forward conn, path, "http://cache/geometries/"
+  end
+
+  # match "/sparql/*path" do
+  #  Proxy.forward conn, path, "http://triplestore:8890/sparql/"
+  #end
+  #uncomment if you want to enable direct SPARQL access to the triplestore.
+
+  match "/adresses-register/*path" do
+    forward conn, path, "http://adressenregister"
+  end
+
+  # match "/duplicate-uri/*path" do
+  #   forward conn, path, "http://adressenregister"
+  # end
+
   ###############
   # SERVICES
   ###############
@@ -100,8 +129,12 @@ defmodule Dispatcher do
   # SEARCH
   ###############################################################
 
-  match "/search/*path", @json do
-    Proxy.forward conn, path, "http://search/"
+  get "/search/sessions/search", @json do
+    Proxy.forward conn, [], "http://search/sessions/search"
+  end
+
+  get "/search/agenda-items/search", @json do
+    Proxy.forward conn, [], "http://search/agenda-items/search"
   end
 
   #################################################################
