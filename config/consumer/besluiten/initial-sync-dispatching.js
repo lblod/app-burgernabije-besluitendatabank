@@ -1,4 +1,4 @@
-import { batchedUpdate, rejectDeniedPredicates } from "./utils.js";
+import { batchedUpdate, rejectDeniedPredicates, normalizeGeometries } from "./utils.js";
 import { backfillGoverningBodyAbstract } from "./governing-body-abstract.js";
 import {
   BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES,
@@ -52,4 +52,7 @@ export async function dispatch(lib, data) {
 export async function onFinishInitialIngest(lib) {
   console.log(`onFinishInitialIngest was called, deriving ext:governingBodyAbstract.`);
   await backfillGoverningBodyAbstract(lib);
+  console.log(`onFinishInitialIngest: normalizing locn:geometry -> adres:positie`);
+  await normalizeGeometries(lib);
+  console.log(`onFinishInitialIngest: geometry normalization complete`);
 }

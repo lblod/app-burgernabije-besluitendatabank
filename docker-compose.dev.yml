@@ -1,7 +1,9 @@
+version: '3.7'
+
 services:
   identifier:
-    ports:
-      - "80:80"
+    # ports:
+    #   - "80:80"
     restart: "no"
   dispatcher:
     restart: "no"
@@ -16,20 +18,20 @@ services:
   database:
     restart: "no"
   triplestore:
-    ports:
-      - "8890:8890"
+    # ports:
+    #   - "8890:8890"
     restart: "no"
   delta-notifier:
     restart: "no"
   uuid-generation:
     environment:
-        RUN_CRON_JOBS: "true"
-        CRON_FREQUENCY: "0 * * * *"
+      RUN_CRON_JOBS: "true"
+      CRON_FREQUENCY: "0 * * * *"
     restart: "no"
   mandatendatabank-consumer:
     environment:
-      DCR_DISABLE_DELTA_INGEST: "false" # uncomment to enable data ingestion
-      DCR_DISABLE_INITIAL_SYNC: "false" # uncomment to enable initial sync
+      DCR_DISABLE_DELTA_INGEST: "true" # uncomment to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "true" # uncomment to enable initial sync
       SUDO_QUERY_RETRY: 'true'
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
 
@@ -48,8 +50,8 @@ services:
     restart: "no"
   op-public-consumer:
     environment:
-      DCR_DISABLE_DELTA_INGEST: "false" # uncomment to enable data ingestion
-      DCR_DISABLE_INITIAL_SYNC: "false" # uncomment to enable initial sync
+      DCR_DISABLE_DELTA_INGEST: "true" # uncomment to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "true" # uncomment to enable initial sync
       SUDO_QUERY_RETRY: 'true'
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
 
@@ -69,16 +71,16 @@ services:
   besluiten-consumer:
     environment:
       DCR_SYNC_BASE_URL: "https://dev.harvesting-self-service.lblod.info/"
-      DCR_DISABLE_DELTA_INGEST: "false" # uncomment to enable data ingestion
-      DCR_DISABLE_INITIAL_SYNC: "false" # uncomment to enable initial sync
+      DCR_DISABLE_DELTA_INGEST: "true" # uncomment to enable data ingestion
+      DCR_DISABLE_INITIAL_SYNC: "true" # uncomment to enable initial sync
       SUDO_QUERY_RETRY: 'true'
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
 
       # #### START: 'intialSync operation mode' in optimal performance for direct virtuoso (needs full-reindex though)
-      SLEEP_BETWEEN_BATCHES: 1 # also maybe increast this during intial sync
+      SLEEP_BETWEEN_BATCHES: 100 # also maybe increast this during intial sync
       BATCH_SIZE: 500
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: 'true'
-      PARALLEL_CALLS: "4" # we might be jinxing virtuoso; but let's try
+      PARALLEL_CALLS: "2" # we might be jinxing virtuoso; but let's try
       # #### END: 'intialSync operation mode' in optimal performance for direct virtuoso
 
       # #### START: 'normal operation mode' in optimal performance for mu-auth
