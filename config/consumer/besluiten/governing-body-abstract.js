@@ -20,7 +20,8 @@ export const IS_GEHOUDEN_DOOR =
 
 const PREFIXES = `
 PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
-PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>`;
+PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+PREFIX generiek: <https://data.vlaanderen.be/ns/generiek#>`;
 
 const writeEndpoint = BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES
   ? DIRECT_DATABASE_ENDPOINT
@@ -49,12 +50,12 @@ function derivationPattern(sparqlEscapeUri, extraPatterns = "") {
     GRAPH ${sparqlEscapeUri(INGEST_GRAPH)} { ?subject besluit:isGehoudenDoor ?body . }
     VALUES ?lookupGraph { ${lookupGraphValues(sparqlEscapeUri)} }
     {
-      GRAPH ?lookupGraph { ?body mandaat:isTijdspecialisatieVan ?abstract . }
+      GRAPH ?lookupGraph { ?body (mandaat:isTijdspecialisatieVan|generiek:isTijdspecialisatieVan) ?abstract . }
     }
     UNION
     {
       GRAPH ?lookupGraph { ?body a besluit:Bestuursorgaan . }
-      FILTER NOT EXISTS { GRAPH ?specialisationGraph { ?body mandaat:isTijdspecialisatieVan ?otherAbstract . } }
+      FILTER NOT EXISTS { GRAPH ?specialisationGraph { ?body (mandaat:isTijdspecialisatieVan|generiek:isTijdspecialisatieVan) ?otherAbstract . } }
       FILTER NOT EXISTS { GRAPH ?bindingGraph { ?body mandaat:bindingStart ?bindingStart . } }
       BIND(?body AS ?abstract)
     }

@@ -47,11 +47,11 @@ lookup_values () {
 classification_pattern () {
   cat <<PATTERN
     VALUES ?lookupGraph { $(lookup_values "$1") }
-    { GRAPH ?lookupGraph { ?body mandaat:isTijdspecialisatieVan ?abstract . } }
+    { GRAPH ?lookupGraph { ?body (mandaat:isTijdspecialisatieVan|generiek:isTijdspecialisatieVan) ?abstract . } }
     UNION
     {
       GRAPH ?lookupGraph { ?body a besluit:Bestuursorgaan . }
-      FILTER NOT EXISTS { GRAPH ?sg { ?body mandaat:isTijdspecialisatieVan ?otherAbstract . } }
+      FILTER NOT EXISTS { GRAPH ?sg { ?body (mandaat:isTijdspecialisatieVan|generiek:isTijdspecialisatieVan) ?otherAbstract . } }
       FILTER NOT EXISTS { GRAPH ?bg { ?body mandaat:bindingStart ?bindingStart . } }
       ${2-}
     }
@@ -80,7 +80,8 @@ PATTERN
 }
 
 sparql_prefixes='PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
-PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>'
+PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+PREFIX generiek: <https://data.vlaanderen.be/ns/generiek#>'
 
 count_pending () {
   local out

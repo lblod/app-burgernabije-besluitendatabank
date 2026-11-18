@@ -2,6 +2,7 @@
   "automatic_index_updates": true,
   "persist_indexes": true,
   "number_of_threads": 8,
+  "batch_size": 500,
   "eager_indexing_groups": [
     [
       {
