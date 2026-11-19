@@ -79,6 +79,18 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/votes/"
   end
 
+  get "/validation-reports/*path", @any do
+    Proxy.forward conn, path, "http://cache/validation-reports/"
+  end
+
+  get "/validation-results/*path", @any do
+    Proxy.forward conn, path, "http://cache/validation-results/"
+  end
+
+  get "/validation-shapes/*path", @any do
+    Proxy.forward conn, path, "http://cache/validation-shapes/"
+  end
+
   ###############
   # SERVICES
   ###############

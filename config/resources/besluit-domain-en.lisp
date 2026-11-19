@@ -159,6 +159,9 @@
                          :as "attendees-at-start")
               (agenda-item :via ,(s-prefix "besluit:behandelt")
                            :as "agenda-items")
+              (validation-report :via ,(s-prefix "ext:validatedResource")
+                                 :inverse t
+                                 :as "validation-reports")
             ;;   (uittreksel :via ,(s-prefix "ext:uittreksel")
             ;;               :as "uittreksels")
             ;;   (agenda :via ,(s-prefix "ext:agenda")
