@@ -49,6 +49,9 @@
 (define-graph organisations ("http://mu.semte.ch/graphs/organisations")
   (_ -> _))
 
+(define-graph validation-results ("http://mu.semte.ch/graphs/validation-results")
+  (_ -> _))
+
 
 
 (supply-allowed-group "public")
@@ -79,6 +82,10 @@
 
 (grant (read)
   :to-graph (organisations)
+  :for-allowed-group "public")
+
+(grant (read)
+  :to-graph (validation-results)
   :for-allowed-group "public")
 
 ;; increase the default read timeout. this allows waiting heavier queries
