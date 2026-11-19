@@ -1,0 +1,277 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix ext: <http://mu.semte.ch/vocabularies/ext/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.lblod.info/id/validation-reports/bfe50b98eb0a4dd69a69ed31dce81f3f> a sh:ValidationReport ; mu:uuid "bfe50b98eb0a4dd69a69ed31dce81f3f" ;
+  sh:conforms false ; dct:created "2026-11-19T12:00:00Z"^^xsd:dateTime ;
+  ext:validatedResource <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:result <http://data.lblod.info/id/validation-results/0b60c2dd7834275e14b8ab5521a23fc0>, <http://data.lblod.info/id/validation-results/11a46da35cb89c6102c42d54ce634494>, <http://data.lblod.info/id/validation-results/121c80fe95076b7edac2c30e31552783>, <http://data.lblod.info/id/validation-results/13131664d22149ba0a8b4b901fa4837c>, <http://data.lblod.info/id/validation-results/22415884bbaa120c81588f9abc3005a0>, <http://data.lblod.info/id/validation-results/30961693a874afacf3c3604947990a85>, <http://data.lblod.info/id/validation-results/397fa08875d862f71664d636be09f1c0>, <http://data.lblod.info/id/validation-results/3faf9581572cbf9746adeea80a9e94d8>, <http://data.lblod.info/id/validation-results/620646b0ccafcce3c1335ce6bf39ae63>, <http://data.lblod.info/id/validation-results/665b6f4669621158674ecf284573e0c7>, <http://data.lblod.info/id/validation-results/690056fe249d7c332fff5a9a3be15d84>, <http://data.lblod.info/id/validation-results/8284fa5a702c39c333fdc5a738e45a6d>, <http://data.lblod.info/id/validation-results/969123357f985e72b0fd38a4ce6996f3>, <http://data.lblod.info/id/validation-results/9bf3a6e4d7245a6f98624a96a4625f8f>, <http://data.lblod.info/id/validation-results/ac56f1a551013e42f07337dea673d4bc>, <http://data.lblod.info/id/validation-results/b72030c589f32ac9a83b0b49c2c5b610>, <http://data.lblod.info/id/validation-results/b8e45c0678e6d9927a943de7c46b7acb>, <http://data.lblod.info/id/validation-results/bdfc3785dcd3bd981493076046325c71>, <http://data.lblod.info/id/validation-results/c3f57a63446435e3ea86307945bf2bc6>, <http://data.lblod.info/id/validation-results/ced93c88164be260c23c34a9e9a11aab>, <http://data.lblod.info/id/validation-results/dacd4239c092f2e55d7dcbe73b17ed1a>, <http://data.lblod.info/id/validation-results/e14373bd66e67f3b8624b4520f06b668>, <http://data.lblod.info/id/validation-results/e2897433f5f44ecc7b829f014ae5f462>, <http://data.lblod.info/id/validation-results/e4040eca74227918f95e37a86b036742>, <http://data.lblod.info/id/validation-results/e8ec707a82b3e8a364412578853a6df7>, <http://data.lblod.info/id/validation-results/ee44b97d7a33737427d3cbc80b258530>, <http://data.lblod.info/id/validation-results/f2c26b0b01f0b6100d8280b866cf97a1>, <http://data.lblod.info/id/validation-results/f8e93c58883a8b067306e882a69a8f10> .
+
+<http://data.lblod.info/id/validation-results/0b60c2dd7834275e14b8ab5521a23fc0> a sh:ValidationResult ; mu:uuid "0b60c2dd7834275e14b8ab5521a23fc0" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaHtmlGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gekoppeldeHtmlAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeKindConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt een Agenda (besluit:heeftAgenda)."@nl ;
+  sh:resultMessage "The Zitting links an Agenda (besluit:heeftAgenda)."@en .
+<http://data.lblod.info/id/validation-results/11a46da35cb89c6102c42d54ce634494> a sh:ValidationResult ; mu:uuid "11a46da35cb89c6102c42d54ce634494" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstBevatLinkedData> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Besluitenlijst HTML with RDFa annotations found that contains the Zitting."@en ;
+  sh:resultMessage "Besluitenlijst in HTML met RDFa-annotaties gevonden die de Zitting bevat."@nl .
+<http://data.lblod.info/id/validation-results/121c80fe95076b7edac2c30e31552783> a sh:ValidationResult ; mu:uuid "121c80fe95076b7edac2c30e31552783" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstNietAndersGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt geen ander document als Besluitenlijst (besluit:heeftBesluitenlijst) in plaats van de HTML met RDFa-annotaties."@nl ;
+  sh:resultMessage "The Zitting doesn't link another document as Besluitenlijst (besluit:heeftBesluitenlijst) instead of its HTML with RDFa annotations."@en .
+<http://data.lblod.info/id/validation-results/13131664d22149ba0a8b4b901fa4837c> a sh:ValidationResult ; mu:uuid "13131664d22149ba0a8b4b901fa4837c" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenTijdigGepubliceerd> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeNotulen> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Notulen zijn niet gepubliceerd na 2026-10-29, 10 dagen na de volgende Zitting van 2026-10-19, die ze goedkeurt."@nl ;
+  sh:resultMessage "The Notulen weren't published after 2026-10-29, 10 days after the next Zitting of 2026-10-19, which approves them."@en .
+<http://data.lblod.info/id/validation-results/22415884bbaa120c81588f9abc3005a0> a sh:ValidationResult ; mu:uuid "22415884bbaa120c81588f9abc3005a0" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenNietAndersGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeNotulen> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Notulen in HTML met RDFa-annotaties die de Zitting bevatten, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html, zijn niet gekoppeld (besluit:heeftNotulen): de Zitting koppelt https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Notulen_Gemeenteraad_21-09-2026_Notulen_Vlaanderen.pdf, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71434.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71438.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71440.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71441.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71442.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71443.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71444.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71445.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71446.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71989.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71991.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71992.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71995.html."@nl ;
+  sh:resultMessage "The Notulen HTML with RDFa annotations that contains the Zitting, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html, are not linked (besluit:heeftNotulen): the Zitting links https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Notulen_Gemeenteraad_21-09-2026_Notulen_Vlaanderen.pdf, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71434.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71438.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71440.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71441.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71442.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71443.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71444.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71445.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71446.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71989.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71991.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71992.html, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Uittreksels_21-09-2026_71995.html instead."@en .
+<http://data.lblod.info/id/validation-results/30961693a874afacf3c3604947990a85> a sh:ValidationResult ; mu:uuid "30961693a874afacf3c3604947990a85" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaNietAndersGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt geen ander document als Agenda (besluit:heeftAgenda) in plaats van de HTML met RDFa-annotaties."@nl ;
+  sh:resultMessage "The Zitting doesn't link another document as Agenda (besluit:heeftAgenda) instead of its HTML with RDFa annotations."@en .
+<http://data.lblod.info/id/validation-results/397fa08875d862f71664d636be09f1c0> a sh:ValidationResult ; mu:uuid "397fa08875d862f71664d636be09f1c0" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaNietVerplichtGekoppeld> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#MinCountConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt een Agenda (besluit:heeftAgenda)."@nl ;
+  sh:resultMessage "The Zitting links an Agenda (besluit:heeftAgenda)."@en .
+<http://data.lblod.info/id/validation-results/3faf9581572cbf9746adeea80a9e94d8> a sh:ValidationResult ; mu:uuid "3faf9581572cbf9746adeea80a9e94d8" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaBevatLinkedData> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Agenda HTML with RDFa annotations found that contains the Zitting."@en ;
+  sh:resultMessage "Agenda in HTML met RDFa-annotaties gevonden die de Zitting bevat."@nl .
+<http://data.lblod.info/id/validation-results/620646b0ccafcce3c1335ce6bf39ae63> a sh:ValidationResult ; mu:uuid "620646b0ccafcce3c1335ce6bf39ae63" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstTijdigheidGekend> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Publicatiedatum (eli:date_publication) 2026-09-30 gevonden voor de Besluitenlijst in HTML met RDFa-annotaties, dus kan gecontroleerd worden of ze tijdig gepubliceerd is."@nl ;
+  sh:resultMessage "Publication date (eli:date_publication) 2026-09-30 found for the Besluitenlijst HTML with RDFa annotations, so it can be checked whether it was published in time."@en .
+<http://data.lblod.info/id/validation-results/665b6f4669621158674ecf284573e0c7> a sh:ValidationResult ; mu:uuid "665b6f4669621158674ecf284573e0c7" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenPublicatiedatumGekend> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeNotulen> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Geen publicatiedatum (eli:date_publication) gevonden voor de Notulen in HTML met RDFa-annotaties, de tijdigheid kan niet gecontroleerd worden."@nl ;
+  sh:resultMessage "No publication date (eli:date_publication) found for the Notulen HTML with RDFa annotations, so its timeliness can't be checked."@en .
+<http://data.lblod.info/id/validation-results/690056fe249d7c332fff5a9a3be15d84> a sh:ValidationResult ; mu:uuid "690056fe249d7c332fff5a9a3be15d84" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstGelijkAanDerivedFrom> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Besluitenlijst is gekoppeld (besluit:heeftBesluitenlijst) met https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html, die anders geschreven is dan de URI van de HTML met RDFa-annotaties, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html (http of https, www., of een '/' voor de '?' of op het einde)."@nl ;
+  sh:resultMessage "The Besluitenlijst is linked (besluit:heeftBesluitenlijst) with https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html, which is written differently than the URI of its HTML with RDFa annotations, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html (http or https, www., or a '/' before the '?' or at the end)."@en .
+<http://data.lblod.info/id/validation-results/8284fa5a702c39c333fdc5a738e45a6d> a sh:ValidationResult ; mu:uuid "8284fa5a702c39c333fdc5a738e45a6d" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenTijdigheidGekend> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeNotulen> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Geen publicatiedatum (eli:date_publication) gevonden voor de Notulen in HTML met RDFa-annotaties, dus kan niet gecontroleerd worden of ze gepubliceerd zijn tegen 2026-10-29, 10 dagen na de volgende Zitting van 2026-10-19, die ze goedkeurt."@nl ;
+  sh:resultMessage "No publication date (eli:date_publication) found for the Notulen HTML with RDFa annotations, so it can't be checked whether they were published by 2026-10-29, 10 days after the next Zitting of 2026-10-19, which approves them."@en .
+<http://data.lblod.info/id/validation-results/969123357f985e72b0fd38a4ce6996f3> a sh:ValidationResult ; mu:uuid "969123357f985e72b0fd38a4ce6996f3" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaHtmlGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gekoppeldeHtmlAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeKindConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt een Agenda (besluit:heeftAgenda)."@nl ;
+  sh:resultMessage "The Zitting links an Agenda (besluit:heeftAgenda)."@en .
+<http://data.lblod.info/id/validation-results/9bf3a6e4d7245a6f98624a96a4625f8f> a sh:ValidationResult ; mu:uuid "9bf3a6e4d7245a6f98624a96a4625f8f" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaBevatLinkedData> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Agenda HTML with RDFa annotations found that contains the Zitting."@en ;
+  sh:resultMessage "Agenda in HTML met RDFa-annotaties gevonden die de Zitting bevat."@nl .
+<http://data.lblod.info/id/validation-results/ac56f1a551013e42f07337dea673d4bc> a sh:ValidationResult ; mu:uuid "ac56f1a551013e42f07337dea673d4bc" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstGekoppeld> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gekoppeldeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#MinCountConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt een Besluitenlijst (besluit:heeftBesluitenlijst)."@nl ;
+  sh:resultMessage "The Zitting links a Besluitenlijst (besluit:heeftBesluitenlijst)."@en .
+<http://data.lblod.info/id/validation-results/b72030c589f32ac9a83b0b49c2c5b610> a sh:ValidationResult ; mu:uuid "b72030c589f32ac9a83b0b49c2c5b610" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaPublicatiedatumGekend> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Geen publicatiedatum (eli:date_publication) gevonden voor de Agenda in HTML met RDFa-annotaties, de tijdigheid kan niet gecontroleerd worden."@nl ;
+  sh:resultMessage "No publication date (eli:date_publication) found for the Agenda HTML with RDFa annotations, so its timeliness can't be checked."@en .
+<http://data.lblod.info/id/validation-results/b8e45c0678e6d9927a943de7c46b7acb> a sh:ValidationResult ; mu:uuid "b8e45c0678e6d9927a943de7c46b7acb" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstHtmlGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gekoppeldeHtmlBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeKindConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt een Besluitenlijst (besluit:heeftBesluitenlijst)."@nl ;
+  sh:resultMessage "The Zitting links a Besluitenlijst (besluit:heeftBesluitenlijst)."@en .
+<http://data.lblod.info/id/validation-results/bdfc3785dcd3bd981493076046325c71> a sh:ValidationResult ; mu:uuid "bdfc3785dcd3bd981493076046325c71" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstPublicatiedatumGekend> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Publicatiedatum (eli:date_publication) 2026-09-30 gevonden voor de Besluitenlijst in HTML met RDFa-annotaties."@nl ;
+  sh:resultMessage "Publication date (eli:date_publication) 2026-09-30 found for the Besluitenlijst HTML with RDFa annotations."@en .
+<http://data.lblod.info/id/validation-results/c3f57a63446435e3ea86307945bf2bc6> a sh:ValidationResult ; mu:uuid "c3f57a63446435e3ea86307945bf2bc6" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaGelijkAanDerivedFrom> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Agenda is gekoppeld (besluit:heeftAgenda) met https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011, die anders geschreven is dan de URI van de HTML met RDFa-annotaties, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Agenda_Gemeenteraad_21-09-2026.html (http of https, www., of een '/' voor de '?' of op het einde)."@nl ;
+  sh:resultMessage "The Agenda is linked (besluit:heeftAgenda) with https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011, which is written differently than the URI of its HTML with RDFa annotations, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Agenda_Gemeenteraad_21-09-2026.html (http or https, www., or a '/' before the '?' or at the end)."@en .
+<http://data.lblod.info/id/validation-results/ced93c88164be260c23c34a9e9a11aab> a sh:ValidationResult ; mu:uuid "ced93c88164be260c23c34a9e9a11aab" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaPublicatiedatumGekend> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Geen publicatiedatum (eli:date_publication) gevonden voor de Agenda in HTML met RDFa-annotaties, de tijdigheid kan niet gecontroleerd worden."@nl ;
+  sh:resultMessage "No publication date (eli:date_publication) found for the Agenda HTML with RDFa annotations, so its timeliness can't be checked."@en .
+<http://data.lblod.info/id/validation-results/dacd4239c092f2e55d7dcbe73b17ed1a> a sh:ValidationResult ; mu:uuid "dacd4239c092f2e55d7dcbe73b17ed1a" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenGelijkAanDerivedFrom> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeNotulen> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Notulen zijn gekoppeld (besluit:heeftNotulen) met de URI van de HTML met RDFa-annotaties."@nl ;
+  sh:resultMessage "The Notulen is linked (besluit:heeftNotulen) with the URI of its HTML with RDFa annotations."@en .
+<http://data.lblod.info/id/validation-results/e14373bd66e67f3b8624b4520f06b668> a sh:ValidationResult ; mu:uuid "e14373bd66e67f3b8624b4520f06b668" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenGekoppeld> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#MinCountConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt Notulen (besluit:heeftNotulen)."@nl ;
+  sh:resultMessage "The Zitting links Notulen (besluit:heeftNotulen)."@en .
+<http://data.lblod.info/id/validation-results/e2897433f5f44ecc7b829f014ae5f462> a sh:ValidationResult ; mu:uuid "e2897433f5f44ecc7b829f014ae5f462" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaNietAndersGekoppeld> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=Agenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt geen ander document als Agenda (besluit:heeftAgenda) in plaats van de HTML met RDFa-annotaties."@nl ;
+  sh:resultMessage "The Zitting doesn't link another document as Agenda (besluit:heeftAgenda) instead of its HTML with RDFa annotations."@en .
+<http://data.lblod.info/id/validation-results/e4040eca74227918f95e37a86b036742> a sh:ValidationResult ; mu:uuid "e4040eca74227918f95e37a86b036742" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstTijdigGepubliceerd> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=BesluitenLijst_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeBesluitenlijst> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Besluitenlijst is niet gepubliceerd na 2026-10-01, 10 dagen na de Zitting van 2026-09-21."@nl ;
+  sh:resultMessage "The Besluitenlijst wasn't published after 2026-10-01, 10 days after the Zitting of 2026-09-21."@en .
+<http://data.lblod.info/id/validation-results/e8ec707a82b3e8a364412578853a6df7> a sh:ValidationResult ; mu:uuid "e8ec707a82b3e8a364412578853a6df7" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <http://www.w3.org/ns/shacl#Warning> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaGelijkAanDerivedFrom> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeAgenda> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "De Agenda is gekoppeld (besluit:heeftAgenda) met https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011, die anders geschreven is dan de URI van de HTML met RDFa-annotaties, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html (http of https, www., of een '/' voor de '?' of op het einde)."@nl ;
+  sh:resultMessage "The Agenda is linked (besluit:heeftAgenda) with https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication/?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html#Agenda3011, which is written differently than the URI of its HTML with RDFa annotations, https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=ToegevoegdeAgenda_Gemeenteraad_21-09-2026.html (http or https, www., or a '/' before the '?' or at the end)."@en .
+<http://data.lblod.info/id/validation-results/ee44b97d7a33737427d3cbc80b258530> a sh:ValidationResult ; mu:uuid "ee44b97d7a33737427d3cbc80b258530" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenNietVerplichtGekoppeld> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#MinCountConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt Notulen (besluit:heeftNotulen)."@nl ;
+  sh:resultMessage "The Zitting links Notulen (besluit:heeftNotulen)."@en .
+<http://data.lblod.info/id/validation-results/f2c26b0b01f0b6100d8280b866cf97a1> a sh:ValidationResult ; mu:uuid "f2c26b0b01f0b6100d8280b866cf97a1" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaGekoppeld> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#MinCountConstraintComponent> ;
+  sh:resultMessage "De Zitting koppelt een Agenda (besluit:heeftAgenda)."@nl ;
+  sh:resultMessage "The Zitting links an Agenda (besluit:heeftAgenda)."@en .
+<http://data.lblod.info/id/validation-results/f8e93c58883a8b067306e882a69a8f10> a sh:ValidationResult ; mu:uuid "f8e93c58883a8b067306e882a69a8f10" ;
+  sh:focusNode <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011> ;
+  sh:resultSeverity <https://schemas.link/shacl-next#Debug> ;
+  sh:sourceShape <http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenBevatLinkedData> ;
+  sh:value <https://lblod.zottegem.be/LBLODWeb/Home/Overzicht/e3d9480acc0cf400e11ab7afe2bcea144038dd2ef71d77247d5159c7ce8efb1a/GetPublication?filename=Notulen_Gemeenteraad_21-09-2026.html> ;
+  sh:resultPath <http://mu.semte.ch/vocabularies/ext/gecontroleerdeNotulen> ;
+  sh:sourceConstraintComponent <http://www.w3.org/ns/shacl#NodeConstraintComponent> ;
+  sh:resultMessage "Notulen HTML with RDFa annotations found that contains the Zitting."@en ;
+  sh:resultMessage "Notulen in HTML met RDFa-annotaties gevonden die de Zitting bevatten."@nl .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaHtmlGekoppeld> a sh:PropertyShape ; mu:uuid "35874935fbe7536589b7c5c72fae9a1f" ; sh:name "sessionLinksWithADocument" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstBevatLinkedData> a sh:PropertyShape ; mu:uuid "86a83f816b265dfcb197cb2f8f6d4192" ; sh:name "published" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstNietAndersGekoppeld> a sh:PropertyShape ; mu:uuid "68adb098562055a8a202674b6052d295" ; sh:name "sessionLinksWithExpectedDocumentURI" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenTijdigGepubliceerd> a sh:PropertyShape ; mu:uuid "c38d9f32e46153be96d267c6ed17f3af" ; sh:name "publishedOnTime" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenNietAndersGekoppeld> a sh:PropertyShape ; mu:uuid "0cc3202612985a80b88653e2a14f176a" ; sh:name "sessionLinksWithExpectedDocumentURI" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaNietAndersGekoppeld> a sh:PropertyShape ; mu:uuid "d545596f62d55f4583fb0d685c94741e" ; sh:name "sessionLinksWithExpectedDocumentURI" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaNietVerplichtGekoppeld> a sh:PropertyShape ; mu:uuid "5490f5b5654d56c0a9969537489baead" ; sh:name "agendaFound" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaBevatLinkedData> a sh:PropertyShape ; mu:uuid "adceaf7c053156b5b1935ecc338db23c" ; sh:name "published" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstTijdigheidGekend> a sh:PropertyShape ; mu:uuid "357d59f3b1085d49ba1f4fff72f9a848" ; sh:name "publishedOnTime" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenPublicatiedatumGekend> a sh:PropertyShape ; mu:uuid "4867e1126d0e576eb1b5aa471bfad1f3" ; sh:name "publicationDateKnown" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstGelijkAanDerivedFrom> a sh:PropertyShape ; mu:uuid "97ee5ccbadb753a1b35649401674fdeb" ; sh:name "sessionLinksWithExpectedDocumentURI" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenTijdigheidGekend> a sh:PropertyShape ; mu:uuid "29c5add79fcd5b419a1d10e658bf60f9" ; sh:name "publishedOnTime" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstGekoppeld> a sh:PropertyShape ; mu:uuid "b46da49dd2ff55aab49372cafb3c4f17" ; sh:name "besluitenlijstFound" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaPublicatiedatumGekend> a sh:PropertyShape ; mu:uuid "efe6d6208efb529a83b3eb054031ee10" ; sh:name "publicationDateKnown" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstHtmlGekoppeld> a sh:PropertyShape ; mu:uuid "5fdea69ef54955fa93f8234e45f0eaa5" ; sh:name "sessionLinksWithADocument" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstPublicatiedatumGekend> a sh:PropertyShape ; mu:uuid "63e0f2806e64532c96e1536af054f8eb" ; sh:name "publicationDateKnown" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaGelijkAanDerivedFrom> a sh:PropertyShape ; mu:uuid "1533500d003e5fd1bff8236ebaf360ac" ; sh:name "sessionLinksWithExpectedDocumentURI" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenGelijkAanDerivedFrom> a sh:PropertyShape ; mu:uuid "d67366e10887551a874b1ba215cc0a5d" ; sh:name "sessionLinksWithExpectedDocumentURI" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenGekoppeld> a sh:PropertyShape ; mu:uuid "17902f7e3416513c99b9a10e02233abd" ; sh:name "notulenFound" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-besluitenlijstTijdigGepubliceerd> a sh:PropertyShape ; mu:uuid "fa5f235a3da059038336e8d8301d6fb6" ; sh:name "publishedOnTime" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenNietVerplichtGekoppeld> a sh:PropertyShape ; mu:uuid "3a579b2168b85716ae38084e1d94dbf4" ; sh:name "notulenFound" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-agendaGekoppeld> a sh:PropertyShape ; mu:uuid "74379148011e5655990c0f4c104a7c12" ; sh:name "agendaFound" .
+<http://data.lblod.info/shapes/publicatieplicht#DocumentGepubliceerd-notulenBevatLinkedData> a sh:PropertyShape ; mu:uuid "e2fcde8404d05955995362c23b93a95f" ; sh:name "published" .
