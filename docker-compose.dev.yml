@@ -5,6 +5,11 @@ services:
     restart: "no"
   login:
     restart: "no"
+  mocklogin:
+    image: lblod/mock-login-service:0.5.0
+    environment:
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/organisations"
+    restart: "no"
   dispatcher:
     restart: "no"
   frontend:
