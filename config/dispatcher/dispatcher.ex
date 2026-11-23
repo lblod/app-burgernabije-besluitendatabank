@@ -25,6 +25,22 @@ defmodule Dispatcher do
   #############################################################
 
   ###############
+  # LOGIN
+  ###############
+  # GET /sessions are the zittingen (resources): keep these above the resources.
+  post "/sessions/*path", @any do
+    Proxy.forward conn, path, "http://login/sessions/"
+  end
+
+  delete "/sessions/*path", @any do
+    Proxy.forward conn, path, "http://login/sessions/"
+  end
+
+  get "/sessions/current", @any do
+    Proxy.forward conn, [], "http://login/sessions/current"
+  end
+
+  ###############
   # RESOURCES
   ###############
   get "/articles/*path", @any do
