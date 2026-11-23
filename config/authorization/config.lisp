@@ -49,12 +49,71 @@
 (define-graph organisations ("http://mu.semte.ch/graphs/organisations")
   (_ -> _))
 
-(define-graph validation-results ("http://mu.semte.ch/graphs/validation-results")
-  (_ -> _))
+(define-prefixes
+  :sh "http://www.w3.org/ns/shacl#")
+
+;; One graph per bestuur: evaluations/<uuid of the bestuurseenheid in the
+;; organisations graph>. Harvested data can give a bestuur another mu:uuid.
+(define-graph evaluations ("http://mu.semte.ch/graphs/evaluations/")
+  ("sh:ValidationReport" -> _)
+  ("sh:ValidationResult" -> _)
+  ("sh:PropertyShape" -> _))
 
 
 
 (supply-allowed-group "public")
+
+;; TODO: the role values are placeholders until the ACM/IDM client registration.
+
+;; Only the besturen that have an evaluation graph: a group for every bestuur
+;; makes queries too large for Virtuoso. Computed at login, so ABB sees new
+;; evaluation graphs after logging in again.
+(supply-allowed-group "abb"
+  :parameters ("session_group")
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX sh: <http://www.w3.org/ns/shacl#>
+          SELECT DISTINCT ?session_group WHERE {
+            <SESSION_ID> ext:sessionRole ?session_role .
+            FILTER(?session_role = \"LokaalBeslist-ABB\")
+            GRAPH ?graph { ?report a sh:ValidationReport . }
+            FILTER(STRSTARTS(STR(?graph), \"http://mu.semte.ch/graphs/evaluations/\"))
+            BIND(STRAFTER(STR(?graph), \"http://mu.semte.ch/graphs/evaluations/\") AS ?session_group)
+          }")
+
+(supply-allowed-group "bestuur"
+  :parameters ("session_group")
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          SELECT DISTINCT ?session_group WHERE {
+            <SESSION_ID> ext:sessionGroup ?group ;
+              ext:sessionRole ?session_role .
+            FILTER(?session_role = \"LokaalBeslist-bestuur\")
+            GRAPH <http://mu.semte.ch/graphs/organisations> {
+              ?group mu:uuid ?session_group .
+            }
+          }")
+
+;; TODO: how suppliers log in for real is still open; for now the user is a
+;; foaf:member of the vendor (as in the mock login sample data).
+(supply-allowed-group "supplier"
+  :parameters ("session_group")
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          PREFIX muAccount: <http://mu.semte.ch/vocabularies/account/>
+          PREFIX session: <http://mu.semte.ch/vocabularies/session/>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          SELECT DISTINCT ?session_group WHERE {
+            <SESSION_ID> session:account ?account ;
+              ext:sessionRole ?session_role .
+            FILTER(?session_role = \"LokaalBeslist-leverancier\")
+            ?person foaf:account ?account ;
+              foaf:member ?vendor .
+            ?vendor a ext:Vendor ;
+              muAccount:canActOnBehalfOf ?bestuurseenheid .
+            GRAPH <http://mu.semte.ch/graphs/organisations> {
+              ?bestuurseenheid mu:uuid ?session_group .
+            }
+          }")
 
 (grant (read)
   :to-graph (public)
@@ -85,8 +144,16 @@
   :for-allowed-group "public")
 
 (grant (read)
-  :to-graph (validation-results)
-  :for-allowed-group "public")
+  :to-graph (evaluations)
+  :for-allowed-group "abb")
+
+(grant (read)
+  :to-graph (evaluations)
+  :for-allowed-group "bestuur")
+
+(grant (read)
+  :to-graph (evaluations)
+  :for-allowed-group "supplier")
 
 ;; increase the default read timeout. this allows waiting heavier queries
 (setf dexador.util:*default-read-timeout* 300)
