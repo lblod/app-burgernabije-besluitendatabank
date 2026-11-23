@@ -227,6 +227,31 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
+  vendors-consumer:
+    image: lblod/delta-consumer:0.1.6
+    environment:
+      DCR_SYNC_BASE_URL: "https://loket.lokaalbestuur.vlaanderen.be/"
+      DCR_SERVICE_NAME: "vendors-consumer"
+      DCR_SYNC_FILES_PATH: "/sync/vendor-management/files"
+      DCR_SYNC_LOGIN_ENDPOINT: "https://loket.lokaalbestuur.vlaanderen.be/sync/vendor-management/login"
+      DCR_SECRET_KEY: "" # set in docker-compose.override.yml, never commit it
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/VendorManagementCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/vendor-management"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/vendorManagementSyncing"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/vendors-consumer"
+      DCR_KEEP_DELTA_FILES: "false"
+      DCR_DELTA_FILE_FOLDER: "/consumer-files"
+      DCR_DISABLE_DELTA_INGEST: "true" # toggle this in override, leave 'true' in default docker-compose.yml
+      DCR_DISABLE_INITIAL_SYNC: "true" # toggle this in override, leave 'true' in default docker-compose.yml
+      VENDORS_GRAPH: "http://mu.semte.ch/graphs/vendors"
+      BATCH_SIZE: 100
+    volumes:
+      - ./config/consumer/vendors/:/config/triples-dispatching/custom-dispatching
+      - ./data/files/consumer-files/vendors:/consumer-files/
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
   # Search facility for mu-semtech, powered by ElasticSearch
   # https://github.com/mu-semtech/mu-search
   search:
