@@ -100,6 +100,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/votes/"
   end
 
+  get "/reports/*path", @any do
+    Proxy.forward conn, path, "http://cache/reports/"
+  end
+
   get "/accounts/*path", @any do
     Proxy.forward conn, path, "http://cache/accounts/"
   end
@@ -108,16 +112,12 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/users/"
   end
 
-  get "/validation-reports/*path", @any do
-    Proxy.forward conn, path, "http://cache/validation-reports/"
+  get "/validationresults/*path", @any do
+    Proxy.forward conn, path, "http://cache/validationresults/"
   end
 
-  get "/validation-results/*path", @any do
-    Proxy.forward conn, path, "http://cache/validation-results/"
-  end
-
-  get "/validation-shapes/*path", @any do
-    Proxy.forward conn, path, "http://cache/validation-shapes/"
+  get "/validationshapes/*path", @any do
+    Proxy.forward conn, path, "http://cache/validationshapes/"
   end
 
   ###############
