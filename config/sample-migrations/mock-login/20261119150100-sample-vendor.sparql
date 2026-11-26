@@ -1,0 +1,25 @@
+# DEV ONLY. Sample vendor serving Zaventem and Londerzeel.
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX muAccount: <http://mu.semte.ch/vocabularies/account/>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/vendors> {
+    <http://data.lblod.info/vendors/mock-0b7c2e4d9a1f4c3e8d6b5a4f3e2d1c0b> a ext:Vendor, foaf:Agent ;
+      mu:uuid "mock-0b7c2e4d9a1f4c3e8d6b5a4f3e2d1c0b" ;
+      foaf:name "Voorbeeldleverancier" ;
+      muAccount:canActOnBehalfOf ?bestuurseenheid .
+  }
+}
+WHERE {
+  VALUES ?name { "Zaventem" "Londerzeel" }
+  GRAPH <http://mu.semte.ch/graphs/organisations> {
+    ?bestuurseenheid a besluit:Bestuurseenheid ;
+      skos:prefLabel ?name ;
+      org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001> .
+  }
+}

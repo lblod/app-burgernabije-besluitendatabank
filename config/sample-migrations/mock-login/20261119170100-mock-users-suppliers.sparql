@@ -1,0 +1,60 @@
+# DEV ONLY. One per vendor; logs in with one of the vendor's besturen. Run
+# again after syncing new vendors.
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX muAccount: <http://mu.semte.ch/vocabularies/account/>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+INSERT {
+  GRAPH ?graph {
+    ?person a foaf:Person ;
+      mu:uuid ?personUuid ;
+      foaf:familyName ?vendorName ;
+      foaf:account ?account ;
+      foaf:member ?group, ?vendor .
+    ?account a foaf:OnlineAccount ;
+      mu:uuid ?accountUuid ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> ;
+      ext:sessionRole "LokaalBeslist-leverancier" .
+  }
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?person a foaf:Person ;
+      mu:uuid ?personUuid ;
+      foaf:familyName ?vendorName ;
+      foaf:account ?account ;
+      foaf:member ?group .
+    ?account a foaf:OnlineAccount ;
+      mu:uuid ?accountUuid ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> ;
+      ext:mockLoginGroupId ?groupUuid ;
+      ext:sessionRole "LokaalBeslist-leverancier" .
+  }
+}
+WHERE {
+  {
+    SELECT ?vendor (MIN(?uuid) AS ?groupUuid) WHERE {
+      GRAPH <http://mu.semte.ch/graphs/vendors> {
+        ?vendor a ext:Vendor ;
+          muAccount:canActOnBehalfOf ?bestuurseenheid .
+      }
+      GRAPH <http://mu.semte.ch/graphs/organisations> {
+        ?bestuurseenheid mu:uuid ?uuid .
+      }
+    }
+    GROUP BY ?vendor
+  }
+  GRAPH <http://mu.semte.ch/graphs/vendors> {
+    ?vendor foaf:name ?vendorName .
+  }
+  GRAPH <http://mu.semte.ch/graphs/organisations> {
+    ?group mu:uuid ?groupUuid .
+  }
+  BIND(MD5(CONCAT("mock-person-", STR(?vendor))) AS ?personUuid)
+  BIND(MD5(CONCAT("mock-account-", STR(?vendor))) AS ?accountUuid)
+  BIND(IRI(CONCAT("http://data.lblod.info/id/persoon/", ?personUuid)) AS ?person)
+  BIND(IRI(CONCAT("http://data.lblod.info/id/account/", ?accountUuid)) AS ?account)
+  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/organizations/", ?groupUuid)) AS ?graph)
+}

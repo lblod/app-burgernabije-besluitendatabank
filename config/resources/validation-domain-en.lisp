@@ -20,8 +20,8 @@
                 (:target-class-of-focus-node :url ,(s-prefix "ext:targetClassOfFocusNode"))
                 (:value :url ,(s-prefix "sh:value"))
                 (:result-path :url ,(s-prefix "sh:resultPath"))
-                (:severity :url ,(s-prefix "sh:resultSeverity"))
-                (:message :language-string-set ,(s-prefix "sh:resultMessage"))
+                (:result-severity :url ,(s-prefix "sh:resultSeverity"))
+                (:result-message :language-string-set ,(s-prefix "sh:resultMessage"))
                 (:source-constraint-component :url ,(s-prefix "sh:sourceConstraintComponent")))
   :has-one `((report :via ,(s-prefix "sh:result")
                      :inverse t

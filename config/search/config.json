@@ -11,6 +11,11 @@
       }
     ]
   ],
+  "ignored_allowed_groups": [
+    { "name": "abb", "variables": ["*"] },
+    { "name": "bestuur", "variables": ["*"] },
+    { "name": "supplier", "variables": ["*"] }
+  ],
   "default_settings": {
     "analysis": {
       "analyzer": {

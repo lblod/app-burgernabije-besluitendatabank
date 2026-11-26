@@ -25,6 +25,27 @@ defmodule Dispatcher do
   #############################################################
 
   ###############
+  # LOGIN
+  ###############
+  # GET /sessions are the zittingen (resources): keep these above the resources.
+  post "/sessions/*path", @any do
+    Proxy.forward conn, path, "http://login/sessions/"
+  end
+
+  delete "/sessions/*path", @any do
+    Proxy.forward conn, path, "http://login/sessions/"
+  end
+
+  get "/sessions/current", @any do
+    Proxy.forward conn, [], "http://login/sessions/current"
+  end
+
+  # Only on dev stacks (mocklogin is in docker-compose.dev.yml)
+  match "/mock/sessions/*path", @any do
+    Proxy.forward conn, path, "http://mocklogin/sessions/"
+  end
+
+  ###############
   # RESOURCES
   ###############
   get "/articles/*path", @any do
@@ -81,6 +102,14 @@ defmodule Dispatcher do
 
   get "/reports/*path", @any do
     Proxy.forward conn, path, "http://cache/reports/"
+  end
+
+  get "/accounts/*path", @any do
+    Proxy.forward conn, path, "http://cache/accounts/"
+  end
+
+  get "/users/*path", @any do
+    Proxy.forward conn, path, "http://cache/users/"
   end
 
   get "/validationresults/*path", @any do
