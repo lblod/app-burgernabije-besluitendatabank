@@ -1,7 +1,8 @@
 # DEV ONLY. Moves the sample validation report (a Zottegem zitting, not in the
-# local data) to Zaventem's evaluation graph, links it to Zaventem's latest
-# gemeenteraad zitting and marks Zaventem as its owner (ext:ownedBy, which the
-# ABB group looks for). Needs ../20261119120000-sample-validation-report.*.
+# local data) to Zaventem's evaluation graph, points it and its results to
+# Zaventem's latest gemeenteraad zitting and marks Zaventem as its owner
+# (ext:ownedBy, which the ABB group looks for).
+# Needs ../20261119120000-sample-validation-report.*.
 PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
 PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -39,7 +40,8 @@ WHERE {
     LIMIT 1
   }
   GRAPH <http://mu.semte.ch/graphs/validation-results> { ?s ?p ?o . }
-  BIND(IF(?p = ext:validatedResource, ?zitting, ?o) AS ?newO)
+  # The report and its results point to the Zottegem zitting (ext:validatedResource, sh:focusNode).
+  BIND(IF(?o = <https://lblod.zottegem.be/LBLODWeb/id/zittingen/0f4604fca3c84e8bb983b29d8abb1796-3011>, ?zitting, ?o) AS ?newO)
 }
 
 ;
