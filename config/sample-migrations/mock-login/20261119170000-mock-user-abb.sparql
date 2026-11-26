@@ -1,0 +1,49 @@
+# DEV ONLY. Mock users are stored in their organisation's graph (mock login)
+# and in the public graph (mock login page). ext:mockLoginGroupId: a bestuur can
+# have other mu:uuids in harvested data; the mock login needs this one.
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX muAccount: <http://mu.semte.ch/vocabularies/account/>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+INSERT {
+  GRAPH ?graph {
+    ?person a foaf:Person ;
+      mu:uuid ?personUuid ;
+      foaf:familyName ?name ;
+      foaf:account ?account ;
+      foaf:member ?abb .
+    ?account a foaf:OnlineAccount ;
+      mu:uuid ?accountUuid ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> ;
+      ext:sessionRole "LokaalBeslist-ABB" .
+  }
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?person a foaf:Person ;
+      mu:uuid ?personUuid ;
+      foaf:familyName ?name ;
+      foaf:account ?account ;
+      foaf:member ?abb .
+    ?account a foaf:OnlineAccount ;
+      mu:uuid ?accountUuid ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> ;
+      ext:mockLoginGroupId ?uuid ;
+      ext:sessionRole "LokaalBeslist-ABB" .
+  }
+}
+WHERE {
+  BIND("141d9d6b-54af-4d17-b313-8d1c30bc3f5b" AS ?uuid)
+  GRAPH <http://mu.semte.ch/graphs/organisations> {
+    ?abb a besluit:Bestuurseenheid ;
+      mu:uuid ?uuid ;
+      skos:prefLabel ?name .
+  }
+  BIND(MD5(CONCAT("mock-person-", ?uuid)) AS ?personUuid)
+  BIND(MD5(CONCAT("mock-account-", ?uuid)) AS ?accountUuid)
+  BIND(IRI(CONCAT("http://data.lblod.info/id/persoon/", ?personUuid)) AS ?person)
+  BIND(IRI(CONCAT("http://data.lblod.info/id/account/", ?accountUuid)) AS ?account)
+  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/organizations/", ?uuid)) AS ?graph)
+}

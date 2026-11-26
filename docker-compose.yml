@@ -37,6 +37,12 @@ services:
   # https://github.com/lblod/frontend-burgernabije-besluitendatabank
   frontend:
     image: lblod/frontend-burgernabije-besluitendatabank:0.8.11
+    environment:
+      EMBER_ACMIDM_CLIENT_ID: "<CLIENT ID>" # TODO: same as MU_APPLICATION_AUTH_CLIENT_ID
+      EMBER_ACMIDM_AUTH_URL: "https://authenticatie.vlaanderen.be/op/v1/auth"
+      EMBER_ACMIDM_AUTH_REDIRECT_URL: "https://lokaalbeslist.vlaanderen.be/authorization/callback"
+      EMBER_ACMIDM_LOGOUT_URL: "https://authenticatie.vlaanderen.be/op/v1/logout"
+      EMBER_ACMIDM_SCOPE: "openid rrn vo profile abb_lokaalbeslist" # TODO: align with the ACM/IDM client registration
     restart: always
     logging: *default-logging
     labels:
@@ -196,6 +202,7 @@ services:
       BATCH_SIZE: 250
     volumes:
       - ./data/files/consumer-files/op-public:/consumer-files/
+      - ./config/consumer/op:/config/triples-dispatching/custom-dispatching
     restart: always
     logging: *default-logging
     labels:
@@ -223,6 +230,44 @@ services:
     volumes:
       - ./config/consumer/besluiten/:/config/triples-dispatching/custom-dispatching
       - ./data/files/consumer-files/besluiten:/consumer-files/
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  login:
+    image: lblod/acmidm-login-service:0.12.0
+    environment:
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie.vlaanderen.be/op/.well-known/openid-configuration"
+      MU_APPLICATION_AUTH_CLIENT_ID: "<CLIENT ID>" # TODO: from the ACM/IDM client registration of Lokaal Beslist
+      MU_APPLICATION_AUTH_REDIRECT_URI: "https://lokaalbeslist.vlaanderen.be/authorization/callback"
+      MU_APPLICATION_AUTH_CLIENT_SECRET: "<SECRET KEY>" # set in docker-compose.override.yml, never commit it
+      MU_APPLICATION_AUTH_ROLE_CLAIM: "abb_lokaalbeslist_rol_3d" # TODO: align with the ACM/IDM client registration
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/organisations"
+    restart: always
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  vendors-consumer:
+    image: lblod/delta-consumer:0.1.6
+    environment:
+      DCR_SYNC_BASE_URL: "https://loket.lokaalbestuur.vlaanderen.be/"
+      DCR_SERVICE_NAME: "vendors-consumer"
+      DCR_SYNC_FILES_PATH: "/sync/vendor-management/files"
+      DCR_SYNC_LOGIN_ENDPOINT: "https://loket.lokaalbestuur.vlaanderen.be/sync/vendor-management/login"
+      DCR_SECRET_KEY: "" # set in docker-compose.override.yml, never commit it
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/VendorManagementCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/vendor-management"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/vendorManagementSyncing"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/vendors-consumer"
+      DCR_KEEP_DELTA_FILES: "false"
+      DCR_DELTA_FILE_FOLDER: "/consumer-files"
+      DCR_DISABLE_DELTA_INGEST: "true" # toggle this in override, leave 'true' in default docker-compose.yml
+      DCR_DISABLE_INITIAL_SYNC: "true" # toggle this in override, leave 'true' in default docker-compose.yml
+      VENDORS_GRAPH: "http://mu.semte.ch/graphs/vendors"
+      BATCH_SIZE: 100
+    volumes:
+      - ./config/consumer/vendors/:/config/triples-dispatching/custom-dispatching
+      - ./data/files/consumer-files/vendors:/consumer-files/
     restart: always
     logging: *default-logging
     labels:

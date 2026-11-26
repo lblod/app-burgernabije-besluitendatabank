@@ -1,0 +1,49 @@
+# DEV ONLY. One per gemeente.
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX muAccount: <http://mu.semte.ch/vocabularies/account/>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+INSERT {
+  GRAPH ?graph {
+    ?person a foaf:Person ;
+      mu:uuid ?personUuid ;
+      foaf:firstName "Gemeente" ;
+      foaf:familyName ?name ;
+      foaf:account ?account ;
+      foaf:member ?bestuurseenheid .
+    ?account a foaf:OnlineAccount ;
+      mu:uuid ?accountUuid ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> ;
+      ext:sessionRole "LokaalBeslist-bestuur" .
+  }
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?person a foaf:Person ;
+      mu:uuid ?personUuid ;
+      foaf:firstName "Gemeente" ;
+      foaf:familyName ?name ;
+      foaf:account ?account ;
+      foaf:member ?bestuurseenheid .
+    ?account a foaf:OnlineAccount ;
+      mu:uuid ?accountUuid ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> ;
+      ext:mockLoginGroupId ?uuid ;
+      ext:sessionRole "LokaalBeslist-bestuur" .
+  }
+}
+WHERE {
+  GRAPH <http://mu.semte.ch/graphs/organisations> {
+    ?bestuurseenheid a besluit:Bestuurseenheid ;
+      mu:uuid ?uuid ;
+      skos:prefLabel ?name ;
+      org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001> .
+  }
+  BIND(MD5(CONCAT("mock-person-", ?uuid)) AS ?personUuid)
+  BIND(MD5(CONCAT("mock-account-", ?uuid)) AS ?accountUuid)
+  BIND(IRI(CONCAT("http://data.lblod.info/id/persoon/", ?personUuid)) AS ?person)
+  BIND(IRI(CONCAT("http://data.lblod.info/id/account/", ?accountUuid)) AS ?account)
+  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/organizations/", ?uuid)) AS ?graph)
+}
