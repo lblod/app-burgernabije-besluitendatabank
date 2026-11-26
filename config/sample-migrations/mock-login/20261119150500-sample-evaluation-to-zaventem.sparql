@@ -1,6 +1,7 @@
 # DEV ONLY. Moves the sample validation report (a Zottegem zitting, not in the
-# local data) to Zaventem's evaluation graph and links it to Zaventem's latest
-# gemeenteraad zitting. Needs ../20261119120000-sample-validation-report.*.
+# local data) to Zaventem's evaluation graph, links it to Zaventem's latest
+# gemeenteraad zitting and marks Zaventem as its owner (ext:ownedBy, which the
+# ABB group looks for). Needs ../20261119120000-sample-validation-report.*.
 PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
 PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -39,4 +40,20 @@ WHERE {
   }
   GRAPH <http://mu.semte.ch/graphs/validation-results> { ?s ?p ?o . }
   BIND(IF(?p = ext:validatedResource, ?zitting, ?o) AS ?newO)
+}
+
+;
+
+INSERT {
+  GRAPH ?graph { ?report ext:ownedBy ?bestuurseenheid . }
+}
+WHERE {
+  GRAPH <http://mu.semte.ch/graphs/organisations> {
+    ?bestuurseenheid a besluit:Bestuurseenheid ;
+      mu:uuid ?uuid ;
+      skos:prefLabel "Zaventem" ;
+      org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001> .
+  }
+  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/evaluations/", ?uuid)) AS ?graph)
+  GRAPH ?graph { ?report a sh:ValidationReport . }
 }

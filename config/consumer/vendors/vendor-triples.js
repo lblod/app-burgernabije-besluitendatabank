@@ -12,6 +12,8 @@ const ALLOWED_PREDICATES = new Set([
   "<http://mu.semte.ch/vocabularies/account/canActOnBehalfOf>",
 ]);
 
+// The terms come already escaped from delta-consumer (sparqlEscapeUri,
+// sparqlEscapeString), both for the initial sync and the deltas.
 export function allowedTriples(termObjects, context) {
   const kept = termObjects.filter((o) => ALLOWED_PREDICATES.has(o.predicate));
   if (kept.length < termObjects.length) {

@@ -65,19 +65,22 @@
 
 ;; TODO: the role values are placeholders until the ACM/IDM client registration.
 
-;; Only the besturen that have an evaluation graph: a group for every bestuur
-;; makes queries too large for Virtuoso. Computed at login, so ABB sees new
-;; evaluation graphs after logging in again.
+;; Only the besturen that own a report (ext:ownedBy, as in LMB): a group for
+;; every bestuur makes queries too large for Virtuoso. Computed at login, so ABB
+;; sees the reports of newly evaluated besturen after logging in again.
 (supply-allowed-group "abb"
   :parameters ("session_group")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
           PREFIX sh: <http://www.w3.org/ns/shacl#>
           SELECT DISTINCT ?session_group WHERE {
             <SESSION_ID> ext:sessionRole ?session_role .
             FILTER(?session_role = \"LokaalBeslist-ABB\")
-            GRAPH ?graph { ?report a sh:ValidationReport . }
-            FILTER(STRSTARTS(STR(?graph), \"http://mu.semte.ch/graphs/evaluations/\"))
-            BIND(STRAFTER(STR(?graph), \"http://mu.semte.ch/graphs/evaluations/\") AS ?session_group)
+            ?report a sh:ValidationReport ;
+              ext:ownedBy ?bestuurseenheid .
+            GRAPH <http://mu.semte.ch/graphs/organisations> {
+              ?bestuurseenheid mu:uuid ?session_group .
+            }
           }")
 
 (supply-allowed-group "bestuur"
